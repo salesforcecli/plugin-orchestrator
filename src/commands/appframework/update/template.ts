@@ -1,0 +1,126 @@
+/*
+ * Copyright (c) 2025, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
+import { Messages, SfError, Connection } from '@salesforce/core';
+
+import AppFrameworkTemplate from '../../../utils/template/appframeworktemplate.js';
+import { TemplateData } from '../../../utils/template/templateTypes.js';
+import { TemplateDisplayUtil } from '../../../utils/template/templateDisplayUtil.js';
+
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
+const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'appframework.update.template');
+
+export default class UpdateTemplate extends SfCommand<TemplateData> {
+  public static readonly summary = messages.getMessage('summary');
+  public static readonly description = messages.getMessage('description');
+  public static readonly examples = messages.getMessages('examples');
+  public static readonly state = 'preview';
+
+  public static readonly flags = {
+    'target-org': Flags.requiredOrg({
+      summary: messages.getMessage('flags.target-org.summary'),
+      description: messages.getMessage('flags.target-org.description'),
+      required: true,
+    }),
+    'api-version': Flags.orgApiVersion({
+      summary: messages.getMessage('flags.api-version.summary'),
+      description: messages.getMessage('flags.api-version.description'),
+    }),
+    'template-id': Flags.string({
+      char: 'i',
+      summary: messages.getMessage('flags.template-id.summary'),
+      description: messages.getMessage('flags.template-id.description'),
+      exclusive: ['template-name'],
+    }),
+    'template-name': Flags.string({
+      char: 'n',
+      summary: messages.getMessage('flags.template-name.summary'),
+      description: messages.getMessage('flags.template-name.description'),
+      exclusive: ['template-id'],
+    }),
+    label: Flags.string({
+      char: 'l',
+      summary: messages.getMessage('flags.label.summary'),
+      description: messages.getMessage('flags.label.description'),
+    }),
+    description: Flags.string({
+      char: 'd',
+      summary: messages.getMessage('flags.description.summary'),
+      description: messages.getMessage('flags.description.description'),
+    }),
+  };
+
+  public async run(): Promise<TemplateData> {
+    const { flags } = await this.parse(UpdateTemplate);
+
+    if (!flags['template-id'] && !flags['template-name']) {
+      throw new SfError(messages.getMessage('missingRequiredField'), 'MissingRequiredFlag');
+    }
+
+    try {
+      this.spinner.start(messages.getMessage('fetchingTemplate'));
+
+      type OrgType = { getConnection(apiVersion?: string): Connection };
+      const connection = (flags['target-org'] as OrgType).getConnection(flags['api-version']);
+      const appFrameworkTemplate = new AppFrameworkTemplate(connection);
+
+      const identifier = flags['template-id'] ?? flags['template-name'];
+
+      this.spinner.stop();
+      this.spinner.start(messages.getMessage('updatingTemplate'));
+
+      const updateOptions = {
+        label: flags.label,
+        description: flags.description,
+      };
+
+      const rawTemplate = await appFrameworkTemplate.update(identifier as string, updateOptions);
+
+      this.spinner.stop();
+
+      this.log(messages.getMessage('updateSuccess', [rawTemplate.name, rawTemplate.id]));
+
+      const updatedTemplate = {
+        id: rawTemplate.id,
+        name: rawTemplate.name,
+        label: rawTemplate.label,
+        description: rawTemplate.description,
+        templateType: rawTemplate.templateType,
+        templateSubtype: rawTemplate.templateSubtype,
+        templateId: rawTemplate.templateId,
+        folderId: rawTemplate.folderId,
+        namespace: rawTemplate.namespace,
+        templateVersion: rawTemplate.releaseInfo?.templateVersion,
+        assetVersion: rawTemplate.assetVersion,
+        maxAppCount: rawTemplate.maxAppCount,
+        variableDefinition: rawTemplate.variableDefinition,
+        layoutDefinition: rawTemplate.layoutDefinition,
+        rules: rawTemplate.rules,
+        created: rawTemplate.createdDate ? new Date(rawTemplate.createdDate).toLocaleDateString() : 'n/a',
+        modified: rawTemplate.lastModifiedDate ? new Date(rawTemplate.lastModifiedDate).toLocaleDateString() : 'n/a',
+        industries: rawTemplate.tags?.industries?.join(', ') ?? 'n/a',
+        audience: rawTemplate.tags?.targetAudience?.join(', ') ?? 'n/a',
+        icons: rawTemplate.icons,
+        chainDefinitions: rawTemplate.chainDefinitions,
+        applicationSourceId: rawTemplate.applicationSourceId,
+        url: rawTemplate.url,
+        configurationUrl: rawTemplate.configurationUrl,
+        readinessUrl: rawTemplate.readinessUrl,
+      };
+
+      TemplateDisplayUtil.displayTemplateDetail(this, updatedTemplate);
+
+      return updatedTemplate;
+    } catch (error) {
+      this.spinner.stop();
+      const errorMsg = (error as Error).message;
+
+      throw new SfError(`Error updating template: ${errorMsg}`, 'TemplateUpdateError');
+    }
+  }
+}
