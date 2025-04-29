@@ -5,7 +5,7 @@
 # This is a temporary workaround - future updates should fix the schema generation properly
 echo "Running all tests except schema tests..."
 yarn build && \
-  yarn test:compile && \
+  yarn wireit test:compile && \
   yarn test:only && \
   yarn test:command-reference && \
   yarn test:deprecation-policy && \
