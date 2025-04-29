@@ -5,18 +5,20 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-// Export types for schema generation
-export type StringType = string;
-export type NumberType = number;
-export type BooleanType = boolean;
-export type ObjectType = Record<string, unknown>;
-export type ArrayType<T = unknown> = T[];
+// Import primitive types
+import './primitive-types.js';
 
-// For schema generation - primitive type exports
-export { StringType as string };
-export { NumberType as number };
-export { BooleanType as boolean };
-export { ObjectType as object };
-export { ArrayType as array };
+// These named exports are required for the OCLIF schema generator
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const string: any = String;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const number: any = Number;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const boolean: any = Boolean;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const object: any = Object;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const array: any = Array;
 
+// Main export
 export default {};

@@ -76,7 +76,7 @@
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
-    "alias": [],
+    "alias": ["orchestrator template list"],
     "command": "orchestrator:list:template",
     "flagAliases": [],
     "flagChars": ["o"],
@@ -108,7 +108,7 @@
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
-    "alias": [],
+    "alias": ["orchestrator template list"],
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
@@ -119,48 +119,37 @@
     "alias": [],
     "command": "orchestrator:template:update",
     "flagAliases": [],
-    "flagChars": ["d", "i", "l", "n", "o", "s", "t"],
-    "flags": [
-      "api-version",
-      "description",
-      "flags-dir",
-      "json",
-      "label",
-      "name",
-      "subtype",
-      "target-org",
-      "template-id",
-      "template-name",
-      "type"
-    ],
+    "flagChars": ["d", "i", "l", "n", "o"],
+    "flags": ["api-version", "description", "flags-dir", "json", "label", "target-org", "template-id", "template-name"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
     "alias": [],
     "command": "orchestrator:update:app",
     "flagAliases": [],
-    "flagChars": ["d", "i", "l", "n", "o"],
-    "flags": ["api-version", "app-id", "app-name", "description", "flags-dir", "json", "label", "name", "target-org"],
+    "flagChars": ["d", "g", "i", "l", "m", "n", "o", "r", "t"],
+    "flags": [
+      "api-version",
+      "app-id",
+      "app-name",
+      "description",
+      "flags-dir",
+      "json",
+      "label",
+      "log-level",
+      "runtime-method",
+      "target-org",
+      "template-id",
+      "template-name"
+    ],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
     "alias": [],
     "command": "orchestrator:update:template",
     "flagAliases": [],
-    "flagChars": ["d", "i", "l", "n", "o", "s", "t"],
-    "flags": [
-      "api-version",
-      "description",
-      "flags-dir",
-      "json",
-      "label",
-      "name",
-      "subtype",
-      "target-org",
-      "template-id",
-      "template-name",
-      "type"
-    ],
+    "flagChars": ["d", "i", "l", "n", "o"],
+    "flags": ["api-version", "description", "flags-dir", "json", "label", "target-org", "template-id", "template-name"],
     "plugin": "@salesforce/plugin-orchestrator"
   }
 ]
