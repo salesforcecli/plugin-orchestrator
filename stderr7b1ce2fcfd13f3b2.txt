@@ -1,0 +1,1 @@
+ ›   Error: Command appframework:template:display not found.

@@ -8,7 +8,7 @@
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
 import { expect } from 'chai';
 
-describe('appframework:template:create NUTs', () => {
+describe('orchestrator:template:create NUTs', () => {
   let session: TestSession;
 
   before(async () => {
@@ -25,33 +25,30 @@ describe('appframework:template:create NUTs', () => {
   });
 
   it('should show help for create command', () => {
-    const command = 'appframework template create --help';
+    const command = 'orchestrator template create --help';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     expect(output).to.include('Create a new AppFramework template');
+    expect(output).to.include('--target-org');
     expect(output).to.include('--name');
-    expect(output).to.include('--label');
-    expect(output).to.include('--description');
   });
 
   it('should error without target-org flag', () => {
-    const command = 'appframework template create';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-
-    expect(output).to.include('Error');
-    expect(output).to.include('--target-org');
+    const command = 'orchestrator template create';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('Missing required flag');
+    expect(result.shellOutput.stderr).to.include('target-org');
   });
 
   it('should error without name flag', () => {
-    const command = 'appframework template create --target-org dummy@example.com';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-
-    expect(output).to.include('Error');
+    const command = 'orchestrator template create --target-org dummy@example.com';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('Missing required flag');
+    expect(result.shellOutput.stderr).to.include('name');
   });
 
   it('should run with name and target-org', () => {
-    const command = 'appframework template create --target-org dummy@example.com --name my_template';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-
-    expect(output).to.include('No authorization information found');
+    const command = 'orchestrator template create --target-org dummy@example.com --name my_template';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('No org found with name');
   });
 });

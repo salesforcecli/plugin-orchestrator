@@ -8,7 +8,7 @@
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
 import { expect } from 'chai';
 
-describe('appframework template list NUTs', () => {
+describe('orchestrator template list NUTs', () => {
   let session: TestSession;
 
   before(async () => {
@@ -23,7 +23,7 @@ describe('appframework template list NUTs', () => {
   // They are commented out as they won't pass without a real org
   /*
   it('should list templates in the org', () => {
-    const command = appframework template list --target-org yourOrgAlias;
+    const command = orchestrator template list --target-org yourOrgAlias;
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     expect(output).to.include('AppFramework Templates');
     expect(output).to.include('Name');
@@ -33,7 +33,7 @@ describe('appframework template list NUTs', () => {
   });
 
   it('should display extended information', () => {
-    const command = appframework template list --target-org yourOrgAlias --extended;
+    const command = orchestrator template list --target-org yourOrgAlias --extended;
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     // Table should include additional columns
     expect(output).to.include('Created');
@@ -45,14 +45,14 @@ describe('appframework template list NUTs', () => {
   });
   
   it('should filter for embedded templates', () => {
-    const command = appframework template list --target-org yourOrgAlias --includembeddedtemplates;
+    const command = orchestrator template list --target-org yourOrgAlias --includembeddedtemplates;
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     // Basic verification that the command ran
     expect(output).to.include('AppFramework Templates');
   });
   
   it('should include salesforce templates', () => {
-    const command = appframework template list --target-org yourOrgAlias --includesalesforcetemplates;
+    const command = orchestrator template list --target-org yourOrgAlias --includesalesforcetemplates;
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     // Basic verification that the command ran
     expect(output).to.include('AppFramework Templates');
@@ -60,9 +60,9 @@ describe('appframework template list NUTs', () => {
   */
 
   it('should see the command help', () => {
-    const command = 'appframework template list --help';
+    const command = 'orchestrator template list --help';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
-    expect(output).to.include('appframework template list');
+    expect(output).to.include('orchestrator template list');
     expect(output).not.to.include('--extended');
     expect(output).not.to.include('--includesalesforcetemplates');
     expect(output).not.to.include('--includembeddedtemplates');

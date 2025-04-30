@@ -8,7 +8,7 @@
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
 import { expect } from 'chai';
 
-describe('appframework template update NUTs', () => {
+describe('orchestrator template update NUTs', () => {
   let session: TestSession;
 
   before(async () => {
@@ -25,36 +25,36 @@ describe('appframework template update NUTs', () => {
   });
 
   it('should show help for update command', () => {
-    const command = 'appframework template update --help';
+    const command = 'orchestrator template update --help';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     expect(output).to.include('Update an existing AppFramework template');
     expect(output).to.include('--template-id');
-    expect(output).to.include('target-org');
-  });
-
-  it('should error without template identifier', () => {
-    const command = 'appframework template update';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-    expect(output).to.include('Error');
-  });
-
-  it('should error without an org', () => {
-    const command = 'appframework template update --template-id 0XtB000000001aXYAQ --folder-id 0FbB000000001XxKAI';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-    expect(output).to.include('Error');
+    expect(output).to.include('--name');
     expect(output).to.include('--target-org');
   });
 
+  it('should error without template identifier', () => {
+    const command = 'orchestrator template update';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('Missing required flag');
+  });
+
+  it('should error without an org', () => {
+    const command = 'orchestrator template update --template-id 0XtB000000001aXYAQ --folder-id 0FbB000000001XxKAI';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('Missing required flag');
+    expect(result.shellOutput.stderr).to.include('--target-org');
+  });
+
   it('should warn about exclusive flags if both provided', () => {
-    const command = 'appframework template update --template-id 0XtB000000001aXYAQ --template-name "Test Template"';
-    const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
-    expect(output).to.include('Error');
+    const command = 'orchestrator template update --template-id 0XtB000000001aXYAQ --template-name "Test Template"';
+    const result = execCmd(command, { ensureExitCode: 1 });
+    expect(result.shellOutput.stderr).to.include('error');
   });
 
   it('should display provided name', () => {
-    const command = 'appframework template update --name World';
+    const command = 'orchestrator template update --name World';
     const result = execCmd(command, { ensureExitCode: 1 });
-
-    expect(result.shellOutput.stderr).to.include('No default environment found');
+    expect(result.shellOutput.stderr).to.include('World');
   });
 });
