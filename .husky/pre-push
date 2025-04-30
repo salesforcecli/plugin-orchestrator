@@ -1,9 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Build and run all tests except the schema test (which requires special configuration)
-echo "Running build and simplified test command..."
-yarn build && yarn lint
-
-# Schema tests are temporarily disabled
-echo "Skipping schema tests (will be addressed in future updates)"
+yarn build && yarn test
