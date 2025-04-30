@@ -29,19 +29,19 @@ sf plugins link .
 
 When developing the plugin, you can run it in several ways:
 
-### Using the local run file
-
-```bash
-# Run a command using the local development script
-./bin/dev.js orchestrator template list --help
-```
-
 ### Using the linked plugin
 
 After linking the plugin with `sf plugins link .`, you can run commands normally:
 
 ```bash
 sf orchestrator template list --help
+```
+
+### Using the local run file
+
+```bash
+# Run a command using the local development script
+./bin/dev.js orchestrator template list --help
 ```
 
 ### Running Tests
