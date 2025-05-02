@@ -1,3 +1,9 @@
+## [1.1.2](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.1...1.1.2) (2025-05-02)
+
+### Bug Fixes
+
+- **deps:** bump @babel/helpers from 7.25.0 to 7.27.1 ([f1306b0](https://github.com/salesforcecli/plugin-orchestrator/commit/f1306b025979feeb704587a85d9a7a4e5baef58c))
+
 ## [1.1.1](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.0...1.1.1) (2025-05-01)
 
 ### Bug Fixes
