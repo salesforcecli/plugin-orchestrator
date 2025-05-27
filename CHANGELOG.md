@@ -1,3 +1,9 @@
+# [1.0.0](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.6...1.0.0) (2025-05-27)
+
+### Features
+
+- initial beta release ([7759e6f](https://github.com/salesforcecli/plugin-orchestrator/commit/7759e6f3821f4ac6fc9c12d1a5f258423d9a1cc2))
+
 ## [1.1.6](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.5...1.1.6) (2025-05-25)
 
 ### Bug Fixes
