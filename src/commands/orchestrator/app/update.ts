@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 import { Messages, SfError, Connection } from '@salesforce/core';
 import AppFrameworkApp from '../../../utils/app/appframeworkapp.js';
