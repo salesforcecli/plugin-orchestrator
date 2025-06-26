@@ -1,8 +1,17 @@
 /*
- * Copyright (c) 2025, salesforce.com, inc.
- * All rights reserved.
- * Licensed under the BSD 3-Clause license.
- * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Copyright 2025, Salesforce, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
@@ -23,7 +32,7 @@ describe('orchestrator template display NUTs', () => {
   // They are commented out as they won't pass without real resources
   /*
   it('should display a template by ID', () => {
-    const command = orchestrator template display --template-id 0NRxx000000000x --target-org yourOrgAlias;
+    const command = 'orchestrator template display --template-id 0NRxx000000000x --target-org yourOrgAlias';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     
     // Check basic output format
@@ -34,7 +43,7 @@ describe('orchestrator template display NUTs', () => {
   });
   
   it('should display a template by name', () => {
-    const command = orchestrator template display --name "My Template" --target-org yourOrgAlias;
+    const command = 'orchestrator template display --name "My Template" --target-org yourOrgAlias';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     
     // Basic output verification
@@ -43,7 +52,7 @@ describe('orchestrator template display NUTs', () => {
   });
   
   it('should error with invalid template ID', () => {
-    const command = orchestrator template display --template-id nonexistent-id --target-org yourOrgAlias;
+    const command = 'orchestrator template display --template-id nonexistent-id --target-org yourOrgAlias';
     // This should error
     const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
     expect(output).to.include('Error');

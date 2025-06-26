@@ -1,92 +1,120 @@
 /*
- * Copyright (c) 2025, salesforce.com, inc.
- * All rights reserved.
- * Licensed under the BSD 3-Clause license.
- * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Copyright 2025, Salesforce, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { expect } from 'chai';
-import { RawTemplate, TemplateData } from '../../../../src/utils/template/templateTypes.js';
+import sinon from 'sinon';
+import { Config } from '@oclif/core';
+import CreateTemplate from '../../../../src/commands/orchestrator/template/create.js';
+import { RawTemplate } from '../../../../src/utils/template/templateTypes.js';
+import AppFrameworkTemplate from '../../../../src/utils/template/appframeworktemplate.js';
 
-describe('appframework template create', () => {
-  it('should construct the correct template creation payload', () => {
-    const options = {
-      name: 'test_template',
-      templateType: 'app',
-      templateSubtype: 'analytics',
-      label: 'Test Template',
-      description: 'Template description',
-    };
+/**
+ * Tests for the create template command
+ *
+ * These tests check that template creation works correctly
+ */
+describe('orchestrator template create', () => {
+  const sandbox = sinon.createSandbox();
+  let createStub: sinon.SinonStub;
+  let getTemplateStub: sinon.SinonStub;
 
-    const body = {
-      name: options.name,
-      templateType: options.templateType,
-      templateSubtype: options.templateSubtype,
-      label: options.label,
-      description: options.description,
-    };
+  const mockTemplate: RawTemplate = {
+    id: 'template-123',
+    name: 'TestTemplate',
+    label: 'Test Template',
+    description: 'A test template',
+    templateType: 'dashboard',
+    createdDate: '2023-01-01T12:00:00Z',
+    lastModifiedDate: '2023-01-01T12:00:00Z',
+    tags: {
+      industries: ['Healthcare'],
+      targetAudience: ['Admins'],
+    },
+  };
 
-    expect(body).to.be.an('object');
-    expect(body.name).to.equal('test_template');
-    expect(body.templateType).to.equal('app');
-    expect(body.templateSubtype).to.equal('analytics');
-    expect(body.label).to.equal('Test Template');
-    expect(body.description).to.equal('Template description');
+  beforeEach(() => {
+    // Create stubs for the AppFrameworkTemplate methods
+    createStub = sandbox.stub(AppFrameworkTemplate.prototype, 'create').resolves('template-123');
+    getTemplateStub = sandbox.stub(AppFrameworkTemplate.prototype, 'getTemplate').resolves(mockTemplate);
   });
 
-  it('should handle template creation with minimal parameters', () => {
-    const options = {
-      name: 'minimal_template',
-    };
-
-    const body = {
-      name: options.name,
-      templateType: 'app',
-    };
-
-    expect(body).to.be.an('object');
-    expect(body.name).to.equal('minimal_template');
-    expect(body.templateType).to.equal('app');
-    expect(body).to.not.have.property('templateSubtype');
-    expect(body).to.not.have.property('label');
-    expect(body).to.not.have.property('description');
+  afterEach(() => {
+    sandbox.restore();
   });
 
-  it('should properly convert raw template data for display', () => {
-    const rawTemplate: RawTemplate = {
-      id: 'template123',
-      name: 'test_template',
-      label: 'Test Template',
-      templateType: 'app',
-      templateSubtype: 'analytics',
-      description: 'A test template',
-      createdDate: '2023-01-01T00:00:00Z',
-      lastModifiedDate: '2023-02-01T00:00:00Z',
-      tags: {
-        industries: ['Technology', 'Healthcare'],
-        targetAudience: ['Developers', 'Admins'],
+  /**
+   * Tests the creation of a template from a JSON file
+   */
+  it('should create a template from a JSON file', async () => {
+    // Arrange
+    const command = new CreateTemplate([], {} as Config);
+
+    // Mock the command's parse method
+    sandbox.stub(command, 'parse' as keyof CreateTemplate).resolves({
+      flags: {
+        name: 'TestTemplate',
+        type: 'dashboard',
+        'target-org': { getConnection: () => ({}) },
       },
-    };
+    });
 
-    const displayTemplate: TemplateData = {
-      id: rawTemplate.id,
-      name: rawTemplate.name,
-      label: rawTemplate.label,
-      description: rawTemplate.description,
-      templateType: rawTemplate.templateType,
-      templateSubtype: rawTemplate.templateSubtype,
-      created: rawTemplate.createdDate ? new Date(rawTemplate.createdDate).toLocaleDateString() : undefined,
-      modified: rawTemplate.lastModifiedDate ? new Date(rawTemplate.lastModifiedDate).toLocaleDateString() : undefined,
-      industries: rawTemplate.tags?.industries?.join(', ') ?? 'n/a',
-      audience: rawTemplate.tags?.targetAudience?.join(', ') ?? 'n/a',
-    };
+    // Mock other command methods to avoid actual execution
+    sandbox.stub(command.spinner, 'start');
+    sandbox.stub(command.spinner, 'stop');
+    sandbox.stub(command, 'log');
 
-    expect(displayTemplate.id).to.equal('template123');
-    expect(displayTemplate.name).to.equal('test_template');
-    expect(displayTemplate.label).to.equal('Test Template');
-    expect(displayTemplate.templateType).to.equal('app');
-    expect(displayTemplate.templateSubtype).to.equal('analytics');
-    expect(displayTemplate.industries).to.equal('Technology, Healthcare');
-    expect(displayTemplate.audience).to.equal('Developers, Admins');
+    // Act
+    const result = await command.run();
+
+    // Assert
+    expect(createStub.calledOnce).to.be.true;
+    expect(getTemplateStub.calledOnce).to.be.true;
+    expect(result).to.equal('template-123');
+  });
+
+  /**
+   * Tests error handling when the API returns an error
+   */
+  it('should handle API errors appropriately', async () => {
+    // Arrange
+    const command = new CreateTemplate([], {} as Config);
+
+    // Mock the command's parse method
+    sandbox.stub(command, 'parse' as keyof CreateTemplate).resolves({
+      flags: {
+        name: 'TestTemplate',
+        type: 'dashboard',
+        'target-org': { getConnection: () => ({}) },
+      },
+    });
+
+    // Mock other command methods to avoid actual execution
+    sandbox.stub(command.spinner, 'start');
+    sandbox.stub(command.spinner, 'stop');
+
+    // Make the create method throw an error
+    createStub.rejects(new Error('API Error'));
+
+    // Act & Assert
+    try {
+      await command.run();
+      expect.fail('Should have thrown an error');
+    } catch (error) {
+      expect(error).to.be.an('error');
+      expect((error as Error).message).to.include('API Error');
+    }
   });
 });

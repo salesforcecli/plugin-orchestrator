@@ -36,7 +36,7 @@ Fetching AppFramework templates...
 
 # templateTypeLegend
 
-Legend: %s - Application templates, %s - Component templates, %s - Other template types
+Legend: %s, %s, %s - Other template types
 
 # error.CertificateError
 

@@ -1,7 +1,7 @@
 {
   "name": "@salesforce/plugin-orchestrator",
   "description": "Plugin for working with SalesForce analytic apps, templates, assets and services.",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "author": "Salesforce",
   "bugs": "https://github.com/forcedotcom/cli/issues",
   "dependencies": {
@@ -10,7 +10,7 @@
     "@salesforce/kit": "^3.2.1",
     "@salesforce/sf-plugins-core": "^12",
     "ansis": "^3.17.0",
-    "eslint-config-salesforce-license": "^0.2.0"
+    "eslint": "^8.56.0"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.3.2",
@@ -57,23 +57,8 @@
       "orchestrator": {
         "description": "Commands to work with AppFramework apps and templates"
       },
-      "orchestrator:list": {
-        "description": "List AppFramework resources"
-      },
-      "orchestrator:display": {
-        "description": "Display AppFramework resources"
-      },
-      "orchestrator:create": {
-        "description": "Create AppFramework resources"
-      },
-      "orchestrator:update": {
-        "description": "Update AppFramework resources"
-      },
-      "orchestrator:delete": {
-        "description": "Delete AppFramework resources"
-      },
-      "orchestrator:decouple": {
-        "description": "Decouple AppFramework resources"
+      "orchestrator:app": {
+        "description": "Work with AppFramework apps"
       },
       "orchestrator:template": {
         "description": "Work with AppFramework templates"

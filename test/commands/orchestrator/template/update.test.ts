@@ -1,20 +1,29 @@
 /*
- * Copyright (c) 2025, salesforce.com, inc.
- * All rights reserved.
- * Licensed under the BSD 3-Clause license.
- * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Copyright 2025, Salesforce, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import { expect } from 'chai';
 import { TemplateData, RawTemplate } from '../../../../src/utils/template/templateTypes.js';
 
 /**
- * Tests for the Update command in appframework
+ * Tests for the Update command in orchestrator
  *
  * These tests focus on the AppFrameworkTemplate.update method functionality
  * rather than testing the command implementation directly.
  */
-describe('appframework template update', () => {
+describe('orchestrator update template', () => {
   // Test data
   const testTemplateId = '0XtB000000001aXYAQ';
   const testTemplateName = 'TestTemplate';
@@ -101,29 +110,27 @@ describe('appframework template update', () => {
     };
 
     // Verify the template has the updated fields
-    expect(updatedTemplate).to.have.property('id', testTemplateId);
-    expect(updatedTemplate).to.have.property('name', testTemplateName);
-    expect(updatedTemplate).to.have.property('label', 'Updated Label');
-    expect(updatedTemplate).to.have.property('description', 'Updated Description');
+    expect(updatedTemplate.id).to.equal(testTemplateId);
+    expect(updatedTemplate.name).to.equal(testTemplateName);
+    expect(updatedTemplate.label).to.equal('Updated Label');
+    expect(updatedTemplate.description).to.equal('Updated Description');
 
-    // Create a formatted date string safely
-    const formatDate = (dateString: string | undefined): string | undefined =>
-      dateString ? new Date(dateString).toLocaleDateString() : undefined;
-
-    // The processed data should contain all the fields needed for display
+    // Create a typed processed data object with the necessary conversions
     const processedTemplate: TemplateData = {
       id: updatedTemplate.id,
       name: updatedTemplate.name,
       label: updatedTemplate.label,
       description: updatedTemplate.description,
       templateType: updatedTemplate.templateType,
-      created: formatDate(updatedTemplate.createdDate),
-      modified: formatDate(updatedTemplate.lastModifiedDate),
+      created: updatedTemplate.createdDate ? new Date(updatedTemplate.createdDate).toLocaleDateString() : undefined,
+      modified: updatedTemplate.lastModifiedDate
+        ? new Date(updatedTemplate.lastModifiedDate).toLocaleDateString()
+        : undefined,
     };
 
     // Verify the processed template has expected properties
-    expect(processedTemplate).to.have.property('id', testTemplateId);
-    expect(processedTemplate).to.have.property('label', 'Updated Label');
-    expect(processedTemplate).to.have.property('description', 'Updated Description');
+    expect(processedTemplate.id).to.equal(testTemplateId);
+    expect(processedTemplate.label).to.equal('Updated Label');
+    expect(processedTemplate.description).to.equal('Updated Description');
   });
 });
