@@ -134,9 +134,7 @@ export class TemplateDisplayUtil {
 
     command.log('');
     command.log(
-      `Legend: ${ansis.green('app')} - Application templates, ${ansis.blue(
-        'component'
-      )} - Component templates, ${ansis.yellow('other')} - Other template types`
+      `Legend: ${ansis.green('app')}, ${ansis.blue('component')}, ${ansis.yellow('other')} - Other template types`
     );
     command.log('');
   }

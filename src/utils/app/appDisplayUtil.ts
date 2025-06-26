@@ -85,9 +85,7 @@ export class AppDisplayUtil {
 
     command.log('');
     command.log(
-      `Legend: ${ansis.green('app')} - Application apps, ${ansis.blue('component')} - Component apps, ${ansis.yellow(
-        'other'
-      )} - Other app types`
+      `Legend: ${ansis.green('app')}, ${ansis.blue('component')}, ${ansis.yellow('other')} - Other app types`
     );
     command.log('');
   }
