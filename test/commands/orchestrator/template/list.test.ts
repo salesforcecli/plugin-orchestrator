@@ -16,10 +16,9 @@
 
 import { expect } from 'chai';
 import { TemplateListUtil } from '../../../../src/utils/template/templateListUtils.js';
-import { TemplateData, RawTemplate, TemplateType } from '../../../../src/utils/template/templateTypes.js';
-import { TemplateOutput } from '../../../../src/utils/template/templateListUtils.js';
+import { TemplateData, RawTemplate } from '../../../../src/utils/template/templateTypes.js';
 
-describe('orchestrator template list', () => {
+describe('orchestrator list template', () => {
   it('should sort by Label rather than Type', () => {
     const sortConfig = {
       Label: 'asc',
@@ -35,7 +34,7 @@ describe('orchestrator template list', () => {
         id: 'template1',
         name: 'Test Template 1',
         label: 'Test 1',
-        templateType: 'app' as TemplateType,
+        templateType: 'app',
         templateSubtype: 'tableau',
         applicationSourceId: 'source1',
         namespace: 'test',
@@ -44,7 +43,7 @@ describe('orchestrator template list', () => {
         id: 'template2',
         name: 'Test Template 2',
         label: 'Test 2',
-        templateType: 'component' as TemplateType,
+        templateType: 'component',
         templateSubtype: 'dashboard',
       },
     ];
@@ -52,11 +51,11 @@ describe('orchestrator template list', () => {
     const templates: TemplateData[] = TemplateListUtil.processTemplates(rawTemplates);
 
     expect(templates).to.be.an('array').with.length(2);
-    expect(templates[0]).to.have.property('id', 'template1');
-    expect(templates[0]).to.have.property('templateSubtype', 'tableau');
-    expect(templates[0]).to.have.property('applicationSourceId', 'source1');
-    expect(templates[1]).to.have.property('id', 'template2');
-    expect(templates[1]).to.have.property('templateSubtype', 'dashboard');
+    expect(templates[0]?.id).to.equal('template1');
+    expect(templates[0]?.templateSubtype).to.equal('tableau');
+    expect(templates[0]?.applicationSourceId).to.equal('source1');
+    expect(templates[1]?.id).to.equal('template2');
+    expect(templates[1]?.templateSubtype).to.equal('dashboard');
   });
 
   it('should display the correct columns in the table with the updated order', () => {
@@ -83,15 +82,25 @@ describe('orchestrator template list', () => {
       },
     ];
 
-    const displayData: TemplateOutput[] = TemplateListUtil.processSimpleOutput(templateData);
+    const outputData = TemplateListUtil.processSimpleOutput(templateData);
 
-    expect(displayData).to.be.an('array').with.length(1);
-    expect(displayData[0]).to.have.property('TemplateId', 'id1');
-    expect(displayData[0]).to.have.property('Name', 'Template 1');
-    expect(displayData[0]).to.have.property('Label', 'Test 1');
-    expect(displayData[0]).to.have.property('Type', 'app');
-    expect(displayData[0]).to.have.property('SubType', 'tableau');
-    expect(displayData[0]).to.have.property('Version');
-    expect(displayData[0]).to.have.property('SourceID', 'src123');
+    // Check the output structure
+    expect(outputData).to.be.an('array').with.length(1);
+    expect(outputData[0]).to.have.property('TemplateId');
+    expect(outputData[0]).to.have.property('Name');
+    expect(outputData[0]).to.have.property('Label');
+    expect(outputData[0]).to.have.property('Type');
+    expect(outputData[0]).to.have.property('SubType');
+    expect(outputData[0]).to.have.property('Version');
+    expect(outputData[0]).to.have.property('SourceID');
+
+    // Use type assertion for specific properties
+    const firstItem = outputData[0] as Record<string, string | undefined>;
+    expect(firstItem.TemplateId).to.equal('id1');
+    expect(firstItem.Name).to.equal('Template 1');
+    expect(firstItem.Label).to.equal('Test 1');
+    expect(firstItem.Type).to.equal('app');
+    expect(firstItem.SubType).to.equal('tableau');
+    expect(firstItem.SourceID).to.equal('src123');
   });
 });

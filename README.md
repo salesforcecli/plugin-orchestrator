@@ -84,19 +84,19 @@ sf orchestrator template delete -o <target-org> --template-id <id>
 
 ```bash
 # List apps in an org
-sf orchestrator list app -o <target-org>
+sf orchestrator app list -o <target-org>
 
 # Display details of a specific app
-sf orchestrator display app -o <target-org> --app-id <id>
+sf orchestrator app display -o <target-org> --app-id <id>
 
 # Create a new app
-sf orchestrator create app -o <target-org> --name <app-name> [--label <label>] [--template-id <template-id>]
+sf orchestrator app create -o <target-org> --name <app-name> [--label <label>] [--template-id <template-id>]
 
 # Update an existing app
-sf orchestrator update app -o <target-org> --app-id <id> [--label <new-label>] [--description <text>]
+sf orchestrator app update -o <target-org> --app-id <id> [--label <new-label>] [--description <text>]
 
 # Delete an app
-sf orchestrator delete app -o <target-org> --app-id <id>
+sf orchestrator app delete -o <target-org> --app-id <id>
 ```
 
 ## Issues

@@ -16,7 +16,7 @@
 
 import { expect } from 'chai';
 
-describe('appframework template delete', () => {
+describe('appframework delete template', () => {
   const testTemplateId = '0XtB000000001aXYAQ';
 
   it('should verify URL construction for delete request', () => {

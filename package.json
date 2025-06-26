@@ -59,23 +59,8 @@
       "orchestrator": {
         "description": "Commands to work with AppFramework apps and templates"
       },
-      "orchestrator:list": {
-        "description": "List AppFramework resources"
-      },
-      "orchestrator:display": {
-        "description": "Display AppFramework resources"
-      },
-      "orchestrator:create": {
-        "description": "Create AppFramework resources"
-      },
-      "orchestrator:update": {
-        "description": "Update AppFramework resources"
-      },
-      "orchestrator:delete": {
-        "description": "Delete AppFramework resources"
-      },
-      "orchestrator:decouple": {
-        "description": "Decouple AppFramework resources"
+      "orchestrator:app": {
+        "description": "Work with AppFramework apps"
       },
       "orchestrator:template": {
         "description": "Work with AppFramework templates"

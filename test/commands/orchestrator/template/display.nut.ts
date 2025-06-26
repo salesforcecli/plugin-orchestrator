@@ -32,7 +32,7 @@ describe('orchestrator template display NUTs', () => {
   // They are commented out as they won't pass without real resources
   /*
   it('should display a template by ID', () => {
-    const command = orchestrator template display --template-id 0NRxx000000000x --target-org yourOrgAlias;
+    const command = 'orchestrator template display --template-id 0NRxx000000000x --target-org yourOrgAlias';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     
     // Check basic output format
@@ -43,7 +43,7 @@ describe('orchestrator template display NUTs', () => {
   });
   
   it('should display a template by name', () => {
-    const command = orchestrator template display --name "My Template" --target-org yourOrgAlias;
+    const command = 'orchestrator template display --name "My Template" --target-org yourOrgAlias';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     
     // Basic output verification
@@ -52,7 +52,7 @@ describe('orchestrator template display NUTs', () => {
   });
   
   it('should error with invalid template ID', () => {
-    const command = orchestrator template display --template-id nonexistent-id --target-org yourOrgAlias;
+    const command = 'orchestrator template display --template-id nonexistent-id --target-org yourOrgAlias';
     // This should error
     const output = execCmd(command, { ensureExitCode: 1 }).shellOutput.stderr;
     expect(output).to.include('Error');
