@@ -29,14 +29,6 @@
   },
   {
     "alias": [],
-    "command": "orchestrator:decouple:app",
-    "flagAliases": [],
-    "flagChars": ["i", "n", "o"],
-    "flags": ["api-version", "app-id", "app-name", "flags-dir", "json", "target-org"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
-    "alias": [],
     "command": "orchestrator:delete:app",
     "flagAliases": [],
     "flagChars": ["i", "n", "o", "p"],
@@ -84,43 +76,11 @@
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
-    "alias": [],
-    "command": "orchestrator:template:create",
-    "flagAliases": [],
-    "flagChars": ["d", "l", "n", "o", "s", "t"],
-    "flags": ["api-version", "description", "flags-dir", "json", "label", "name", "subtype", "target-org", "type"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
-    "alias": [],
-    "command": "orchestrator:template:delete",
-    "flagAliases": [],
-    "flagChars": ["i", "n", "o", "p"],
-    "flags": ["api-version", "flags-dir", "json", "no-prompt", "target-org", "template-id", "template-name"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
-    "alias": [],
-    "command": "orchestrator:template:display",
-    "flagAliases": [],
-    "flagChars": ["i", "n", "o"],
-    "flags": ["api-version", "flags-dir", "json", "target-org", "template-id", "template-name"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
     "alias": ["orchestrator template list"],
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
     "flags": ["api-version", "flags-dir", "json", "target-org"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
-    "alias": [],
-    "command": "orchestrator:template:update",
-    "flagAliases": [],
-    "flagChars": ["d", "i", "l", "n", "o"],
-    "flags": ["api-version", "description", "flags-dir", "json", "label", "target-org", "template-id", "template-name"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
