@@ -1,0 +1,5 @@
+{
+  "devDepOverrides": [
+    "eslint-config-salesforce-license"
+  ]
+}
