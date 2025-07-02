@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 module.exports = {
-  extends: ['eslint-config-salesforce-typescript', 'plugin:sf-plugin/recommended'],
+  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'plugin:sf-plugin/recommended'],
   root: true,
 };

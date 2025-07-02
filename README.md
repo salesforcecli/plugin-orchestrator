@@ -2,7 +2,7 @@
 
 # Salesforce Orchestrator Plugin
 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/plugin-orchestrator/main/LICENSE.txt)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/license/apache-2-0)
 
 A Salesforce CLI plugin for working with AppFramework apps, templates, assets, and services.
 
