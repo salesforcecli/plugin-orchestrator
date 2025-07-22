@@ -89,7 +89,7 @@
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
-    "alias": ["orchestrator template list"],
+    "alias": [],
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
