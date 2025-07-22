@@ -1,3 +1,9 @@
+## [1.0.10](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.9...1.0.10) (2025-07-22)
+
+### Bug Fixes
+
+- **deps:** bump form-data from 4.0.0 to 4.0.4 ([4f33fc4](https://github.com/salesforcecli/plugin-orchestrator/commit/4f33fc47130d4d34869114f628e0fd107cac789d))
+
 ## [1.0.9](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.8...1.0.9) (2025-07-13)
 
 ### Bug Fixes
