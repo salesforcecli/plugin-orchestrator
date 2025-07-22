@@ -31,9 +31,6 @@ export default class ListTemplate extends SfCommand<TemplateData[]> {
   public static readonly examples = messages.getMessages('examples');
   public static readonly state = 'preview';
 
-  // Add alias for backward compatibility
-  public static readonly aliases = ['orchestrator template list'];
-
   public static readonly flags = {
     'target-org': Flags.requiredOrg({
       summary: messages.getMessage('flags.target-org.summary'),
