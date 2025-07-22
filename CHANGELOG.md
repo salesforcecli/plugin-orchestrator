@@ -1,3 +1,9 @@
+## [1.0.11](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.10...1.0.11) (2025-07-22)
+
+### Bug Fixes
+
+- remove space-separated alias causing zsh autocomplete parsing error ([09ea048](https://github.com/salesforcecli/plugin-orchestrator/commit/09ea04873f3366960e89071c59d00c192bbc8940))
+
 ## [1.0.10](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.9...1.0.10) (2025-07-22)
 
 ### Bug Fixes
