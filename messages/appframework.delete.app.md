@@ -4,7 +4,13 @@ Delete an AppFramework app.
 
 # description
 
-Deletes an app from AppFramework. Either the app ID or app name must be provided to identify the app.
+Delete an AppFramework application from your org. This command permanently removes the app and all its associated data, configurations, and settings. This is a destructive operation that cannot be undone.
+
+You can identify the app to delete by either its unique ID or its name. App IDs are guaranteed to be unique, while app names should be unique within an org. The command will prompt for confirmation before deletion unless you use the --no-prompt flag.
+
+Deleting an app removes it from the Analytics Studio UI and makes it unavailable to users. Any dashboards, reports, or other components that depend on this app may be affected. Consider the impact on your users and any dependent systems before proceeding.
+
+You must have AppFramework enabled in your org and appropriate permissions to delete applications. You can only delete apps that exist in the target org.
 
 # flags.target-org.summary
 
@@ -12,15 +18,15 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-Overrides your default org.
+The target org to connect to for deleting the application. This org must have AppFramework enabled and you must have appropriate permissions to delete applications. The application must exist in this org.
 
 # flags.api-version.summary
 
-Override the api version used for api requests made by this command.
+Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the api version used for api requests made by this command.
+Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
 
 # flags.app-id.summary
 
@@ -28,7 +34,7 @@ ID of the app to delete.
 
 # flags.app-id.description
 
-Specify the ID of the app to delete. Either this or --app-name is required.
+The unique identifier of the application to delete. App IDs are guaranteed to be unique within an org. Use this flag when you know the app's ID, which you can get from "sf orchestrator app list" command. Either --app-id or --app-name is required.
 
 # flags.app-name.summary
 
@@ -36,15 +42,15 @@ Name of the app to delete.
 
 # flags.app-name.description
 
-Specify the name of the app to delete. Either this or --app-id is required.
+The name of the application to delete. App names should be unique within an org. Use this flag when you know the app's name but not its ID. If the name contains spaces, enclose it in quotes. Either --app-id or --app-name is required.
 
 # flags.no-prompt.summary
 
-Skip confirmation prompt before deleting.
+Do not prompt for confirmation.
 
 # flags.no-prompt.description
 
-Disables the confirmation prompt that normally appears before deleting an app. Use with caution.
+Skip the confirmation prompt before deleting the app. Use this flag carefully, especially in scripts or automation, as app deletion cannot be undone. This flag is useful for CI/CD pipelines and automated processes.
 
 # noAppSpecified
 
@@ -74,21 +80,99 @@ App deletion cancelled.
 
 Successfully deleted app with ID: %s
 
+# error.MissingRequiredFlag
+
+Either --app-id or --app-name must be provided.
+
+# error.MissingRequiredFlag.Actions
+
+- Use --app-id to specify an app by its unique ID
+- Use --app-name to specify an app by its name
+- Get app IDs and names using "sf orchestrator app list"
+
+# error.AppNotFound
+
+Application "%s" not found.
+
+# error.AppNotFound.Actions
+
+- Verify the app ID or name is correct
+- Use "sf orchestrator app list" to see available apps
+- Check your permissions to view apps
+- Make sure you're connected to the correct org with --target-org
+
 # error.DeleteError
 
 Failed to delete app: %s
 
 # error.DeleteError.Actions
 
-- Check that the app ID or name is correct
-- Verify you have permissions to delete apps in this org
-- Ensure your authentication to the org is valid
-- Try running with --debug for more details
+- Verify that you have permission to delete applications in the target org
+- Check that the app exists and is accessible
+- Ensure AppFramework is enabled in your org
+- Try using a different API version with --api-version
+- Verify your authentication and org connection are valid
+
+# error.InsufficientPermissions
+
+You don't have permission to delete applications in this org.
+
+# error.InsufficientPermissions.Actions
+
+- Contact your Salesforce administrator to request application deletion permissions
+- Verify you're connected to the correct org with --target-org
+- Ensure AppFramework is enabled in your org
+- Check that your user profile has the necessary AppFramework permissions
+
+# error.AppInUse
+
+Cannot delete app: It is currently in use by active processes.
+
+# error.AppInUse.Actions
+
+- Wait for any active processes using this app to complete
+- Check which processes are using this app
+- Consider stopping dependent processes before deletion
+- Try again after active processes have finished
+
+# error.MultipleAppsFound
+
+Multiple applications found with name "%s".
+
+# error.MultipleAppsFound.Actions
+
+- Use --app-id instead of --app-name for unique identification
+- Get the specific app ID using "sf orchestrator app list"
+- App names should be unique, but this org may have duplicates
+
+# error.InvalidAppId
+
+App ID "%s" is not valid.
+
+# error.InvalidAppId.Actions
+
+- Verify the app ID format is correct
+- Get valid app IDs using "sf orchestrator app list"
+- App IDs should be 15 or 18 character Salesforce IDs
 
 # examples
 
-- Delete an app using its ID:
-  <%= config.bin %> <%= command.id %> --app-id 01t5e000006lOjDAA2
+- Delete an app by ID with confirmation prompt:
 
-- Delete an app using its name:
-  <%= config.bin %> <%= command.id %> --app-name MyAppName
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 01t000000000123
+
+- Delete an app by name with confirmation prompt:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-name "My App"
+
+- Delete an app without confirmation prompt:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 01t000000000123 --no-prompt
+
+- Delete an app with a name containing spaces:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-name "Sales Analytics App"
+
+- Delete an app in a specific org with API version:
+
+  <%= config.bin %> <%= command.id %> --target-org mySandbox --app-id 01t000000000123 --api-version 60.0

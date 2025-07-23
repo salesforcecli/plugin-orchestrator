@@ -4,63 +4,95 @@ Delete an AppFramework template.
 
 # description
 
-Deletes an existing template. By default, apps created from this template will remain but will no longer be linked to the template. Use --force-delete to delete both the template and all apps created from it. Use --decouple to keep the apps but remove their link to the template.
+Delete an AppFramework template from your org. This command provides several options for handling applications that were created from the template.
+
+By default, when you delete a template, any applications created from it remain in your org but lose their association with the template. You can also choose to force delete both the template and all associated applications, or decouple applications before deletion to ensure they continue functioning independently.
+
+This is a destructive operation that cannot be undone. The command will prompt for confirmation unless you use the --no-prompt flag. Consider carefully which deletion strategy best fits your needs before proceeding.
+
+You must have AppFramework enabled in your org and appropriate permissions to delete templates. You can only delete templates that exist in the target org.
+
+# examples
+
+- Delete a template by ID (keeps associated apps):
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-id 0XtB000000001aXYAQ
+
+- Delete a template by name with confirmation prompt:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-name "My Template"
+
+- Force delete template and all apps created from it:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-id 0XtB000000001aXYAQ --force-delete
+
+- Delete template without confirmation prompt:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-id 0XtB000000001aXYAQ --no-prompt
+
+- Decouple apps before deleting template:
+
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-name "Sales Template" --decouple
+
+- Delete template in specific org with API version:
+
+  <%= config.bin %> <%= command.id %> --target-org mySandbox --template-id 0XtB000000001aXYAQ --api-version 60.0
 
 # flags.target-org.summary
 
-Login username or alias for the target org
+Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for deleting the template.
+The target org to connect to for deleting the template. This org must have AppFramework enabled and you must have appropriate permissions to delete templates. The template must exist in this org.
 
 # flags.api-version.summary
 
-Override the api version used for api requests
+Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the api version used for api requests to the app framework.
+Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
 
 # flags.template-id.summary
 
-ID of the template to delete
+ID of the template to delete.
 
 # flags.template-id.description
 
-The unique identifier of the template to delete.
+The unique identifier of the template to delete. Template IDs are guaranteed to be unique within an org. Use this flag when you know the template's ID, which you can get from "sf orchestrator template list" command. Either --template-id or --template-name is required.
 
 # flags.template-name.summary
 
-Name of the template to delete
+Name of the template to delete.
 
 # flags.template-name.description
 
-The name of the template to delete. Use this if you don't know the template ID.
+The name of the template to delete. Template names should be unique within an org. Use this flag when you know the template's name but not its ID. If the name contains spaces, enclose it in quotes. Either --template-id or --template-name is required.
 
 # flags.force-delete.summary
 
-Force delete the template and all apps created from it
+Force delete the template and all apps created from it.
 
 # flags.force-delete.description
 
-When set, all apps created from this template will also be deleted. Otherwise, the apps will remain but will no longer be linked to any template.
+When set, all applications created from this template will also be deleted. This is a destructive operation that cannot be undone. Use with caution as it will permanently remove both the template and all associated applications from your org.
 
 # flags.decouple.summary
 
-Decouple apps from this template before deleting it
+Decouple apps from this template before deleting it.
 
 # flags.decouple.description
 
-When set, apps created from this template will have their link to the template removed before the template is deleted. This allows the apps to exist independently after the template is gone.
+When set, applications created from this template will have their association with the template removed before the template is deleted. This ensures applications continue to function independently after the template is gone. Use this option when you want to preserve applications while removing the template.
 
 # flags.no-prompt.summary
 
-Do not prompt for confirmation
+Do not prompt for confirmation.
 
 # flags.no-prompt.description
 
-Skip the confirmation prompt before deleting the template.
+Skip the confirmation prompt before deleting the template. Use this flag carefully, especially in scripts or automation, as template deletion cannot be undone. This flag is useful for CI/CD pipelines and automated processes.
 
 # fetchingTemplate
 
@@ -96,12 +128,13 @@ Successfully deleted template with ID: %s
 
 # error.MissingRequiredFlag
 
-You must provide either template-id or template-name.
+You must provide either --template-id or --template-name.
 
 # error.MissingRequiredFlag.Actions
 
-- Specify the template ID with --template-id
-- Or specify the template name with --template-name
+- Use --template-id to specify a template by its unique ID
+- Use --template-name to specify a template by its name
+- Get template IDs and names using "sf orchestrator template list"
 
 # error.TemplateNotFound
 
@@ -110,7 +143,9 @@ Could not find template: %s
 # error.TemplateNotFound.Actions
 
 - Verify the template ID or name is correct
-- Use 'sf appframework list template' to see available templates
+- Use "sf orchestrator template list" to see available templates
+- Check your permissions to view templates
+- Make sure you're connected to the correct org with --target-org
 
 # error.CertificateError
 
@@ -120,7 +155,8 @@ Error connecting to Salesforce: Certificate validation failed.
 
 - Check your network connection
 - Verify you have valid certificates
-- Try again with a different org
+- Try specifying the API version with --api-version
+- If using a sandbox or scratch org, ensure your connection is properly authenticated
 
 # error.AuthenticationError
 
@@ -128,9 +164,10 @@ Error connecting to Salesforce: Authentication failed.
 
 # error.AuthenticationError.Actions
 
-- Verify your credentials
-- Run 'sf org login' to reauthenticate
+- Verify your credentials are valid
+- Run "sf org login web" to reauthenticate
 - Check if your session has expired
+- Ensure you have AppFramework enabled and appropriate permissions
 
 # error.GenericError
 
@@ -140,7 +177,30 @@ Error deleting template: %s
 
 - Review the error message for details
 - Check if you have permission to delete templates
-- Verify the template isn't being used by active apps
+- Verify the template isn't locked or protected
+- Ensure AppFramework is enabled in your org
+
+# error.InsufficientPermissions
+
+You don't have permission to delete templates in this org.
+
+# error.InsufficientPermissions.Actions
+
+- Contact your Salesforce administrator to request template deletion permissions
+- Verify you're connected to the correct org with --target-org
+- Ensure AppFramework is enabled in your org
+- Check that your user profile has the necessary AppFramework permissions
+
+# error.TemplateInUse
+
+Cannot delete template: It is currently in use by active processes.
+
+# error.TemplateInUse.Actions
+
+- Wait for any active processes using this template to complete
+- Use --force-delete to delete the template and all associated apps
+- Use --decouple to preserve apps while deleting the template
+- Check which apps are using this template with "sf orchestrator app list"
 
 # deleteAppSuccess
 
@@ -153,10 +213,3 @@ Successfully decoupled app '%s' (ID: %s) from template
 # deletionCancelled
 
 Template deletion cancelled.
-
-# examples
-
-- <%= config.bin %> <%= command.id %> --template-id 0XtB000000001aXYAQ
-- <%= config.bin %> <%= command.id %> --template-name "My Template"
-- <%= config.bin %> <%= command.id %> --template-id 0XtB000000001aXYAQ --force-delete
-- <%= config.bin %> <%= command.id %> --template-id 0XtB000000001aXYAQ --no-prompt
