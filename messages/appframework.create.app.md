@@ -106,13 +106,21 @@ Log level for the app.
 
 Sets the logging level for the app. This controls how much diagnostic information is captured during app execution. Common values include debug, info, warn, and error.
 
+# noTemplateSpecified
+
+No template specified. You must specify either a template ID with --template-id or a template name with --template-name.
+
+# fetchingTemplate
+
+Fetching template details...
+
 # creatingApp
 
 Creating app from template...
 
 # createSuccess
 
-Successfully created app '%s' with ID: %s
+Successfully created app with ID: %s
 
 # error.MissingRequiredFlag
 
@@ -126,7 +134,7 @@ Either --template-id or --template-name must be provided.
 
 # error.TemplateNotFound
 
-Template "%s" not found.
+Template not found.
 
 # error.TemplateNotFound.Actions
 
