@@ -1,16 +1,16 @@
 # summary
 
-Delete an AppFramework template.
+Delete a template.
 
 # description
 
-Delete an AppFramework template from your org. This command provides several options for handling applications that were created from the template.
+Delete a template from your org. This command provides several options for handling apps that were created from the template.
 
-By default, when you delete a template, any applications created from it remain in your org but lose their association with the template. You can also choose to force delete both the template and all associated applications, or decouple applications before deletion to ensure they continue functioning independently.
+By default, when you delete a template, any apps created from it remain in your org but lose their association with the template. You can also choose to force delete both the template and all associated apps, or decouple apps before deletion to ensure they continue functioning independently.
 
-This is a destructive operation that cannot be undone. The command will prompt for confirmation unless you use the --no-prompt flag. Consider carefully which deletion strategy best fits your needs before proceeding.
+This is a destructive operation that can't be undone. The command prompts for confirmation unless you use the --no-prompt flag. Consider carefully which deletion strategy best fits your needs before proceeding.
 
-You must have AppFramework enabled in your org and appropriate permissions to delete templates. You can only delete templates that exist in the target org.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to delete templates. You can only delete templates that exist in the target org.
 
 # examples
 
@@ -44,7 +44,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for deleting the template. This org must have AppFramework enabled and you must have appropriate permissions to delete templates. The template must exist in this org.
+The target org to connect to for deleting the template. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to delete templates. The template must exist in this org.
 
 # flags.api-version.summary
 
@@ -52,7 +52,7 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.template-id.summary
 
@@ -76,7 +76,7 @@ Force delete the template and all apps created from it.
 
 # flags.force-delete.description
 
-When set, all applications created from this template will also be deleted. This is a destructive operation that cannot be undone. Use with caution as it will permanently remove both the template and all associated applications from your org.
+When set, all apps created from this template are also deleted. This is a destructive operation that can't be undone. Use with caution as it permanently removes both the template and all associated apps from your org.
 
 # flags.decouple.summary
 
@@ -84,15 +84,15 @@ Decouple apps from this template before deleting it.
 
 # flags.decouple.description
 
-When set, applications created from this template will have their association with the template removed before the template is deleted. This ensures applications continue to function independently after the template is gone. Use this option when you want to preserve applications while removing the template.
+When set, apps created from this template have their association with the template removed before the template is deleted. This ensures apps continue to function independently after the template is gone. Use this option when you want to preserve apps while removing the template.
 
 # flags.no-prompt.summary
 
-Do not prompt for confirmation.
+Don't prompt for confirmation.
 
 # flags.no-prompt.description
 
-Skip the confirmation prompt before deleting the template. Use this flag carefully, especially in scripts or automation, as template deletion cannot be undone. This flag is useful for CI/CD pipelines and automated processes.
+Skip the confirmation prompt before deleting the template. Use this flag carefully, especially in scripts or automation, as template deletion can't be undone.
 
 # fetchingTemplate
 
@@ -167,7 +167,7 @@ Error connecting to Salesforce: Authentication failed.
 - Verify your credentials are valid
 - Run "sf org login web" to reauthenticate
 - Check if your session has expired
-- Ensure you have AppFramework enabled and appropriate permissions
+- Ensure you have Data Cloud and Tableau Next enabled and the AppFrameworkManageApp user permission
 
 # error.GenericError
 
@@ -178,7 +178,7 @@ Error deleting template: %s
 - Review the error message for details
 - Check if you have permission to delete templates
 - Verify the template isn't locked or protected
-- Ensure AppFramework is enabled in your org
+- Ensure Data Cloud and Tableau Next are enabled in your org
 
 # error.InsufficientPermissions
 
@@ -186,14 +186,14 @@ You don't have permission to delete templates in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce administrator to request template deletion permissions
+- Contact your Salesforce admin to request template deletion permissions
 - Verify you're connected to the correct org with --target-org
-- Ensure AppFramework is enabled in your org
-- Check that your user profile has the necessary AppFramework permissions
+- Ensure Data Cloud and Tableau Next are enabled in your org
+- Check that your user profile has the AppFrameworkManageApp user permission
 
 # error.TemplateInUse
 
-Cannot delete template: It is currently in use by active processes.
+Can't delete template: It is currently in use by active processes.
 
 # error.TemplateInUse.Actions
 

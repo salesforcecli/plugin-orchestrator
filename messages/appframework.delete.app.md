@@ -1,16 +1,16 @@
 # summary
 
-Delete an AppFramework app.
+Delete an application.
 
 # description
 
-Delete an AppFramework application from your org. This command permanently removes the app and all its associated data, configurations, and settings. This is a destructive operation that cannot be undone.
+Delete an orchestrated application from your org. This command permanently removes the app and all its associated data, configurations, and settings. This is a destructive operation that can't be undone.
 
-You can identify the app to delete by either its unique ID or its name. App IDs are guaranteed to be unique, while app names should be unique within an org. The command will prompt for confirmation before deletion unless you use the --no-prompt flag.
+You can identify the app to delete by either its unique ID or its name. App IDs are guaranteed to be unique, while app names should be unique within an org. The command prompts for confirmation before deletion unless you use the --no-prompt flag.
 
-Deleting an app removes it from the Analytics Studio UI and makes it unavailable to users. Any dashboards, reports, or other components that depend on this app may be affected. Consider the impact on your users and any dependent systems before proceeding.
+Deleting an app removes it Tableau Next and makes it unavailable to users. Any dashboards, visualizations, data assets, or other components that depend on this app may be affected. Consider the impact on your users and any dependent systems before proceeding.
 
-You must have AppFramework enabled in your org and appropriate permissions to delete applications. You can only delete apps that exist in the target org.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to delete apps. You can only delete apps that exist in the target org.
 
 # flags.target-org.summary
 
@@ -18,7 +18,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for deleting the application. This org must have AppFramework enabled and you must have appropriate permissions to delete applications. The application must exist in this org.
+The target org to connect to for deleting the app. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to delete apps. The app must exist in this org.
 
 # flags.api-version.summary
 
@@ -26,7 +26,7 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.app-id.summary
 
@@ -42,7 +42,7 @@ Name of the app to delete.
 
 # flags.app-name.description
 
-The name of the application to delete. App names should be unique within an org. Use this flag when you know the app's name but not its ID. If the name contains spaces, enclose it in quotes. Either --app-id or --app-name is required.
+The name of the app to delete.
 
 # flags.no-prompt.summary
 
@@ -92,7 +92,7 @@ Either --app-id or --app-name must be provided.
 
 # error.AppNotFound
 
-Application "%s" not found.
+App "%s" not found.
 
 # error.AppNotFound.Actions
 
@@ -107,26 +107,26 @@ Failed to delete app: %s
 
 # error.DeleteError.Actions
 
-- Verify that you have permission to delete applications in the target org
+- Verify that you have permission to delete apps in the target org
 - Check that the app exists and is accessible
-- Ensure AppFramework is enabled in your org
+- Ensure Data Cloud and Tableau Next are enabled in your org
 - Try using a different API version with --api-version
 - Verify your authentication and org connection are valid
 
 # error.InsufficientPermissions
 
-You don't have permission to delete applications in this org.
+You don't have permission to delete apps in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce administrator to request application deletion permissions
+- Contact your Salesforce admin to request app deletion permissions
 - Verify you're connected to the correct org with --target-org
-- Ensure AppFramework is enabled in your org
-- Check that your user profile has the necessary AppFramework permissions
+- Ensure Data Cloud and Tableau Next are enabled in your org
+- Check that your user profile has the AppFrameworkManageApp permission
 
 # error.AppInUse
 
-Cannot delete app: It is currently in use by active processes.
+Can't delete app: It is currently in use by active processes.
 
 # error.AppInUse.Actions
 
@@ -137,7 +137,7 @@ Cannot delete app: It is currently in use by active processes.
 
 # error.MultipleAppsFound
 
-Multiple applications found with name "%s".
+Multiple apps found with name "%s".
 
 # error.MultipleAppsFound.Actions
 
