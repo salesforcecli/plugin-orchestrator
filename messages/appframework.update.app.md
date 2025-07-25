@@ -1,16 +1,16 @@
 # summary
 
-Update an AppFramework app with a new template.
+Update an app with a new template.
 
 # description
 
-Update an existing AppFramework application by associating it with a new template or modifying its properties. This command allows you to change the template that an app is based on, update its metadata (label, description), or modify runtime configuration settings.
+Update an existing orchestrated app by associating it with a new template or modifying its properties. This command allows you to change the template that an app is based on, update its metadata (label, description), or modify runtime configuration settings.
 
 You can identify the app by either its unique ID or its name, and specify the new template by either its unique ID or its name. App and template IDs are guaranteed to be unique, while names should be unique within an org.
 
 Updating an app with a new template changes the app's underlying structure and configuration to match the new template. This is useful for migrating apps to updated templates or changing an app's functionality. You can also update just the app's metadata without changing the template.
 
-You must have AppFramework enabled in your org and appropriate permissions to modify applications. Both the app and template must exist in the same org.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to modify applications. Both the app and template must exist in the same org.
 
 # flags.target-org.summary
 
@@ -18,7 +18,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for updating the application. This org must have AppFramework enabled and you must have appropriate permissions to modify applications. Both the app and template must exist in this org.
+The target org to connect to for updating the application. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to modify applications. Both the app and template must exist in this org.
 
 # flags.api-version.summary
 
@@ -26,7 +26,7 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.app-id.summary
 
@@ -34,7 +34,7 @@ ID of the app to update.
 
 # flags.app-id.description
 
-The unique identifier of the application to update. App IDs are guaranteed to be unique within an org. Use this flag when you know the app's ID, which you can get from "sf orchestrator app list" command. Either --app-id or --app-name is required.
+The unique identifier of the app to update.
 
 # flags.app-name.summary
 
@@ -42,7 +42,7 @@ Name of the app to update.
 
 # flags.app-name.description
 
-The name of the application to update. App names should be unique within an org. Use this flag when you know the app's name but not its ID. If the name contains spaces, enclose it in quotes. Either --app-id or --app-name is required.
+The name of the app to update.
 
 # flags.template-id.summary
 
@@ -66,7 +66,7 @@ New label for the app.
 
 # flags.label.description
 
-A new display label for the app. This is the human-readable name shown to users in the Analytics Studio UI. The label helps users identify and select the appropriate app. Use clear, descriptive labels that explain the app's purpose.
+A new display label for the app. This is the human-readable name shown to users on the App Install History page. The label helps users identify and select the appropriate app. Use clear, descriptive labels that explain the app's purpose.
 
 # flags.description.summary
 
@@ -74,7 +74,7 @@ New description for the app.
 
 # flags.description.description
 
-A new description for the app. This provides detailed information about the app's purpose, features, and intended use cases. The description appears in the Analytics Studio UI and helps users understand when and how to use the app effectively.
+A new description for the app. This provides detailed information about the app's purpose, features, and intended use cases. The description appears on the App Install History page and helps users understand when and how to use the app effectively
 
 # flags.runtime-method.summary
 
@@ -82,7 +82,7 @@ Runtime method for the app.
 
 # flags.runtime-method.description
 
-Specifies the runtime method for the app execution. This affects how the app processes data and handles user interactions. Common values include sync and async. This setting overrides the template's default runtime method.
+Specifies the runtime method for the app execution. This affects how the app processes data and handles user interactions. Valid values are 'sync' and 'async'. This setting overrides the app's default runtime method.
 
 # flags.log-level.summary
 
@@ -90,7 +90,7 @@ Log level for the app.
 
 # flags.log-level.description
 
-Sets the logging level for the app. This controls how much diagnostic information is captured during app execution. Common values include debug, info, warn, and error. This setting overrides the template's default log level.
+Sets the logging level for the app. This controls how much diagnostic information is captured during app execution. Valid values are 'debug', 'info', 'warn', and 'error'. This setting overrides the app's default log level.
 
 # noAppSpecified
 
@@ -136,7 +136,7 @@ Either --app-id or --app-name must be provided.
 
 # error.AppNotFound
 
-Application "%s" not found.
+App "%s" not found.
 
 # error.AppNotFound.Actions
 
@@ -174,22 +174,22 @@ Failed to update app: %s
 
 # error.UpdateError.Actions
 
-- Verify that you have permission to modify applications in the target org
+- Verify that you have permission to modify apps in the target org
 - Check that both the app and template exist and are accessible
-- Ensure AppFramework is enabled in your org
+- Ensure Data Cloud and Tableau Next are enabled in your org
 - Try using a different API version with --api-version
 - Verify your authentication and org connection are valid
 
 # error.InsufficientPermissions
 
-You don't have permission to update applications in this org.
+You don't have permission to update apps in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce administrator to request application modification permissions
+- Contact your Salesforce admin to request app modification permissions
 - Verify you're connected to the correct org with --target-org
-- Ensure AppFramework is enabled in your org
-- Check that your user profile has the necessary AppFramework permissions
+- Ensure Data Cloud and Tableau Next are enabled in your org
+- Check that your user profile has the AppFrameworkManageApp user permission
 
 # examples
 

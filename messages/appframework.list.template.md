@@ -1,18 +1,18 @@
 # summary
 
-List all available AppFramework templates in the target org.
+List all available templates in the target org.
 
 # description
 
-AppFramework templates are reusable configurations that define the structure and settings for creating AppFramework applications. Use this command to discover available templates in your org before creating new apps.
+Templates are reusable configurations that define the structure and settings for creating orchestrated apps. Use this command to discover available templates in your org before creating new apps.
 
-Templates are displayed in a table format showing their name, label, ID, type, and other metadata. This information helps you choose the right template for your AppFramework application development.
+Templates are displayed in a table format showing their name, label, ID, type, and other metadata. This information helps you choose the right template for your orchestrated app development.
 
-You must have AppFramework enabled in your org and appropriate permissions to view templates. This command works with production orgs, sandboxes, and scratch orgs that have AppFramework configured.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkViewApp user permission to view templates. This command works with production orgs, sandboxes, and scratch orgs.
 
 # examples
 
-- List all AppFramework templates in your default org:
+- List all templates in your default org:
 
   <%= config.bin %> <%= command.id %>
 
@@ -34,7 +34,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for listing templates. This org must have AppFramework enabled and you must have appropriate permissions to view templates.
+The target org to connect to for listing templates. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view templates.
 
 # flags.api-version.summary
 
@@ -42,19 +42,19 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # templatesFound
 
-Found %s AppFramework templates:
+Found %s templates:
 
 # noResultsFound
 
-No AppFramework templates found.
+No templates found.
 
 # fetchingTemplates
 
-Fetching AppFramework templates...
+Fetching templates...
 
 # templateTypeLegend
 
@@ -62,7 +62,7 @@ Legend: %s, %s, %s - Other template types
 
 # error.CertificateError
 
-Error retrieving AppFramework templates: Certificate validation error.
+Error retrieving templates: Certificate validation error.
 
 # error.CertificateError.Actions
 
@@ -73,23 +73,23 @@ Error retrieving AppFramework templates: Certificate validation error.
 
 # error.AuthenticationError
 
-Error retrieving AppFramework templates: Authentication issue.
+Error retrieving templates: Authentication issue.
 
 # error.AuthenticationError.Actions
 
 - Your session may have expired or you may not have permission to access this resource
 - Try running "sf org login web" to reauthenticate
-- Ensure you have AppFramework enabled and have permission to view templates
+- Ensure you have Data Cloud and Tableau Next enabled and have the AppFrameworkViewApp user permission to view templates
 - Verify the target org is correct and accessible
 
 # error.GenericError
 
-Error retrieving AppFramework templates: %s
+Error retrieving templates: %s
 
 # error.GenericError.Actions
 
-- Verify that you are using an org with AppFramework enabled
+- Verify that you are using an org with Data Cloud and Tableau Next enabled
 - Check that your credentials and permissions are valid
 - Check your internet connection
 - Try running "sf org login web" to reauthenticate
-- Ensure the target org has AppFramework properly configured
+- Ensure the target org has Data Cloud and Tableau Next properly configured
