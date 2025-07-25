@@ -1,10 +1,10 @@
 # summary
 
-Delete an application.
+Delete an app.
 
 # description
 
-Delete an orchestrated application from your org. This command permanently removes the app and all its associated data, configurations, and settings. This is a destructive operation that can't be undone.
+Delete an orchestrated app from your org.
 
 You can identify the app to delete by either its unique ID or its name. App IDs are guaranteed to be unique, while app names should be unique within an org. The command prompts for confirmation before deletion unless you use the --no-prompt flag.
 
@@ -34,7 +34,7 @@ ID of the app to delete.
 
 # flags.app-id.description
 
-The unique identifier of the application to delete. App IDs are guaranteed to be unique within an org. Use this flag when you know the app's ID, which you can get from "sf orchestrator app list" command. Either --app-id or --app-name is required.
+The unique identifier of the app to delete.
 
 # flags.app-name.summary
 

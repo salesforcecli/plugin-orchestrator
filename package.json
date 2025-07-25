@@ -56,13 +56,13 @@
     ],
     "topics": {
       "orchestrator": {
-        "description": "Commands to work with AppFramework apps and templates"
+        "description": "Commands to work with apps and templates"
       },
       "orchestrator:app": {
-        "description": "Work with AppFramework apps"
+        "description": "Work with apps"
       },
       "orchestrator:template": {
-        "description": "Work with AppFramework templates"
+        "description": "Work with templates"
       }
     },
     "flexibleTaxonomy": true

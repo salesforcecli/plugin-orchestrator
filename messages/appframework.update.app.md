@@ -10,7 +10,7 @@ You can identify the app by either its unique ID or its name, and specify the ne
 
 Updating an app with a new template changes the app's underlying structure and configuration to match the new template. This is useful for migrating apps to updated templates or changing an app's functionality. You can also update just the app's metadata without changing the template.
 
-You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to modify applications. Both the app and template must exist in the same org.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to modify apps. Both the app and template must exist in the same org.
 
 # flags.target-org.summary
 
@@ -18,7 +18,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for updating the application. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to modify applications. Both the app and template must exist in this org.
+The target org to connect to for updating the app.
 
 # flags.api-version.summary
 

@@ -1,6 +1,6 @@
 # summary
 
-Create a new application from a template.
+Create a new app from a template.
 
 # description
 
@@ -24,7 +24,7 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 - Create an app with a custom label and description:
 
-  <%= config.bin %> <%= command.id %> --target-org myOrg --name "analytics_app" --template-name "Analytics_Template" --label "My Analytics App" --description "Custom analytics application"
+  <%= config.bin %> <%= command.id %> --target-org myOrg --name "analytics_app" --template-name "Analytics_Template" --label "My Analytics App" --description "Custom analytics app"
 
 - Create an app with specific runtime configuration:
 
@@ -149,7 +149,7 @@ Failed to create app: %s
 
 # error.AppCreationError.Actions
 
-- Verify that you have permission to create applications in the target org
+- Verify that you have permission to create apps in the target org
 - Ensure the app name is unique within your org
 - Check that Data Cloud and Tableau Next are enabled in your org
 - Verify your authentication and org connection are valid
@@ -168,7 +168,7 @@ App name "%s" is invalid or already exists.
 
 # error.InsufficientPermissions
 
-You don't have permission to create applications in this org.
+You don't have permission to create apps in this org.
 
 # error.InsufficientPermissions.Actions
 

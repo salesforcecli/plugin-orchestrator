@@ -1,6 +1,6 @@
 # summary
 
-Display details of an application.
+Display details of an app.
 
 # description
 
