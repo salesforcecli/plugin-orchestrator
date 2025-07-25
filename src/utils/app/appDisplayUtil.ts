@@ -42,7 +42,7 @@ export class AppDisplayUtil {
    * @param apps - The app data to display
    * @param title - Optional title for the table
    */
-  public static displayAppList(command: SfCommand<unknown>, apps: AppData[], title = 'AppFramework Apps'): void {
+  public static displayAppList(command: SfCommand<unknown>, apps: AppData[], title = 'Apps'): void {
     if (apps.length === 0) {
       command.log('No apps found.');
       return;
