@@ -1,18 +1,18 @@
 # summary
 
-List all AppFramework apps in the target org.
+List all orchestrated apps in the target org.
 
 # description
 
-List all AppFramework applications in your org with their key information including name, label, ID, type, and associated template details. This command helps you discover and manage existing applications in your organization.
+List all orchestrated apps in your org with their key information including name, label, ID, type, and associated template details. This command helps you discover and manage existing apps in your organization.
 
-Applications are displayed in a table format showing their current status, creation details, and template associations. You can use this information to understand your application inventory and make informed decisions about application management.
+Apps are displayed in a table format showing their current status, creation details, and template associations. Use this information to understand your app inventory and make informed decisions about app management.
 
-You must have AppFramework enabled in your org and appropriate permissions to view applications. This command works with production orgs, sandboxes, and scratch orgs that have AppFramework configured.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkViewApp user permission to view apps. This command works with production orgs, sandboxes, and scratch orgs.
 
 # examples
 
-- List all AppFramework apps in your default org:
+- List all orchestrated apps in your default org:
 
   <%= config.bin %> <%= command.id %>
 
@@ -34,7 +34,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for listing applications. This org must have AppFramework enabled and you must have appropriate permissions to view applications.
+The target org to connect to for listing apps. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view apps.
 
 # flags.api-version.summary
 
@@ -42,15 +42,15 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # fetchingApps
 
-Fetching apps from AppFramework. This might take a moment...
+Fetching apps. This might take a moment...
 
 # noAppsFound
 
-No AppFramework apps found in the org.
+No orchestrated apps found in the org.
 
 # emptyFilteredApps
 
@@ -68,7 +68,7 @@ Failed to list apps: %s
 
 # noResultsFound
 
-No AppFramework apps found in the org.
+No apps found in the org.
 
 # error.CertificateError
 
@@ -88,7 +88,7 @@ Authentication error: Unable to authenticate with the org. Please check your cre
 # error.AuthenticationError.Actions
 
 - Use "sf org login web" to log in to the org again
-- Ensure that your user has the necessary permissions to access the AppFramework API
+- Ensure that your user has the necessary permissions to access the orchestration API
 - Check if your authentication token has expired
 - Verify the target org is correct and accessible
 
@@ -99,6 +99,6 @@ An error occurred while listing apps: %s
 # error.GenericError.Actions
 
 - Check the error message above for more details
-- Ensure that AppFramework is enabled in your org
+- Ensure that Data Cloud and Tableau Next are enabled in your org
 - Ensure that your user has the necessary permissions
 - Try running "sf org login web" to reauthenticate

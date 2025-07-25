@@ -1,14 +1,14 @@
 # summary
 
-Display details of an AppFramework template.
+Display details of a template.
 
 # description
 
-Display comprehensive information about a specific AppFramework template including its name, label, ID, type, subtype, description, and other metadata properties. This command is useful for inspecting templates before using them to create applications or for understanding template configurations.
+Display comprehensive information about a specific template including its name, label, ID, type, subtype, description, and other metadata properties. Use this command to inspect templates before using them to create apps or for understanding template configurations.
 
 You can identify a template by either its unique ID or its name. Template IDs are guaranteed to be unique, while template names should be unique within an org. The command displays all available template properties in a formatted, easy-to-read layout.
 
-Template information helps you understand what the template provides, its intended use case, and how to use it effectively when creating AppFramework applications. You must have AppFramework enabled in your org and appropriate permissions to view templates.
+Template information helps you understand what the template provides, its intended use case, and how to use it effectively when creating orchestrated apps. You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkViewApp user permission to view templates.
 
 # examples
 
@@ -54,7 +54,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for displaying the template. This org must have AppFramework enabled and you must have appropriate permissions to view templates. The template must exist in this org.
+The target org to connect to for displaying the template. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view templates. The template must exist in this org.
 
 # flags.api-version.summary
 
@@ -62,11 +62,11 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # fetchingTemplate
 
-Fetching AppFramework template...
+Fetching template...
 
 # error.MissingRequiredFlag
 
@@ -80,7 +80,7 @@ Either --template-id or --template-name must be provided.
 
 # error.CertificateError
 
-Error retrieving AppFramework template: Certificate validation error.
+Error retrieving template: Certificate validation error.
 
 # error.CertificateError.Actions
 
@@ -91,13 +91,13 @@ Error retrieving AppFramework template: Certificate validation error.
 
 # error.AuthenticationError
 
-Error retrieving AppFramework template: Authentication issue.
+Error retrieving template: Authentication issue.
 
 # error.AuthenticationError.Actions
 
 - Your session may have expired or you may not have permission to access this resource
 - Try running "sf org login web" to reauthenticate
-- Ensure you have AppFramework enabled and have permission to view templates
+- Ensure you have Tableau Next enabled and have permission to view templates
 - Verify the target org is correct and accessible
 
 # error.TemplateNotFound
@@ -113,15 +113,15 @@ Template "%s" not found.
 
 # error.GenericError
 
-Error retrieving AppFramework template: %s
+Error retrieving template: %s
 
 # error.GenericError.Actions
 
-- Verify that you are using an org with AppFramework enabled
+- Verify that you are using an org with Data Cloud and Tableau Next enabled
 - Check that the template ID or name is correct
 - Ensure you have permission to view templates
 - Try running "sf org login web" to reauthenticate
-- Verify the target org has AppFramework properly configured
+- Verify the target org has Data Cloud and Tableau Next properly configured
 
 # error.MultipleTemplatesFound
 

@@ -1,16 +1,16 @@
 # summary
 
-Display details of an AppFramework app.
+Display details of an application.
 
 # description
 
-Display comprehensive information about a specific AppFramework application including its name, label, ID, type, template association, creation details, and configuration properties. This command is useful for inspecting applications to understand their current state, template relationships, and configuration settings.
+Display comprehensive information about a specific orchestrated app including its name, label, ID, type, template association, creation details, and configuration properties. Use this command to inspect apps to understand their current state, template relationships, and configuration settings.
 
 You can identify the app by either its unique ID or its name. App IDs are guaranteed to be unique, while app names should be unique within an org. The command displays all available app properties in a formatted, easy-to-read layout.
 
-App information helps you understand the application's current configuration, its template relationship, and any runtime settings that may be applied. This is particularly useful before making updates, troubleshooting issues, or understanding app dependencies.
+App information helps you understand the app's current configuration, its template relationship, and any runtime settings that may be applied. This is particularly useful before making updates, troubleshooting issues, or understanding app dependencies.
 
-You must have AppFramework enabled in your org and appropriate permissions to view applications.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkViewApp user permission to view apps.
 
 # flags.target-org.summary
 
@@ -18,7 +18,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for displaying the application. This org must have AppFramework enabled and you must have appropriate permissions to view applications. The application must exist in this org.
+The target org to connect to for displaying the app. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view apps. The app must also exist in this org.
 
 # flags.api-version.summary
 
@@ -26,7 +26,7 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.app-id.summary
 
@@ -34,7 +34,7 @@ ID of the app to display.
 
 # flags.app-id.description
 
-The unique identifier of the application to display. App IDs are guaranteed to be unique within an org. Use this flag when you know the app's ID, which you can get from "sf orchestrator app list" command. Either --app-id or --app-name is required.
+The unique identifier of the app to display.
 
 # flags.app-name.summary
 
@@ -42,7 +42,7 @@ Name of the app to display.
 
 # flags.app-name.description
 
-The name of the application to display. App names should be unique within an org. Use this flag when you know the app's name but not its ID. If the name contains spaces, enclose it in quotes. Either --app-id or --app-name is required.
+The name of the app to display.
 
 # noAppSpecified
 
@@ -68,13 +68,13 @@ Either --app-id or --app-name must be provided.
 
 # error.AppNotFound
 
-Application "%s" not found.
+App "%s" not found.
 
 # error.AppNotFound.Actions
 
 - Verify that you have the correct app ID or name
 - Ensure the app exists in this org using "sf orchestrator app list"
-- Check your permissions to view applications
+- Check your permissions to view apps
 - Make sure you're connected to the correct org with --target-org
 
 # error.RetrievalError
@@ -83,26 +83,26 @@ Failed to retrieve app details: %s
 
 # error.RetrievalError.Actions
 
-- Verify that you have permission to view applications in the target org
+- Verify that you have permission to view apps in the target org
 - Check that the app exists and is accessible
-- Ensure AppFramework is enabled in your org
+- Ensure that Data Cloud and Tableau Next are enabled in your org
 - Try using a different API version with --api-version
 - Verify your authentication and org connection are valid
 
 # error.InsufficientPermissions
 
-You don't have permission to view applications in this org.
+You don't have permission to view apps in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce administrator to request application view permissions
+- Contact your Salesforce admin to request app view permissions
 - Verify you're connected to the correct org with --target-org
-- Ensure AppFramework is enabled in your org
-- Check that your user profile has the necessary AppFramework permissions
+- Ensure that Data Cloud and Tableau Next are enabled in your org
+- Check that your user profile has the AppFrameworkViewApp user permission
 
 # error.MultipleAppsFound
 
-Multiple applications found with name "%s".
+Multiple apps found with name "%s".
 
 # error.MultipleAppsFound.Actions
 
