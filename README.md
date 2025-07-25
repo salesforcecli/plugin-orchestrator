@@ -4,7 +4,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/license/apache-2-0)
 
-A Salesforce CLI plugin for working with apps, templates, assets, and services.
+A Salesforce CLI plugin for working with orchestrated apps, templates, assets, and services.
 
 ## Installation
 
