@@ -1,16 +1,16 @@
 # summary
 
-Update an existing AppFramework template.
+Update an existing template.
 
 # description
 
-Update the metadata and properties of an existing AppFramework template. This command allows you to modify the template's label, description, and other properties to keep your templates current and well-documented.
+Update the metadata and properties of an existing template. Use this command to modify the template's label, description, and other properties to keep your templates current and well-documented.
 
 You can identify the template to update by either its unique ID or its name. Template IDs are guaranteed to be unique, while template names should be unique within an org. You can update one or more properties in a single command.
 
-Template updates are useful for maintaining accurate documentation, improving template discoverability, and ensuring templates remain relevant as your organization's needs evolve. Updated templates immediately reflect changes in the Analytics Studio UI.
+Template updates are useful for maintaining accurate documentation, improving template discoverability, and ensuring templates remain relevant as your org's needs evolve. Updated templates immediately reflect changes in Tableau Next.
 
-You must have AppFramework enabled in your org and appropriate permissions to modify templates. You can only update templates that exist in the target org.
+You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkModifyApp user permission to modify templates. You can only update templates that exist in the target org.
 
 # examples
 
@@ -40,7 +40,7 @@ Login username or alias for the target org.
 
 # flags.target-org.description
 
-The target org to connect to for updating the template. This org must have AppFramework enabled and you must have appropriate permissions to modify templates. The template must exist in this org.
+The target org to connect to for updating the template. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to modify templates. The template must exist in this org.
 
 # flags.api-version.summary
 
@@ -48,7 +48,7 @@ Override the API version used for API requests.
 
 # flags.api-version.description
 
-Override the API version used for API requests to the AppFramework. Use this flag to specify a particular API version when the default version doesn't work with your org's AppFramework configuration.
+Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.template-id.summary
 
@@ -72,7 +72,7 @@ New label for the template.
 
 # flags.label.description
 
-A new display label for the template. This is the human-readable name shown to users in the Analytics Studio UI. The label helps users identify and select the appropriate template when creating applications. Use clear, descriptive labels that explain the template's purpose.
+This is the human-readable name shown to users in Tableau Next. The label helps users identify and select the appropriate template when creating apps.
 
 # flags.description.summary
 
@@ -80,7 +80,7 @@ New description for the template.
 
 # flags.description.description
 
-A new description for the template. This provides detailed information about the template's purpose, features, and intended use cases. The description appears in the Analytics Studio UI and helps users understand when and how to use the template effectively.
+The description appears in Tableau Next and helps users understand when and how to use the template effectively.
 
 # fetchingTemplate
 
@@ -121,10 +121,10 @@ You don't have permission to update templates in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce administrator to request template modification permissions
+- Contact your Salesforce admin to request template modification permissions
 - Verify you're connected to the correct org with --target-org
-- Ensure AppFramework is enabled in your org
-- Check that your user profile has the necessary AppFramework permissions
+- Ensure Data Cloud and Tableau Next are enabled in your org
+- Check that your user profile has the AppFrameworkModifyApp user permission
 
 # error.NoUpdatesProvided
 
@@ -144,7 +144,7 @@ Failed to update template: %s
 
 - Verify that you have permission to modify templates in the target org
 - Check that the template exists and is accessible
-- Ensure AppFramework is enabled in your org
+- Ensure Data Cloud and Tableau Next are enabled in your org
 - Try using a different API version with --api-version
 - Verify your authentication and org connection are valid
 
