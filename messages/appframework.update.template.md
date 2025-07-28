@@ -20,7 +20,7 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 - Update a template's description by name:
 
-  <%= config.bin %> <%= command.id %> --target-org myOrg --template-name "MyTemplate" --description "Updated template description"
+  <%= config.bin %> <%= command.id %> --target-org myOrg --template-name MyTemplate --description "Updated template description"
 
 - Update both label and description:
 
@@ -36,19 +36,15 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 # flags.target-org.summary
 
-Login username or alias for the target org.
-
-# flags.target-org.description
-
-The target org to connect to for updating the template. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to modify templates. The template must exist in this org.
+Login username or alias for the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.api-version.summary
 
-Override the API version used for API requests.
+Override the API version used for orchestrator API requests.
 
 # flags.api-version.description
 
-Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
+Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.template-id.summary
 
@@ -56,7 +52,7 @@ ID of the template to update.
 
 # flags.template-id.description
 
-The unique identifier of the template to update. Template IDs are guaranteed to be unique within an org. Use this flag when you know the template's ID, which you can get from "sf orchestrator template list" command. Either --template-id or --template-name is required.
+Template IDs are guaranteed to be unique within an org. Use this flag when you know the template's ID, which you can get from "sf orchestrator template list" command. Either --template-id or --template-name is required.
 
 # flags.template-name.summary
 
@@ -64,7 +60,7 @@ Name of the template to update.
 
 # flags.template-name.description
 
-The name of the template to update. Template names should be unique within an org. Use this flag when you know the template's name but not its ID. If the name contains spaces, enclose it in quotes. Either --template-id or --template-name is required.
+Template names should be unique within an org. Use this flag when you know the template's name but not its ID. If the name contains spaces, enclose it in quotes. Either --template-id or --template-name is required.
 
 # flags.label.summary
 
@@ -72,7 +68,7 @@ New label for the template.
 
 # flags.label.description
 
-This is the human-readable name shown to users in Tableau Next. The label helps users identify and select the appropriate template when creating apps.
+This label is the human-readable name shown to users in Tableau Next. The label helps users identify and select the appropriate template when creating apps.
 
 # flags.description.summary
 
@@ -100,9 +96,9 @@ You must provide either --template-id or --template-name.
 
 # error.MissingRequiredField.Actions
 
-- Use --template-id to specify a template by its unique ID
-- Use --template-name to specify a template by its name
-- Get template IDs and names using "sf orchestrator template list"
+- Use --template-id to specify a template by its unique ID.
+- Use --template-name to specify a template by its name.
+- Get template IDs and names using "sf orchestrator template list".
 
 # error.TemplateNotFound
 
@@ -110,10 +106,10 @@ Template "%s" not found.
 
 # error.TemplateNotFound.Actions
 
-- Verify that you have the correct template ID or name
-- Ensure the template exists in this org using "sf orchestrator template list"
-- Check your permissions to view and modify templates
-- Make sure you're connected to the correct org with --target-org
+- Verify that you have the correct template ID or name.
+- Ensure the template exists in this org using "sf orchestrator template list".
+- Check your permissions to view and modify templates.
+- Make sure you're connected to the correct org with --target-org.
 
 # error.InsufficientPermissions
 
@@ -121,10 +117,10 @@ You don't have permission to update templates in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce admin to request template modification permissions
-- Verify you're connected to the correct org with --target-org
-- Ensure Data Cloud and Tableau Next are enabled in your org
-- Check that your user profile has the AppFrameworkModifyApp user permission
+- Contact your Salesforce admin to request template modification permissions.
+- Verify you're connected to the correct org with --target-org.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
+- Check that your user profile has the AppFrameworkModifyApp user permission.
 
 # error.NoUpdatesProvided
 
@@ -132,21 +128,21 @@ No updates provided. You must specify at least one property to update.
 
 # error.NoUpdatesProvided.Actions
 
-- Use --label to update the template's display label
-- Use --description to update the template's description
-- Specify at least one property to modify
+- Use --label to update the template's display label.
+- Use --description to update the template's description.
+- Specify at least one property to modify.
 
 # error.UpdateFailed
 
-Failed to update template: %s
+Failed to update template: %s.
 
 # error.UpdateFailed.Actions
 
-- Verify that you have permission to modify templates in the target org
-- Check that the template exists and is accessible
-- Ensure Data Cloud and Tableau Next are enabled in your org
-- Try using a different API version with --api-version
-- Verify your authentication and org connection are valid
+- Verify that you have permission to modify templates in the target org.
+- Check that the template exists and is accessible.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
+- Try using a different API version with --api-version.
+- Verify your authentication and org connection are valid.
 
 # error.MultipleTemplatesFound
 
@@ -154,9 +150,9 @@ Multiple templates found with name "%s".
 
 # error.MultipleTemplatesFound.Actions
 
-- Use --template-id instead of --template-name for unique identification
-- Get the specific template ID using "sf orchestrator template list"
-- Template names should be unique, but this org may have duplicates
+- Use --template-id instead of --template-name for unique identification.
+- Get the specific template ID using "sf orchestrator template list".
+- Template names should be unique, but this org may have duplicates.
 
 # error.InvalidTemplateId
 
@@ -164,6 +160,6 @@ Template ID "%s" is not valid.
 
 # error.InvalidTemplateId.Actions
 
-- Verify the template ID format is correct
-- Get valid template IDs using "sf orchestrator template list"
-- Template IDs should be 15 or 18 character Salesforce IDs
+- Verify the template ID format is correct.
+- Get valid template IDs using "sf orchestrator template list".
+- Template IDs should be 15 or 18 character Salesforce IDs.

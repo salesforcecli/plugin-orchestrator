@@ -33,7 +33,6 @@ export default class CreateTemplate extends SfCommand<string> {
   public static readonly flags = {
     'target-org': Flags.requiredOrg({
       summary: messages.getMessage('flags.target-org.summary'),
-      description: messages.getMessage('flags.target-org.description'),
       required: true,
     }),
     'api-version': Flags.orgApiVersion({

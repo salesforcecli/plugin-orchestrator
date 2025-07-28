@@ -34,7 +34,6 @@ export default class ListTemplate extends SfCommand<TemplateData[]> {
   public static readonly flags = {
     'target-org': Flags.requiredOrg({
       summary: messages.getMessage('flags.target-org.summary'),
-      description: messages.getMessage('flags.target-org.description'),
       required: true,
     }),
     'api-version': Flags.orgApiVersion({

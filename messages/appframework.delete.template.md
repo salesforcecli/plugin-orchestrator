@@ -40,19 +40,15 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 # flags.target-org.summary
 
-Login username or alias for the target org.
-
-# flags.target-org.description
-
-The target org to connect to for deleting the template. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to delete templates. The template must exist in this org.
+Login username or alias for the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.api-version.summary
 
-Override the API version used for API requests.
+Override the API version used for orchestrator API requests.
 
 # flags.api-version.description
 
-Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
+Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.template-id.summary
 
@@ -68,7 +64,7 @@ Name of the template to delete.
 
 # flags.template-name.description
 
-The name of the template to delete. Template names should be unique within an org. Use this flag when you know the template's name but not its ID. If the name contains spaces, enclose it in quotes. Either --template-id or --template-name is required.
+Template names should be unique within an org. Use this flag when you know the template's name but not its ID. If the name contains spaces, enclose it in quotes. Either --template-id or --template-name is required.
 
 # flags.force-delete.summary
 
@@ -76,7 +72,7 @@ Force delete the template and all apps created from it.
 
 # flags.force-delete.description
 
-When set, all apps created from this template are also deleted. This is a destructive operation that can't be undone. Use with caution as it permanently removes both the template and all associated apps from your org.
+When specified, all apps created from this template are also deleted. This is a destructive operation that can't be undone. Use with caution as it permanently removes both the template and all associated apps from your org.
 
 # flags.decouple.summary
 
@@ -84,7 +80,7 @@ Decouple apps from this template before deleting it.
 
 # flags.decouple.description
 
-When set, apps created from this template have their association with the template removed before the template is deleted. This ensures apps continue to function independently after the template is gone. Use this option when you want to preserve apps while removing the template.
+When specified, apps created from this template have their association with the template removed before the template is deleted. This ensures apps continue to function independently after the template is gone. Use this option when you want to preserve apps while removing the template.
 
 # flags.no-prompt.summary
 
@@ -116,15 +112,15 @@ Are you sure you want to delete this template? Apps created from it will remain 
 
 # confirmForceDeleteYesNo
 
-WARNING: This will delete the template AND all apps created from it. This operation cannot be undone. Continue? (y/n)
+WARNING: This operation will delete the template AND all apps created from it. This operation can't be undone. Continue? (y/n)
 
 # confirmDecoupleYesNo
 
-This will decouple all apps from the template and then delete the template. Apps will remain independent after the template is gone. Continue? (y/n)
+This operation will decouple all apps from the template and then delete the template. Apps will remain independent after the template is gone. Continue? (y/n)
 
 # deleteTemplateSuccess
 
-Successfully deleted template with ID: %s
+Successfully deleted template with ID: %s.
 
 # error.MissingRequiredFlag
 
@@ -132,20 +128,20 @@ You must provide either --template-id or --template-name.
 
 # error.MissingRequiredFlag.Actions
 
-- Use --template-id to specify a template by its unique ID
-- Use --template-name to specify a template by its name
-- Get template IDs and names using "sf orchestrator template list"
+- Use --template-id to specify a template by its unique ID.
+- Use --template-name to specify a template by its name.
+- Get template IDs and names using "sf orchestrator template list".
 
 # error.TemplateNotFound
 
-Could not find template: %s
+Couldn't find template: %s.
 
 # error.TemplateNotFound.Actions
 
-- Verify the template ID or name is correct
-- Use "sf orchestrator template list" to see available templates
-- Check your permissions to view templates
-- Make sure you're connected to the correct org with --target-org
+- Verify the template ID or name is correct.
+- Use "sf orchestrator template list" to see available templates.
+- Check your permissions to view templates.
+- Make sure you're connected to the correct org with --target-org.
 
 # error.CertificateError
 
@@ -153,10 +149,10 @@ Error connecting to Salesforce: Certificate validation failed.
 
 # error.CertificateError.Actions
 
-- Check your network connection
-- Verify you have valid certificates
-- Try specifying the API version with --api-version
-- If using a sandbox or scratch org, ensure your connection is properly authenticated
+- Check your network connection.
+- Verify you have valid certificates.
+- Try specifying the API version with --api-version.
+- If using a sandbox or scratch org, ensure your connection is properly authenticated.
 
 # error.AuthenticationError
 
@@ -164,21 +160,21 @@ Error connecting to Salesforce: Authentication failed.
 
 # error.AuthenticationError.Actions
 
-- Verify your credentials are valid
-- Run "sf org login web" to reauthenticate
-- Check if your session has expired
-- Ensure you have Data Cloud and Tableau Next enabled and the AppFrameworkManageApp user permission
+- Verify your credentials are valid.
+- Run "sf org login web" to reauthenticate.
+- Check if your session has expired.
+- Ensure you have Data Cloud and Tableau Next enabled and the AppFrameworkManageApp user permission.
 
 # error.GenericError
 
-Error deleting template: %s
+Error deleting template: %s.
 
 # error.GenericError.Actions
 
-- Review the error message for details
-- Check if you have permission to delete templates
-- Verify the template isn't locked or protected
-- Ensure Data Cloud and Tableau Next are enabled in your org
+- Review the error message for details.
+- Check if you have permission to delete templates.
+- Verify the template isn't locked or protected.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
 
 # error.InsufficientPermissions
 
@@ -186,29 +182,29 @@ You don't have permission to delete templates in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce admin to request template deletion permissions
-- Verify you're connected to the correct org with --target-org
-- Ensure Data Cloud and Tableau Next are enabled in your org
-- Check that your user profile has the AppFrameworkManageApp user permission
+- Contact your Salesforce admin to request template deletion permissions.
+- Verify you're connected to the correct org with --target-org.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
+- Check that your user profile has the AppFrameworkManageApp user permission.
 
 # error.TemplateInUse
 
-Can't delete template: It is currently in use by active processes.
+Can't delete template: It's currently in use by active processes.
 
 # error.TemplateInUse.Actions
 
-- Wait for any active processes using this template to complete
-- Use --force-delete to delete the template and all associated apps
-- Use --decouple to preserve apps while deleting the template
-- Check which apps are using this template with "sf orchestrator app list"
+- Wait for any active processes using this template to complete.
+- Use --force-delete to delete the template and all associated apps.
+- Use --decouple to preserve apps while deleting the template.
+- Check which apps are using this template with "sf orchestrator app list".
 
 # deleteAppSuccess
 
-Successfully deleted app '%s' (ID: %s)
+Successfully deleted app '%s' (ID: %s).
 
 # decoupleAppSuccess
 
-Successfully decoupled app '%s' (ID: %s) from template
+Successfully decoupled app '%s' (ID: %s) from template.
 
 # deletionCancelled
 

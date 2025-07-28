@@ -31,7 +31,6 @@ export default class UpdateApp extends SfCommand<string> {
   public static readonly flags = {
     'target-org': Flags.requiredOrg({
       summary: messages.getMessage('flags.target-org.summary'),
-      description: messages.getMessage('flags.target-org.description'),
       required: true,
     }),
     'api-version': Flags.orgApiVersion({
@@ -41,13 +40,11 @@ export default class UpdateApp extends SfCommand<string> {
     'app-id': Flags.string({
       char: 'i',
       summary: messages.getMessage('flags.app-id.summary'),
-      description: messages.getMessage('flags.app-id.description'),
       exclusive: ['app-name'],
     }),
     'app-name': Flags.string({
       char: 'n',
       summary: messages.getMessage('flags.app-name.summary'),
-      description: messages.getMessage('flags.app-name.description'),
       exclusive: ['app-id'],
     }),
     'template-id': Flags.string({
