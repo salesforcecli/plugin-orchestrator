@@ -30,19 +30,15 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 # flags.target-org.summary
 
-Login username or alias for the target org.
-
-# flags.target-org.description
-
-The target org to connect to for listing apps. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view apps.
+Login username or alias for the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.api-version.summary
 
-Override the API version used for API requests.
+Override the API version used for orchestrator API requests.
 
 # flags.api-version.description
 
-Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
+Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # fetchingApps
 
@@ -58,13 +54,14 @@ No apps found matching the specified filters.
 
 # error.ListError
 
-Failed to list apps: %s
+Failed to list apps: %s.
 
 # error.ListError.Actions
 
-- Verify you have permissions to view apps in this org
-- Ensure your authentication to the org is valid
-- Try running with --debug for more details
+- Verify you have permissions to view apps in this org.
+- Ensure your authentication to the org is valid.
+- Try running with --debug for more details.
+  .
 
 # noResultsFound
 
@@ -76,29 +73,29 @@ Certificate error: Unable to connect to the org. This is typically caused by an 
 
 # error.CertificateError.Actions
 
-- Check your network connection and try again
-- Ensure that your network is not blocking or intercepting HTTPS requests
-- If you are behind a corporate proxy, ensure that your proxy certificates are properly configured
-- Try specifying the API version with --api-version
+- Check your network connection and try again.
+- Ensure that your network is not blocking or intercepting HTTPS requests.
+- If you are behind a corporate proxy, ensure that your proxy certificates are properly configured.
+- Try specifying the API version with --api-version.
 
 # error.AuthenticationError
 
-Authentication error: Unable to authenticate with the org. Please check your credentials and try again.
+Authentication error: Unable to authenticate with the org. Check your credentials and try again.
 
 # error.AuthenticationError.Actions
 
-- Use "sf org login web" to log in to the org again
-- Ensure that your user has the necessary permissions to access the orchestration API
-- Check if your authentication token has expired
-- Verify the target org is correct and accessible
+- Use "sf org login web" to log in to the org again.
+- Ensure that your user has the necessary permissions to access the orchestration API.
+- Check if your authentication token has expired.
+- Verify the target org is correct and accessible.
 
 # error.GenericError
 
-An error occurred while listing apps: %s
+An error occurred while listing apps: %s.
 
 # error.GenericError.Actions
 
-- Check the error message above for more details
-- Ensure that Data Cloud and Tableau Next are enabled in your org
-- Ensure that your user has the necessary permissions
-- Try running "sf org login web" to reauthenticate
+- Check the error message above for more details.
+- Ensure that Data Cloud and Tableau Next are enabled in your org.
+- Ensure that your user has the necessary permissions.
+- Try running "sf org login web" to reauthenticate.

@@ -33,7 +33,6 @@ export default class CreateApp extends SfCommand<string> {
   public static readonly flags = {
     'target-org': Flags.requiredOrg({
       summary: messages.getMessage('flags.target-org.summary'),
-      description: messages.getMessage('flags.target-org.description'),
       required: true,
     }),
     'api-version': Flags.orgApiVersion({
@@ -59,13 +58,11 @@ export default class CreateApp extends SfCommand<string> {
     'template-id': Flags.string({
       char: 'i',
       summary: messages.getMessage('flags.template-id.summary'),
-      description: messages.getMessage('flags.template-id.description'),
       exclusive: ['template-name'],
     }),
     'template-name': Flags.string({
       char: 't',
       summary: messages.getMessage('flags.template-name.summary'),
-      description: messages.getMessage('flags.template-name.description'),
       exclusive: ['template-id'],
     }),
     'runtime-method': Flags.string({

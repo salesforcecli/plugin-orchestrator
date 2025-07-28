@@ -1,6 +1,6 @@
 # summary
 
-Display details of an app.
+Display details about an app.
 
 # description
 
@@ -14,35 +14,23 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 # flags.target-org.summary
 
-Login username or alias for the target org.
-
-# flags.target-org.description
-
-The target org to connect to for displaying the app. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkViewApp user permission to view apps. The app must also exist in this org.
+Login username or alias for the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.api-version.summary
 
-Override the API version used for API requests.
+Override the API version used for orchestrator API requests.
 
 # flags.api-version.description
 
-Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
+Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.app-id.summary
 
 ID of the app to display.
 
-# flags.app-id.description
-
-The unique identifier of the app to display.
-
 # flags.app-name.summary
 
 Name of the app to display.
-
-# flags.app-name.description
-
-The name of the app to display.
 
 # noAppSpecified
 
@@ -62,9 +50,9 @@ Either --app-id or --app-name must be provided.
 
 # error.MissingRequiredFlag.Actions
 
-- Use --app-id to specify an app by its unique ID
-- Use --app-name to specify an app by its name
-- Get app IDs and names using "sf orchestrator app list"
+- Use --app-id to specify an app by its unique ID.
+- Use --app-name to specify an app by its name.
+- Get app IDs and names using "sf orchestrator app list".
 
 # error.AppNotFound
 
@@ -72,22 +60,22 @@ App "%s" not found.
 
 # error.AppNotFound.Actions
 
-- Verify that you have the correct app ID or name
-- Ensure the app exists in this org using "sf orchestrator app list"
-- Check your permissions to view apps
-- Make sure you're connected to the correct org with --target-org
+- Verify that you have the correct app ID or name.
+- Ensure the app exists in this org using "sf orchestrator app list".
+- Check your permissions to view apps.
+- Make sure you're connected to the correct org with --target-org.
 
 # error.RetrievalError
 
-Failed to retrieve app details: %s
+Failed to retrieve app details: %s.
 
 # error.RetrievalError.Actions
 
-- Verify that you have permission to view apps in the target org
-- Check that the app exists and is accessible
-- Ensure that Data Cloud and Tableau Next are enabled in your org
-- Try using a different API version with --api-version
-- Verify your authentication and org connection are valid
+- Verify that you have permission to view apps in the target org.
+- Check that the app exists and is accessible.
+- Ensure that Data Cloud and Tableau Next are enabled in your org.
+- Try using a different API version with --api-version.
+- Verify your authentication and org connection are valid.
 
 # error.InsufficientPermissions
 
@@ -95,10 +83,10 @@ You don't have permission to view apps in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce admin to request app view permissions
-- Verify you're connected to the correct org with --target-org
-- Ensure that Data Cloud and Tableau Next are enabled in your org
-- Check that your user profile has the AppFrameworkViewApp user permission
+- Contact your Salesforce admin to request app view permissions.
+- Verify you're connected to the correct org with --target-org.
+- Ensure that Data Cloud and Tableau Next are enabled in your org.
+- Check that your user profile has the AppFrameworkViewApp user permission.
 
 # error.MultipleAppsFound
 
@@ -106,9 +94,9 @@ Multiple apps found with name "%s".
 
 # error.MultipleAppsFound.Actions
 
-- Use --app-id instead of --app-name for unique identification
-- Get the specific app ID using "sf orchestrator app list"
-- App names should be unique, but this org may have duplicates
+- Use --app-id instead of --app-name for unique identification.
+- Get the specific app ID using "sf orchestrator app list".
+- App names should be unique, but this org may have duplicates.
 
 # error.InvalidAppId
 
@@ -116,9 +104,9 @@ App ID "%s" is not valid.
 
 # error.InvalidAppId.Actions
 
-- Verify the app ID format is correct
-- Get valid app IDs using "sf orchestrator app list"
-- App IDs should be 15 or 18 character Salesforce IDs
+- Verify the app ID format is correct.
+- Get valid app IDs using "sf orchestrator app list".
+- App IDs should be 15 or 18 character Salesforce IDs.
 
 # examples
 
@@ -140,4 +128,4 @@ App ID "%s" is not valid.
 
 - Display an app by name in your default org:
 
-  <%= config.bin %> <%= command.id %> --app-name "dashboard_app"
+  <%= config.bin %> <%= command.id %> --app-name dashboard_app

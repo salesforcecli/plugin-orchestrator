@@ -14,39 +14,27 @@ You must have Data Cloud and Tableau Next enabled in your org and the AppFramewo
 
 # flags.target-org.summary
 
-Login username or alias for the target org.
-
-# flags.target-org.description
-
-The target org to connect to for deleting the app. This org must have Data Cloud and Tableau Next enabled and you must have the AppFrameworkManageApp user permission to delete apps. The app must exist in this org.
+Login username or alias for the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.api-version.summary
 
-Override the API version used for API requests.
+Override the API version used for orchestrator API requests.
 
 # flags.api-version.description
 
-Override the API version used for orchestrator API requests. Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
+Use this flag to specify a particular API version when the default version doesn't work with your org's configuration.
 
 # flags.app-id.summary
 
 ID of the app to delete.
 
-# flags.app-id.description
-
-The unique identifier of the app to delete.
-
 # flags.app-name.summary
 
 Name of the app to delete.
 
-# flags.app-name.description
-
-The name of the app to delete.
-
 # flags.no-prompt.summary
 
-Do not prompt for confirmation.
+Don't prompt for confirmation.
 
 # flags.no-prompt.description
 
@@ -70,7 +58,7 @@ No app found with the specified ID or name.
 
 # confirmDelete
 
-Are you sure you want to delete the app '%s'? This action cannot be undone.
+Are you sure you want to delete the app '%s'? This action can't be undone.
 
 # deleteCancelled
 
@@ -78,7 +66,7 @@ App deletion cancelled.
 
 # deleteSuccess
 
-Successfully deleted app with ID: %s
+Successfully deleted app with ID: %s.
 
 # error.MissingRequiredFlag
 
@@ -86,9 +74,9 @@ Either --app-id or --app-name must be provided.
 
 # error.MissingRequiredFlag.Actions
 
-- Use --app-id to specify an app by its unique ID
-- Use --app-name to specify an app by its name
-- Get app IDs and names using "sf orchestrator app list"
+- Use --app-id to specify an app by its unique ID.
+- Use --app-name to specify an app by its name.
+- Get app IDs and names using "sf orchestrator app list".
 
 # error.AppNotFound
 
@@ -96,22 +84,22 @@ App "%s" not found.
 
 # error.AppNotFound.Actions
 
-- Verify the app ID or name is correct
-- Use "sf orchestrator app list" to see available apps
-- Check your permissions to view apps
-- Make sure you're connected to the correct org with --target-org
+- Verify the app ID or name is correct.
+- Use "sf orchestrator app list" to see available apps.
+- Check your permissions to view apps.
+- Make sure you're connected to the correct org with --target-org.
 
 # error.DeleteError
 
-Failed to delete app: %s
+Failed to delete app: %s.
 
 # error.DeleteError.Actions
 
-- Verify that you have permission to delete apps in the target org
-- Check that the app exists and is accessible
-- Ensure Data Cloud and Tableau Next are enabled in your org
-- Try using a different API version with --api-version
-- Verify your authentication and org connection are valid
+- Verify that you have permission to delete apps in the target org.
+- Check that the app exists and is accessible.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
+- Try using a different API version with --api-version.
+- Verify your authentication and org connection are valid.
 
 # error.InsufficientPermissions
 
@@ -119,21 +107,21 @@ You don't have permission to delete apps in this org.
 
 # error.InsufficientPermissions.Actions
 
-- Contact your Salesforce admin to request app deletion permissions
-- Verify you're connected to the correct org with --target-org
-- Ensure Data Cloud and Tableau Next are enabled in your org
-- Check that your user profile has the AppFrameworkManageApp permission
+- Contact your Salesforce admin to request app deletion permissions.
+- Verify you're connected to the correct org with --target-org.
+- Ensure Data Cloud and Tableau Next are enabled in your org.
+- Check that your user profile has the AppFrameworkManageApp permission.
 
 # error.AppInUse
 
-Can't delete app: It is currently in use by active processes.
+Can't delete app: It's currently in use by active processes.
 
 # error.AppInUse.Actions
 
-- Wait for any active processes using this app to complete
-- Check which processes are using this app
-- Consider stopping dependent processes before deletion
-- Try again after active processes have finished
+- Wait for any active processes using this app to complete.
+- Check which processes are using this app.
+- Consider stopping dependent processes before deletion.
+- Try again after active processes have finished.
 
 # error.MultipleAppsFound
 
@@ -141,9 +129,9 @@ Multiple apps found with name "%s".
 
 # error.MultipleAppsFound.Actions
 
-- Use --app-id instead of --app-name for unique identification
-- Get the specific app ID using "sf orchestrator app list"
-- App names should be unique, but this org may have duplicates
+- Use --app-id instead of --app-name for unique identification.
+- Get the specific app ID using "sf orchestrator app list".
+- App names should be unique, but this org may have duplicates.
 
 # error.InvalidAppId
 
@@ -151,9 +139,9 @@ App ID "%s" is not valid.
 
 # error.InvalidAppId.Actions
 
-- Verify the app ID format is correct
-- Get valid app IDs using "sf orchestrator app list"
-- App IDs should be 15 or 18 character Salesforce IDs
+- Verify the app ID format is correct.
+- Get valid app IDs using "sf orchestrator app list".
+- App IDs should be 15 or 18 character Salesforce IDs.
 
 # examples
 
