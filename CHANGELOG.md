@@ -1,3 +1,9 @@
+## [1.0.14](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.13...1.0.14) (2025-08-10)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/sf-plugins-core from 12.2.3 to 12.2.4 ([8941a51](https://github.com/salesforcecli/plugin-orchestrator/commit/8941a514b1b8f849052f97eb361dc82a20d29983))
+
 ## [1.0.13](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.12...1.0.13) (2025-07-28)
 
 ### Bug Fixes
