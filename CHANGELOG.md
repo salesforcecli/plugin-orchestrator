@@ -1,3 +1,9 @@
+## [1.0.17](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.16...1.0.17) (2025-09-07)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.22.0 to 8.23.0 ([55b2aef](https://github.com/salesforcecli/plugin-orchestrator/commit/55b2aef5242c8ed3728e8284509fa1df6bd6f5a9))
+
 ## [1.0.16](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.15...1.0.16) (2025-08-31)
 
 ### Bug Fixes
