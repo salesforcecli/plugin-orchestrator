@@ -1,3 +1,39 @@
+## [1.0.17](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.16...1.0.17) (2025-09-07)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.22.0 to 8.23.0 ([55b2aef](https://github.com/salesforcecli/plugin-orchestrator/commit/55b2aef5242c8ed3728e8284509fa1df6bd6f5a9))
+
+## [1.0.16](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.15...1.0.16) (2025-08-31)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.21.2 to 8.22.0 ([d916fd0](https://github.com/salesforcecli/plugin-orchestrator/commit/d916fd0780c6a8744bb95902df7fa1b013c33e99))
+
+## [1.0.15](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.14...1.0.15) (2025-08-24)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.19.1 to 8.21.2 ([6be4f01](https://github.com/salesforcecli/plugin-orchestrator/commit/6be4f0165ef448266ac82d2e879632187538ffbd))
+
+## [1.0.14](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.13...1.0.14) (2025-08-10)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/sf-plugins-core from 12.2.3 to 12.2.4 ([8941a51](https://github.com/salesforcecli/plugin-orchestrator/commit/8941a514b1b8f849052f97eb361dc82a20d29983))
+
+## [1.0.13](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.12...1.0.13) (2025-07-28)
+
+### Bug Fixes
+
+- **deps:** bump @oclif/core from 4.5.1 to 4.5.2 ([9ccf040](https://github.com/salesforcecli/plugin-orchestrator/commit/9ccf040d20b3a80a53bba167f1c354789604a9e1))
+
+## [1.0.12](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.11...1.0.12) (2025-07-27)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.18.1 to 8.18.5 ([b93dc97](https://github.com/salesforcecli/plugin-orchestrator/commit/b93dc975440362700d652dedd6a65a6fe4bc5f9c))
+
 ## [1.0.11](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.10...1.0.11) (2025-07-22)
 
 ### Bug Fixes
