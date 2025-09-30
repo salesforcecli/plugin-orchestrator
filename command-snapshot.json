@@ -47,21 +47,8 @@
     "alias": [],
     "command": "orchestrator:app:update",
     "flagAliases": [],
-    "flagChars": ["d", "g", "i", "l", "m", "n", "o", "r", "t"],
-    "flags": [
-      "api-version",
-      "app-id",
-      "app-name",
-      "description",
-      "flags-dir",
-      "json",
-      "label",
-      "log-level",
-      "runtime-method",
-      "target-org",
-      "template-id",
-      "template-name"
-    ],
+    "flagChars": ["d", "i", "l", "n", "o"],
+    "flags": ["api-version", "app-id", "app-name", "description", "flags-dir", "json", "label", "target-org"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
