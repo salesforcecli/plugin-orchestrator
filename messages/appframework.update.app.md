@@ -1,16 +1,16 @@
 # summary
 
-Update an app with a new template.
+Update an app's label and description.
 
 # description
 
-Update an existing orchestrated app by associating it with a new template or modifying its properties. This command allows you to change the template that an app is based on, update its metadata (label, description), or modify runtime configuration settings.
+Update an existing orchestrated app's label and description. This command allows you to modify the display properties of an app without changing its underlying template or functionality.
 
-You can identify the app by either its unique ID or its name, and specify the new template by either its unique ID or its name. App and template IDs are guaranteed to be unique, while names should be unique within an org.
+You can identify the app by either its unique ID or its name. App IDs are guaranteed to be unique, while names should be unique within an org.
 
-Updating an app with a new template changes the app's underlying structure and configuration to match the new template. This is useful for migrating apps to updated templates or changing an app's functionality. You can also update just the app's metadata without changing the template.
+Use this command to update the human-readable display name (label) and description that users see when viewing the app. This is useful for improving app discoverability and providing clearer information about the app's purpose.
 
-You must have Data Cloud and Tableau Next enabled in your org and the AppFrameworkManageApp user permission to modify apps. Both the app and template must exist in the same org.
+You must have the AppFrameworkManageApp user permission to modify apps.
 
 # flags.target-org.summary
 
@@ -99,6 +99,10 @@ No app specified for update. You must specify either an app ID with --app-id or 
 # noTemplateSpecified
 
 No template specified for update. You must specify either a template ID with --template-id or a template name with --template-name.
+
+# noUpdateFieldsSpecified
+
+No update fields specified. You must specify at least one field to update such as --label or --description.
 
 # fetchingApp
 
@@ -193,22 +197,18 @@ You don't have permission to update apps in this org.
 
 # examples
 
-- Update an app to use a new template by ID:
+- Update an app's label:
 
-  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 01t000000000123 --template-id 01t000000000456
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 1zAxx000000000123 --label "Updated App Label"
 
-- Update an app to use a new template by name:
+- Update an app's description:
 
-  <%= config.bin %> <%= command.id %> --target-org myOrg --app-name "My App" --template-name "New Template"
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-name "My App" --description "Updated description for the app"
 
-- Update an app with a new label and description:
+- Update both label and description:
 
-  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 01t000000000123 --label "Updated App" --description "Updated description for the app"
-
-- Update an app with new template and runtime configuration:
-
-  <%= config.bin %> <%= command.id %> --target-org myOrg --app-name "analytics_app" --template-name "Analytics Template" --runtime-method async --log-level debug
+  <%= config.bin %> <%= command.id %> --target-org myOrg --app-id 1zAxx000000000123 --label "Updated App" --description "Updated description for the app"
 
 - Update an app using a specific API version:
 
-  <%= config.bin %> <%= command.id %> --target-org mySandbox --app-id 01t000000000123 --template-id 01t000000000789 --api-version 60.0
+  <%= config.bin %> <%= command.id %> --target-org mySandbox --app-id 1zAxx000000000123 --label "New Label" --api-version 65.0

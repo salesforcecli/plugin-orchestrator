@@ -204,11 +204,10 @@ export default class AppFrameworkApp {
     appId: string,
     options: {
       templateSourceId: string;
-      label?: string;
-      description?: string;
       templateValues?: Record<string, unknown>;
       runtimeMethod?: string;
       logLevel?: string;
+      chainName?: string;
     }
   ): Promise<string> {
     if (!appId) {
@@ -224,11 +223,10 @@ export default class AppFrameworkApp {
     const body = Object.fromEntries(
       Object.entries({
         templateSourceId: options.templateSourceId,
-        label: options.label,
-        description: options.description,
         templateValues: options.templateValues ?? {},
         runtimeMethod: options.runtimeMethod,
         logLevel: options.logLevel,
+        chainName: options.chainName,
       }).filter((entries) => entries[1] !== undefined)
     );
 
@@ -239,7 +237,61 @@ export default class AppFrameworkApp {
     };
 
     const response = await request<AppResponse>(this.connection, {
-      method: 'POST',
+      method: 'PUT',
+      url,
+      body,
+    });
+
+    if (response && typeof response === 'object') {
+      if ('id' in response && typeof response.id === 'string') {
+        return response.id;
+      } else if ('app' in response && response.app && typeof response.app === 'object' && 'id' in response.app) {
+        return response.app.id;
+      }
+    }
+
+    return appId; // Return the original app ID if no specific ID was found in the response
+  }
+
+  /**
+   * Patch an existing app's metadata (label, description)
+   *
+   * @param appId - ID of the app to patch
+   * @param options - Patch options
+   * @returns The ID of the patched app
+   */
+  public async patchApp(
+    appId: string,
+    options: {
+      label?: string;
+      description?: string;
+    }
+  ): Promise<string> {
+    if (!appId) {
+      throw new Error('App ID must be provided');
+    }
+
+    if (!options.label && !options.description) {
+      throw new Error('At least one field (label or description) must be provided for patch');
+    }
+
+    const url = `/apps/${appId}`;
+
+    const body = Object.fromEntries(
+      Object.entries({
+        label: options.label,
+        description: options.description,
+      }).filter((entries) => entries[1] !== undefined)
+    );
+
+    // Define response types
+    type AppResponse = {
+      id?: string;
+      app?: { id: string };
+    };
+
+    const response = await request<AppResponse>(this.connection, {
+      method: 'PATCH',
       url,
       body,
     });
