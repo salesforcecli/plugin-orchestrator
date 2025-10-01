@@ -50,18 +50,6 @@ export default class UpdateApp extends SfCommand<string> {
       description: messages.getMessage('flags.app-name.description'),
       exclusive: ['app-id'],
     }),
-    'template-id': Flags.string({
-      char: 't',
-      summary: messages.getMessage('flags.template-id.summary'),
-      description: messages.getMessage('flags.template-id.description'),
-      exclusive: ['template-name'],
-    }),
-    'template-name': Flags.string({
-      char: 'm',
-      summary: messages.getMessage('flags.template-name.summary'),
-      description: messages.getMessage('flags.template-name.description'),
-      exclusive: ['template-id'],
-    }),
     label: Flags.string({
       char: 'l',
       summary: messages.getMessage('flags.label.summary'),
@@ -71,18 +59,6 @@ export default class UpdateApp extends SfCommand<string> {
       char: 'd',
       summary: messages.getMessage('flags.description.summary'),
       description: messages.getMessage('flags.description.description'),
-    }),
-    'runtime-method': Flags.string({
-      char: 'r',
-      summary: messages.getMessage('flags.runtime-method.summary'),
-      description: messages.getMessage('flags.runtime-method.description'),
-      options: ['sync', 'async'],
-    }),
-    'log-level': Flags.string({
-      char: 'g',
-      summary: messages.getMessage('flags.log-level.summary'),
-      description: messages.getMessage('flags.log-level.description'),
-      options: ['debug', 'info', 'warn', 'error'],
     }),
   };
 
@@ -98,10 +74,10 @@ export default class UpdateApp extends SfCommand<string> {
       );
     }
 
-    // Check that at least one of template-id or template-name is provided
-    if (!flags['template-id'] && !flags['template-name']) {
+    // Check that at least one update field is provided
+    if (!flags.label && !flags.description) {
       throw new SfError(
-        messages.getMessage('noTemplateSpecified'),
+        messages.getMessage('noUpdateFieldsSpecified'),
         'AppUpdateError',
         messages.getMessages('error.UpdateError.Actions')
       );
@@ -136,34 +112,12 @@ export default class UpdateApp extends SfCommand<string> {
         appId = flags['app-id'] ?? '';
       }
 
-      let templateId = '';
-
-      // Get template ID if template name was provided
-      if (flags['template-name']) {
-        this.spinner.start(messages.getMessage('fetchingTemplate'));
-
-        // Since we don't have a direct way to list templates,
-        // we need to get the template by name from a different utility class
-        // For now, we'll throw an error and suggest using template-id instead
-        this.spinner.stop();
-        throw new SfError(
-          messages.getMessage('noTemplateFound'),
-          'AppUpdateError',
-          messages.getMessages('error.UpdateError.Actions')
-        );
-      } else {
-        templateId = flags['template-id'] ?? '';
-      }
-
       // Update the app
       this.spinner.start(messages.getMessage('updatingApp'));
 
-      const updatedAppId = await appFrameworkApp.updateApp(appId, {
-        templateSourceId: templateId,
+      const updatedAppId = await appFrameworkApp.patchApp(appId, {
         label: flags.label,
         description: flags.description,
-        runtimeMethod: flags['runtime-method'],
-        logLevel: flags['log-level'],
       });
 
       this.spinner.stop();
