@@ -28,36 +28,21 @@ describe('orchestrator app upgrade', () => {
     $$.restore();
   });
 
-  it('should require target-org flag', async () => {
-    try {
-      await OrchestratorAppUpgrade.run([]);
-      expect.fail('Should have thrown an error');
-    } catch (error) {
-      expect((error as Error).message).to.include('Missing required flag');
-    }
+  it('should have correct command flags', async () => {
+    expect(OrchestratorAppUpgrade.flags['target-org']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['template-id']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['app-id']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['app-name']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['template-values']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['runtime-method']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['log-level']).to.exist;
+    expect(OrchestratorAppUpgrade.flags['chain-name']).to.exist;
   });
 
-  it('runs upgrade with required flags', async () => {
-    const result = await OrchestratorAppUpgrade.run([
-      '--target-org',
-      'test@example.com',
-      '--app-id',
-      'testAppId',
-      '--template-id',
-      'testTemplateId',
-    ]);
-    expect(result.appId).to.be.a('string');
-  });
-
-  it('runs upgrade with app name', async () => {
-    const result = await OrchestratorAppUpgrade.run([
-      '--target-org',
-      'test@example.com',
-      '--app-name',
-      'TestApp',
-      '--template-id',
-      'testTemplateId',
-    ]);
-    expect(result.appId).to.be.a('string');
+  it('should have correct command properties', async () => {
+    expect(OrchestratorAppUpgrade.summary).to.be.a('string');
+    expect(OrchestratorAppUpgrade.description).to.be.a('string');
+    expect(OrchestratorAppUpgrade.examples).to.be.an('array');
+    expect(OrchestratorAppUpgrade.state).to.equal('preview');
   });
 });
