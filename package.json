@@ -56,7 +56,13 @@
     ],
     "topics": {
       "orchestrator": {
-        "description": "Commands to work with apps and templates"
+        "description": "Commands to work with apps and templates",
+        "external": true,
+        "subtopics": {
+          "app": {
+            "external": true
+          }
+        }
       },
       "orchestrator:app": {
         "description": "Work with apps"

@@ -53,6 +53,26 @@
   },
   {
     "alias": [],
+    "command": "orchestrator:app:upgrade",
+    "flagAliases": [],
+    "flagChars": ["c", "i", "l", "n", "o", "r", "t", "v"],
+    "flags": [
+      "api-version",
+      "app-id",
+      "app-name",
+      "chain-name",
+      "flags-dir",
+      "json",
+      "log-level",
+      "runtime-method",
+      "target-org",
+      "template-id",
+      "template-values"
+    ],
+    "plugin": "@salesforce/plugin-orchestrator"
+  },
+  {
+    "alias": [],
     "command": "orchestrator:template:create",
     "flagAliases": [],
     "flagChars": ["d", "l", "n", "o", "s", "t"],
