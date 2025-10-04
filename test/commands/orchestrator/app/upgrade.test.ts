@@ -20,36 +20,44 @@ import OrchestratorAppUpgrade from '../../../../src/commands/orchestrator/app/up
 
 describe('orchestrator app upgrade', () => {
   const $$ = new TestContext();
-  let sfCommandStubs: ReturnType<typeof stubSfCommandUx>;
-
   beforeEach(() => {
-    sfCommandStubs = stubSfCommandUx($$.SANDBOX);
+    stubSfCommandUx($$.SANDBOX);
   });
 
   afterEach(() => {
     $$.restore();
   });
 
-  it('runs hello', async () => {
-    await OrchestratorAppUpgrade.run([]);
-    const output = sfCommandStubs.log
-      .getCalls()
-      .flatMap((c) => c.args)
-      .join('\n');
-    expect(output).to.include('hello world');
+  it('should require target-org flag', async () => {
+    try {
+      await OrchestratorAppUpgrade.run([]);
+      expect.fail('Should have thrown an error');
+    } catch (error) {
+      expect((error as Error).message).to.include('Missing required flag');
+    }
   });
 
-  it('runs hello with --json and no provided name', async () => {
-    const result = await OrchestratorAppUpgrade.run([]);
-    expect(result.path).to.equal('src/commands/orchestrator/app/upgrade.ts');
+  it('runs upgrade with required flags', async () => {
+    const result = await OrchestratorAppUpgrade.run([
+      '--target-org',
+      'test@example.com',
+      '--app-id',
+      'testAppId',
+      '--template-id',
+      'testTemplateId',
+    ]);
+    expect(result.appId).to.be.a('string');
   });
 
-  it('runs hello world --name Astro', async () => {
-    await OrchestratorAppUpgrade.run(['--name', 'Astro']);
-    const output = sfCommandStubs.log
-      .getCalls()
-      .flatMap((c) => c.args)
-      .join('\n');
-    expect(output).to.include('hello Astro');
+  it('runs upgrade with app name', async () => {
+    const result = await OrchestratorAppUpgrade.run([
+      '--target-org',
+      'test@example.com',
+      '--app-name',
+      'TestApp',
+      '--template-id',
+      'testTemplateId',
+    ]);
+    expect(result.appId).to.be.a('string');
   });
 });
