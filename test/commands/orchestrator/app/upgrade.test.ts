@@ -19,13 +19,14 @@ import { stubSfCommandUx } from '@salesforce/sf-plugins-core';
 import OrchestratorAppUpgrade from '../../../../src/commands/orchestrator/app/upgrade.js';
 
 describe('orchestrator app upgrade', () => {
-  const $$ = new TestContext();
+  const $ = new TestContext();
+
   beforeEach(() => {
-    stubSfCommandUx($$.SANDBOX);
+    stubSfCommandUx($.SANDBOX);
   });
 
   afterEach(() => {
-    $$.restore();
+    $.restore();
   });
 
   it('should have correct command flags', async () => {
@@ -44,5 +45,74 @@ describe('orchestrator app upgrade', () => {
     expect(OrchestratorAppUpgrade.description).to.be.a('string');
     expect(OrchestratorAppUpgrade.examples).to.be.an('array');
     expect(OrchestratorAppUpgrade.state).to.equal('preview');
+  });
+
+  it('should have required flags configured correctly', () => {
+    expect(OrchestratorAppUpgrade.flags['target-org'].required).to.be.true;
+    expect(OrchestratorAppUpgrade.flags['template-id'].required).to.be.true;
+  });
+
+  it('should have exclusive flags configured correctly', () => {
+    expect(OrchestratorAppUpgrade.flags['app-id'].exclusive).to.deep.equal(['app-name']);
+    expect(OrchestratorAppUpgrade.flags['app-name'].exclusive).to.deep.equal(['app-id']);
+  });
+
+  it('should have correct options for runtime-method flag', () => {
+    expect(OrchestratorAppUpgrade.flags['runtime-method'].options).to.deep.equal(['sync', 'async']);
+  });
+
+  it('should have correct options for log-level flag', () => {
+    expect(OrchestratorAppUpgrade.flags['log-level'].options).to.deep.equal(['debug', 'info', 'warn', 'error']);
+  });
+
+  it('should validate flags correctly', () => {
+    // Test validateRequiredFlags static method
+    expect(() => {
+      // @ts-expect-error - accessing private static method for testing
+      OrchestratorAppUpgrade.validateRequiredFlags({});
+    }).to.throw('No app specified for upgrade');
+
+    expect(() => {
+      // @ts-expect-error - accessing private static method for testing
+      OrchestratorAppUpgrade.validateRequiredFlags({ 'app-id': 'test' });
+    }).to.not.throw();
+  });
+
+  it('should parse template values correctly', () => {
+    // @ts-expect-error - accessing private static method for testing
+    const result = OrchestratorAppUpgrade.parseTemplateValues('{"key": "value"}');
+    expect(result).to.deep.equal({ key: 'value' });
+  });
+
+  it('should handle invalid JSON template values', () => {
+    expect(() => {
+      // @ts-expect-error - accessing private static method for testing
+      OrchestratorAppUpgrade.parseTemplateValues('invalid-json');
+    }).to.throw('Invalid template values JSON');
+  });
+
+  it('should reject array template values', () => {
+    expect(() => {
+      // @ts-expect-error - accessing private static method for testing
+      OrchestratorAppUpgrade.parseTemplateValues('["array", "not", "object"]');
+    }).to.throw('Template values must be a valid JSON object');
+  });
+
+  it('should build update options correctly', () => {
+    const flags = {
+      'template-id': 'test-template',
+      'runtime-method': 'sync',
+      'log-level': 'debug',
+      'chain-name': 'test-chain',
+    };
+
+    // @ts-expect-error - accessing private static method for testing
+    const options = OrchestratorAppUpgrade.buildUpdateOptions(flags, { test: 'value' });
+
+    expect(options.templateSourceId).to.equal('test-template');
+    expect(options.runtimeMethod).to.equal('sync');
+    expect(options.logLevel).to.equal('debug');
+    expect(options.chainName).to.equal('test-chain');
+    expect(options.templateValues).to.deep.equal({ test: 'value' });
   });
 });

@@ -1,10 +1,10 @@
 # summary
 
-Upgrade an app using template chains.
+Upgrade an orchestrated app.
 
 # description
 
-Upgrade an existing orchestrated app by running its template's upgrade chains. This command allows you to apply template updates, reconfigure the app with new template values, and modify runtime settings while staying within the same template.
+Upgrade an existing orchestrated app by running its template's upgrade chains. This command allows you to apply template upgrades, reconfigure the app with new template values, and modify runtime settings while staying within the same template.
 
 You can identify the app by either its unique ID or its name. App IDs are guaranteed to be unique, while names should be unique within an org.
 

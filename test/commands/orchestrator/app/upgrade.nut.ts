@@ -27,10 +27,26 @@ describe('orchestrator app upgrade NUTs', () => {
     await session?.clean();
   });
 
-  it('should display provided name', () => {
-    const name = 'World';
-    const command = `orchestrator app upgrade --name ${name}`;
+  it('should show help for upgrade command', () => {
+    const command = 'orchestrator app upgrade --help';
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
-    expect(output).to.contain(name);
+    expect(output).to.contain('Upgrade an app');
+    expect(output).to.contain('--template-id');
+    expect(output).to.contain('--app-id');
+    expect(output).to.contain('--app-name');
+  });
+
+  it('should error without template-id flag', () => {
+    const command = 'orchestrator app upgrade --app-id 1zAxx000000000123 --target-org test';
+    const output = execCmd(command, { ensureExitCode: 2 }).shellOutput.stderr;
+    expect(output).to.contain('Missing required flag');
+    expect(output).to.contain('template-id');
+  });
+
+  it('should error when both app-id and app-name are provided', () => {
+    const command =
+      'orchestrator app upgrade --app-id 1zAxx000000000123 --app-name "My App" --template-id 1zDxx000000001EAA --target-org test';
+    const output = execCmd(command, { ensureExitCode: 2 }).shellOutput.stderr;
+    expect(output).to.contain('exclusive');
   });
 });
