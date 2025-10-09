@@ -37,7 +37,7 @@ describe('orchestrator app upgrade NUTs', () => {
   });
 
   it('should error without template-id flag', () => {
-    const command = 'orchestrator app upgrade --app-id 1zAxx000000000123 --target-org test';
+    const command = 'orchestrator app upgrade --app-id 1zAxx000000000123';
     const output = execCmd(command, { ensureExitCode: 2 }).shellOutput.stderr;
     expect(output).to.contain('Missing required flag');
     expect(output).to.contain('template-id');
@@ -45,7 +45,7 @@ describe('orchestrator app upgrade NUTs', () => {
 
   it('should error when both app-id and app-name are provided', () => {
     const command =
-      'orchestrator app upgrade --app-id 1zAxx000000000123 --app-name "My App" --template-id 1zDxx000000001EAA --target-org test';
+      'orchestrator app upgrade --app-id 1zAxx000000000123 --app-name "My App" --template-id 1zDxx000000001EAA';
     const output = execCmd(command, { ensureExitCode: 2 }).shellOutput.stderr;
     expect(output).to.contain('exclusive');
   });
