@@ -1,10 +1,3 @@
-## [1.0.19](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.0.19) (2025-10-09)
-
-### Features
-
-- **app:** add orchestrator app upgrade command ([#PR](https://github.com/salesforcecli/plugin-orchestrator/pull/PR))
-  - Enables upgrading apps using template chains with customizable parameters
-
 ## [1.0.18](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.17...1.0.18) (2025-09-30)
 
 ### Bug Fixes
