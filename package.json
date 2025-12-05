@@ -214,6 +214,12 @@
       "output": []
     }
   },
+  "resolutions": {
+    "@types/node": "^20.0.0"
+  },
+  "overrides": {
+    "@types/node": "^20.0.0"
+  },
   "exports": "./lib/index.js",
   "type": "module"
 }
