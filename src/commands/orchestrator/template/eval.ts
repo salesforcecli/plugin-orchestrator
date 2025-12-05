@@ -17,8 +17,6 @@
 import * as fs from 'node:fs/promises';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages, Connection } from '@salesforce/core';
-import select from '@inquirer/select';
-import { LocalTemplateDetector, LocalTemplate } from '../../../utils/template/localTemplateDetector.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'orchestrator.template.eval');
@@ -91,7 +89,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       char: 'd',
       summary: messages.getMessage('flags.document-file.summary'),
       description: messages.getMessage('flags.document-file.description'),
-      exclusive: ['template-path', 'template-name', 'no-prompt'],
+      required: true,
     }),
     'values-file': Flags.file({
       char: 'v',
@@ -104,27 +102,6 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       summary: messages.getMessage('flags.definition-file.summary'),
       description: messages.getMessage('flags.definition-file.description'),
       dependsOn: ['document-file'],
-    }),
-    'template-path': Flags.directory({
-      char: 'p',
-      summary: messages.getMessage('flags.template-path.summary'),
-      description: messages.getMessage('flags.template-path.description'),
-      exclusive: ['template-name', 'document-file'],
-    }),
-    'template-name': Flags.string({
-      char: 't',
-      summary: messages.getMessage('flags.template-name.summary'),
-      description: messages.getMessage('flags.template-name.description'),
-      exclusive: ['template-path', 'document-file'],
-    }),
-    'project-dir': Flags.directory({
-      summary: messages.getMessage('flags.project-dir.summary'),
-      description: messages.getMessage('flags.project-dir.description'),
-    }),
-    'no-prompt': Flags.boolean({
-      summary: messages.getMessage('flags.no-prompt.summary'),
-      description: messages.getMessage('flags.no-prompt.description'),
-      exclusive: ['document-file'],
     }),
   };
 
@@ -183,138 +160,14 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
   }
 
   private async getTemplatePayload(flags: {
-    'template-path'?: string;
-    'template-name'?: string;
-    'project-dir'?: string;
-    'no-prompt'?: boolean;
-    'document-file'?: string;
+    'document-file': string;
     'values-file'?: string;
     'definition-file'?: string;
   }): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    // If direct file paths are provided, use them
-    if (flags['document-file']) {
-      return this.getDirectFilePayload(flags['document-file'], flags['values-file'], flags['definition-file']);
-    }
-
-    // If no template flags provided, discover local templates and prompt for selection
-    if (!flags['template-path'] && !flags['template-name']) {
-      // If no-prompt flag is set, require template specification
-      if (flags['no-prompt']) {
-        throw new Error(
-          'No template specified. Use --template-path, --template-name, or --document-file when using --no-prompt.'
-        );
-      }
-
-      const detector = new LocalTemplateDetector();
-      const templates = await detector.discoverLocalTemplates(flags['project-dir']);
-
-      if (templates.length === 0) {
-        throw new Error(
-          'No local templates found. Use --template-path or --document-file to specify template files directly.'
-        );
-      }
-
-      return this.promptForTemplateSelection(templates);
-    }
-
-    // If template path is provided directly
-    if (flags['template-path']) {
-      return this.getLocalTemplatePayload(flags['template-path']);
-    }
-
-    // If template name is provided, search for it
-    if (flags['template-name']) {
-      const detector = new LocalTemplateDetector();
-      const templates = await detector.discoverLocalTemplates(flags['project-dir']);
-
-      const foundTemplate = templates.find(
-        (t) => t.name === flags['template-name'] || t.label === flags['template-name']
-      );
-
-      if (!foundTemplate) {
-        throw new Error(
-          `Template '${flags['template-name']}' not found. Available templates: ${templates
-            .map((t) => t.name)
-            .join(', ')}`
-        );
-      }
-
-      return this.getLocalTemplatePayload(foundTemplate.path);
-    }
-
-    throw new Error('No template specified. Use --template-path, --template-name, or --document-file.');
-  }
-
-  private async promptForTemplateSelection(templates: LocalTemplate[]): Promise<{
-    template: TemplateInfo;
-    payload: TransformationPayload;
-  }> {
-    // Build choices for inquirer select
-    const choices = templates.map((template) => {
-      const displayName = template.label ?? template.name;
-      const description = template.description ? ` - ${template.description}` : '';
-      return {
-        name: `${displayName}${description}`,
-        value: template.path,
-      };
-    });
-
-    const selectedValue = await select({
-      message: 'Select a template to preview:',
-      choices,
-      pageSize: 10,
-    });
-
-    // Find the selected template
-    const selectedTemplate = templates.find((t) => t.path === selectedValue);
-    if (selectedTemplate) {
-      const displayName = selectedTemplate.label ?? selectedTemplate.name;
-      this.log(`Selected: ${displayName}`);
-      return this.getLocalTemplatePayload(selectedTemplate.path);
-    }
-
-    // Fallback (should not happen)
-    throw new Error('Selected template not found.');
-  }
-
-  private getLocalTemplatePayload(templatePath: string): {
-    template: TemplateInfo;
-    payload: TransformationPayload;
-  } {
-    // For now, return static payload but indicate it's from local template
-    // TODO: Parse actual template files
-    const templateName = templatePath.split('/').pop() ?? 'Unknown Template';
-
-    this.log(`Local template parsing not yet implemented. Using static rules for: ${templateName}`);
-
-    return {
-      template: {
-        name: templateName,
-        path: templatePath,
-        source: 'local',
-      },
-      payload: {
-        document: {
-          user: {
-            firstName: '',
-            lastName: '',
-            userName: '',
-            id: '',
-            hello: '',
-          },
-          company: {
-            id: '',
-            name: '',
-            namespace: '',
-          },
-        },
-        values: { Variables: { hello: '' } },
-        definition: { rules: [] },
-      },
-    };
+    return this.getDirectFilePayload(flags['document-file'], flags['values-file'], flags['definition-file']);
   }
 
   private async getDirectFilePayload(

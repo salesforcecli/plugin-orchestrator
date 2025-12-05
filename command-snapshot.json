@@ -99,20 +99,8 @@
     "alias": [],
     "command": "orchestrator:template:eval",
     "flagAliases": [],
-    "flagChars": ["d", "o", "p", "r", "t", "v"],
-    "flags": [
-      "api-version",
-      "definition-file",
-      "document-file",
-      "flags-dir",
-      "json",
-      "no-prompt",
-      "project-dir",
-      "target-org",
-      "template-name",
-      "template-path",
-      "values-file"
-    ],
+    "flagChars": ["d", "o", "r", "v"],
+    "flags": ["api-version", "definition-file", "document-file", "flags-dir", "json", "target-org", "values-file"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
