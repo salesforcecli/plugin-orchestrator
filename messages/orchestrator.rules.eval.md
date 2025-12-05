@@ -22,13 +22,13 @@ Override the api version used for api requests made by this command.
 
 API version to use for the transformation request. Defaults to the org's configured API version.
 
-# flags.template-info.summary
+# flags.document.summary
 
-Path to Analytics template-info.json file.
+Path to JSON document file to transform.
 
-# flags.template-info.description
+# flags.document.description
 
-Path to the template-info.json file containing the base JSON document structure that will be transformed.
+Path to the JSON document file (dashboard, lens, etc.) that will be transformed by the rules.
 
 # flags.variables.summary
 
@@ -48,8 +48,8 @@ Path to the rules.json file containing transformation rules and macro definition
 
 # examples
 
-- Test JSON transformation with Analytics template files:
-  <%= config.bin %> <%= command.id %> --template-info ./template-info.json --variables ./variables.json --rules ./rules.json --target-org myorg
+- Test JSON transformation with Analytics files:
+  <%= config.bin %> <%= command.id %> --document ./dashboard.json --variables ./variables.json --rules ./rules.json --target-org myorg
 
 - Test with specific API version:
-  <%= config.bin %> <%= command.id %> --template-info ./template-info.json --variables ./variables.json --rules ./rules.json --target-org myorg --api-version 60.0
+  <%= config.bin %> <%= command.id %> --document ./dashboard.json --variables ./variables.json --rules ./rules.json --target-org myorg --api-version 60.0
