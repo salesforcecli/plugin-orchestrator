@@ -47,15 +47,3 @@ node_modules
 # os specific files
 .DS_Store
 .idea
-
-# Claude Code and MCP config files (local development only)
-.claude/
-.mcp.json
-mcp-config-examples.json
-
-# Local documentation files
-APP_FRAMEWORK_QUICK_REFERENCE.md
-ISV_TESTING_PLAN.md
-
-# Temporary test files
-*hi.txt
