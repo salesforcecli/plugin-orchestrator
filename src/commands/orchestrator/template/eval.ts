@@ -188,11 +188,11 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       // Determine template source and payload
       const templateResult = await this.getTemplatePayload(flags);
 
-      this.log(`🔍 Testing transformation: ${templateResult.template.name}`);
-      this.log(`📁 Source: ${templateResult.template.source}`);
+      this.log(`Testing transformation: ${templateResult.template.name}`);
+      this.log(`Source: ${templateResult.template.source}`);
 
       if (templateResult.template.source === 'local') {
-        this.log(`📂 Path: ${templateResult.template.path}`);
+        this.log(`Path: ${templateResult.template.path}`);
       }
 
       const startTime = Date.now();
@@ -211,8 +211,8 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
 
       const executionTime = `${Date.now() - startTime}ms`;
 
-      this.log('✅ Transformation completed successfully!');
-      this.log('📊 Results:');
+      this.log('Transformation completed successfully!');
+      this.log('Results:');
       this.log(JSON.stringify(result, null, 2));
 
       return {
@@ -223,7 +223,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
         executionTime,
       };
     } catch (error) {
-      this.log(`❌ Transformation failed: ${(error as Error).message}`);
+      this.log(`Transformation failed: ${(error as Error).message}`);
 
       return {
         status: 'error',
@@ -253,7 +253,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     if (!flags['template-path'] && !flags['template-name']) {
       // If no-prompt flag is set, use static example
       if (flags['no-prompt']) {
-        this.log('ℹ️  Using static example (--no-prompt flag specified).');
+        this.log('Using static example (--no-prompt flag specified).');
         return TemplateEval.getStaticPayload();
       }
 
@@ -261,7 +261,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       const templates = await detector.discoverLocalTemplates(flags['project-dir']);
 
       if (templates.length === 0) {
-        this.log('ℹ️  No local templates found. Using static example.');
+        this.log('No local templates found. Using static example.');
         return TemplateEval.getStaticPayload();
       }
 
@@ -323,7 +323,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     });
 
     if (selectedValue === 'static') {
-      this.log('✅ Selected: Static Example');
+      this.log('Selected: Static Example');
       return TemplateEval.getStaticPayload();
     }
 
@@ -331,12 +331,12 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     const selectedTemplate = templates.find((t) => t.path === selectedValue);
     if (selectedTemplate) {
       const displayName = selectedTemplate.label ?? selectedTemplate.name;
-      this.log(`✅ Selected: ${displayName}`);
+      this.log(`Selected: ${displayName}`);
       return this.getLocalTemplatePayload(selectedTemplate.path);
     }
 
     // Fallback (should not happen)
-    this.log('ℹ️  Template not found. Using static example as fallback.');
+    this.log('Template not found. Using static example as fallback.');
     return TemplateEval.getStaticPayload();
   }
 
@@ -348,7 +348,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     // TODO: Parse actual template files
     const templateName = templatePath.split('/').pop() ?? 'Unknown Template';
 
-    this.log(`⚠️  Local template parsing not yet implemented. Using static rules for: ${templateName}`);
+    this.log(`Local template parsing not yet implemented. Using static rules for: ${templateName}`);
 
     return {
       template: {
@@ -368,7 +368,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    this.log(`📄 Loading document: ${documentFile}`);
+    this.log(`Loading document: ${documentFile}`);
 
     // Read and parse the document file
     const documentContent = await fs.readFile(documentFile, 'utf8');
@@ -377,7 +377,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     // Read values file if provided, otherwise use empty object
     let values = { Variables: { hello: 'world' } };
     if (valuesFile) {
-      this.log(`📊 Loading values: ${valuesFile}`);
+      this.log(`Loading values: ${valuesFile}`);
       const valuesContent = await fs.readFile(valuesFile, 'utf8');
       values = JSON.parse(valuesContent) as typeof values;
     }
@@ -385,7 +385,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     // Read definition file if provided, otherwise use empty rules
     let definition = { rules: [] };
     if (definitionFile) {
-      this.log(`⚙️  Loading definition: ${definitionFile}`);
+      this.log(`Loading definition: ${definitionFile}`);
       const definitionContent = await fs.readFile(definitionFile, 'utf8');
       definition = JSON.parse(definitionContent) as typeof definition;
     }
