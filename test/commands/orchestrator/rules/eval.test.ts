@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
+import { TestContext } from '@salesforce/core/testSetup';
 import { expect } from 'chai';
+import RulesEval from '../../../../src/commands/orchestrator/rules/eval.js';
 
-describe('template preview NUTs', () => {
-  let session: TestSession;
+describe('rules eval', () => {
+  const $$ = new TestContext();
 
-  before(async () => {
-    session = await TestSession.create({ devhubAuthStrategy: 'NONE' });
+  afterEach(() => {
+    $$.restore();
   });
 
-  after(async () => {
-    await session?.clean();
-  });
-
-  it('should display provided name', () => {
-    const name = 'World';
-    const command = `template preview --name ${name}`;
-    const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
-    expect(output).to.contain(name);
+  it('should exist and be importable', async () => {
+    expect(RulesEval).to.exist;
   });
 });
