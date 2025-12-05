@@ -48,11 +48,11 @@ Root directory of the SFDX project to search for templates. Defaults to current 
 
 # flags.no-prompt.summary
 
-Skip interactive template selection and use static example.
+Skip interactive template selection.
 
 # flags.no-prompt.description
 
-Use static example without prompting for template selection. Useful for scripting and CI environments.
+Skip interactive template selection. Requires --template-path, --template-name, or --document-file to be specified. Useful for scripting and CI environments.
 
 # flags.document-file.summary
 
@@ -95,5 +95,8 @@ Path to JSON file containing transformation rules and definitions.
 - Test with custom project directory:
   <%= config.bin %> <%= command.id %> --template-name MyTemplate --project-dir /path/to/project --target-org myorg
 
-- Skip interactive prompts (useful for CI/automation):
-  <%= config.bin %> <%= command.id %> --no-prompt --target-org myorg
+- Skip interactive prompts with specific template (useful for CI/automation):
+  <%= config.bin %> <%= command.id %> --no-prompt --template-name MyTemplate --target-org myorg
+
+- Test with direct file paths (useful for CI/automation):
+  <%= config.bin %> <%= command.id %> --document-file ./document.json --values-file ./values.json --definition-file ./rules.json --target-org myorg

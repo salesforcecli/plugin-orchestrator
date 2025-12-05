@@ -128,56 +128,6 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     }),
   };
 
-  private static getStaticPayload(): {
-    template: TemplateInfo;
-    payload: TransformationPayload;
-  } {
-    return {
-      template: {
-        name: 'Static Example',
-        path: 'built-in',
-        source: 'static',
-      },
-      payload: {
-        document: {
-          user: {
-            firstName: '${User.FirstName}',
-            lastName: '${User.LastName}',
-            userName: '${User.UserName}',
-            id: '${User.Id}',
-            hello: '${Variables.hello}',
-          },
-          company: {
-            id: '${Org.Id}',
-            name: '${Org.Name}',
-            namespace: '${Org.Namespace}',
-          },
-        },
-        values: {
-          Variables: {
-            hello: 'world',
-          },
-        },
-        definition: {
-          rules: [
-            {
-              name: 'Example',
-              actions: [
-                {
-                  action: 'put',
-                  description: 'add hobby to user',
-                  key: 'hobby',
-                  path: '$.user',
-                  value: 'mountain biking',
-                },
-              ],
-            },
-          ],
-        },
-      },
-    };
-  }
-
   public async run(): Promise<TemplatePreviewResult> {
     const { flags } = await this.parse(TemplateEval);
 
@@ -251,18 +201,20 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
 
     // If no template flags provided, discover local templates and prompt for selection
     if (!flags['template-path'] && !flags['template-name']) {
-      // If no-prompt flag is set, use static example
+      // If no-prompt flag is set, require template specification
       if (flags['no-prompt']) {
-        this.log('Using static example (--no-prompt flag specified).');
-        return TemplateEval.getStaticPayload();
+        throw new Error(
+          'No template specified. Use --template-path, --template-name, or --document-file when using --no-prompt.'
+        );
       }
 
       const detector = new LocalTemplateDetector();
       const templates = await detector.discoverLocalTemplates(flags['project-dir']);
 
       if (templates.length === 0) {
-        this.log('No local templates found. Using static example.');
-        return TemplateEval.getStaticPayload();
+        throw new Error(
+          'No local templates found. Use --template-path or --document-file to specify template files directly.'
+        );
       }
 
       return this.promptForTemplateSelection(templates);
@@ -293,7 +245,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       return this.getLocalTemplatePayload(foundTemplate.path);
     }
 
-    return TemplateEval.getStaticPayload();
+    throw new Error('No template specified. Use --template-path, --template-name, or --document-file.');
   }
 
   private async promptForTemplateSelection(templates: LocalTemplate[]): Promise<{
@@ -301,31 +253,20 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     payload: TransformationPayload;
   }> {
     // Build choices for inquirer select
-    const choices = [
-      ...templates.map((template) => {
-        const displayName = template.label ?? template.name;
-        const description = template.description ? ` - ${template.description}` : '';
-        return {
-          name: `${displayName}${description}`,
-          value: template.path,
-        };
-      }),
-      {
-        name: 'Static Example (built-in test data)',
-        value: 'static',
-      },
-    ];
+    const choices = templates.map((template) => {
+      const displayName = template.label ?? template.name;
+      const description = template.description ? ` - ${template.description}` : '';
+      return {
+        name: `${displayName}${description}`,
+        value: template.path,
+      };
+    });
 
     const selectedValue = await select({
       message: 'Select a template to preview:',
       choices,
       pageSize: 10,
     });
-
-    if (selectedValue === 'static') {
-      this.log('Selected: Static Example');
-      return TemplateEval.getStaticPayload();
-    }
 
     // Find the selected template
     const selectedTemplate = templates.find((t) => t.path === selectedValue);
@@ -336,8 +277,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     }
 
     // Fallback (should not happen)
-    this.log('Template not found. Using static example as fallback.');
-    return TemplateEval.getStaticPayload();
+    throw new Error('Selected template not found.');
   }
 
   private getLocalTemplatePayload(templatePath: string): {
@@ -356,7 +296,24 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
         path: templatePath,
         source: 'local',
       },
-      payload: TemplateEval.getStaticPayload().payload,
+      payload: {
+        document: {
+          user: {
+            firstName: '',
+            lastName: '',
+            userName: '',
+            id: '',
+            hello: '',
+          },
+          company: {
+            id: '',
+            name: '',
+            namespace: '',
+          },
+        },
+        values: { Variables: { hello: '' } },
+        definition: { rules: [] },
+      },
     };
   }
 
