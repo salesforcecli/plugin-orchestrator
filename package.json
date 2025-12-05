@@ -5,6 +5,7 @@
   "author": "Salesforce",
   "bugs": "https://github.com/forcedotcom/cli/issues",
   "dependencies": {
+    "@inquirer/select": "^5.0.1",
     "@oclif/core": "^4",
     "@salesforce/core": "^8.23.0",
     "@salesforce/kit": "^3.2.1",
@@ -63,6 +64,9 @@
       },
       "orchestrator:template": {
         "description": "Work with templates"
+      },
+      "template": {
+        "description": "description for template"
       }
     },
     "flexibleTaxonomy": true
