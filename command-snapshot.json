@@ -97,6 +97,14 @@
   },
   {
     "alias": [],
+    "command": "orchestrator:template:eval",
+    "flagAliases": [],
+    "flagChars": ["d", "o", "r", "v"],
+    "flags": ["api-version", "definition-file", "document-file", "flags-dir", "json", "target-org", "values-file"],
+    "plugin": "@salesforce/plugin-orchestrator"
+  },
+  {
+    "alias": [],
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
