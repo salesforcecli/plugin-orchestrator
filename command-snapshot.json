@@ -108,7 +108,7 @@
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
-    "flags": ["api-version", "flags-dir", "json", "target-org"],
+    "flags": ["all", "api-version", "flags-dir", "json", "target-org"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
