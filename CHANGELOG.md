@@ -1,15 +1,25 @@
-## [1.0.19](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.0.19) (2025-10-09)
-
-### Features
-
-- **app:** add orchestrator app upgrade command ([#PR](https://github.com/salesforcecli/plugin-orchestrator/pull/PR))
-  - Enables upgrading apps using template chains with customizable parameters
-
-## [1.0.18](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.17...1.0.18) (2025-09-30)
+# [1.1.0](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.1.0) (2025-12-05)
 
 ### Bug Fixes
 
-- **deps:** chore: bump version to 1.0.18 ([c8cc0e3](https://github.com/salesforcecli/plugin-orchestrator/commit/c8cc0e3))
+- **deps:** bump @oclif/core from 4.5.4 to 4.5.5 ([2c83b6a](https://github.com/salesforcecli/plugin-orchestrator/commit/2c83b6a95fe57a77a4d112bbfc8547636a6c675b))
+- **deps:** bump @oclif/core from 4.5.5 to 4.5.6 ([c9a00d8](https://github.com/salesforcecli/plugin-orchestrator/commit/c9a00d81a8e0aeb52a52743ed4109b6b5904dd5e))
+- **deps:** bump @oclif/core from 4.5.6 to 4.7.2 ([7c349f9](https://github.com/salesforcecli/plugin-orchestrator/commit/7c349f9dd956a70e25d36c7e3c77398ca24d3a8f))
+- **deps:** bump @oclif/core from 4.7.2 to 4.8.0 ([c03a23b](https://github.com/salesforcecli/plugin-orchestrator/commit/c03a23bbd8e6a90a1216e29af25a37969243e869))
+- **deps:** bump @salesforce/core from 8.23.1 to 8.23.2 ([1fe7c9f](https://github.com/salesforcecli/plugin-orchestrator/commit/1fe7c9ff080e5f52987ef4a110b64680562f80b0))
+- **deps:** bump @salesforce/core from 8.23.2 to 8.23.3 ([d268b6b](https://github.com/salesforcecli/plugin-orchestrator/commit/d268b6b0679c7ad8b26183fb050b8f39ff0b4196))
+- **deps:** bump @salesforce/core from 8.23.3 to 8.23.4 ([0bf3799](https://github.com/salesforcecli/plugin-orchestrator/commit/0bf3799f0059893f3cebffd054fccd75bfe86a28))
+- **deps:** bump @salesforce/sf-plugins-core from 12.2.4 to 12.2.5 ([c657513](https://github.com/salesforcecli/plugin-orchestrator/commit/c657513e915252501aa4f78cdb8cf06b7c3d1c46))
+- **deps:** bump @salesforce/sf-plugins-core from 12.2.5 to 12.2.6 ([29c2e3f](https://github.com/salesforcecli/plugin-orchestrator/commit/29c2e3f6d53cb296abd2aaea982192d379e74e8b))
+- **deps:** bump jws from 3.2.2 to 3.2.3 ([ab36c2d](https://github.com/salesforcecli/plugin-orchestrator/commit/ab36c2d3bd84b52c8f977a9b4a572b133b4145d9))
+- resolve CI TypeScript Buffer interface conflicts ([#117](https://github.com/salesforcecli/plugin-orchestrator/issues/117)) ([3e028d6](https://github.com/salesforcecli/plugin-orchestrator/commit/3e028d6894d127da3cc53f6cf81eacc41659dc9f))
+- resolve TypeScript Buffer type conflicts in CI ([#116](https://github.com/salesforcecli/plugin-orchestrator/issues/116)) ([31cbd60](https://github.com/salesforcecli/plugin-orchestrator/commit/31cbd60cd05719138c67dee17ee41e61d65cd4b7))
+
+### Features
+
+- add orchestrator app upgrade command ([#95](https://github.com/salesforcecli/plugin-orchestrator/issues/95)) ([43fc878](https://github.com/salesforcecli/plugin-orchestrator/commit/43fc8784aa188eed10ea2776cb326766ca4e48ea))
+
+## [1.0.18](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.17...1.0.18) (2025-10-01)
 
 ## [1.0.17](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.16...1.0.17) (2025-09-07)
 
@@ -144,17 +154,12 @@
 
 - **deps:** bump @babel/helpers from 7.25.0 to 7.27.1 ([f1306b0](https://github.com/salesforcecli/plugin-orchestrator/commit/f1306b025979feeb704587a85d9a7a4e5baef58c))
 
-## [1.1.1](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.0...1.1.1) (2025-05-01)
-
-### Bug Fixes
-
-- **deps:** bump @oclif/core from 4.2.10 to 4.3.0 ([31f0ce7](https://github.com/salesforcecli/plugin-orchestrator/commit/31f0ce72ac8b5e29ffaeef9a143e1eb4935627b0))
-
-# [1.1.0](https://github.com/salesforcecli/plugin-orchestrator/compare/a7bf67ddf0dda6de77e6250fdf6dff694d6cd870...1.1.0) (2025-05-01)
+## [1.1.1](https://github.com/salesforcecli/plugin-orchestrator/compare/a7bf67ddf0dda6de77e6250fdf6dff694d6cd870...1.1.1) (2025-05-01)
 
 ### Bug Fixes
 
 - bypass schema:compare command and add dummy schema file ([68be859](https://github.com/salesforcecli/plugin-orchestrator/commit/68be859736483698d6b42a9c8e07443a77a95479))
+- **deps:** bump @oclif/core from 4.2.10 to 4.3.0 ([31f0ce7](https://github.com/salesforcecli/plugin-orchestrator/commit/31f0ce72ac8b5e29ffaeef9a143e1eb4935627b0))
 - **deps:** bump @salesforce/core from 8.8.7 to 8.10.0 ([ae30b80](https://github.com/salesforcecli/plugin-orchestrator/commit/ae30b802fd47d94788f7aaa3cfa7d05636766400))
 - provide proper schema types and update command snapshot ([bdd2868](https://github.com/salesforcecli/plugin-orchestrator/commit/bdd2868ffbafd54ca0e935b15fd7b1a6d24bcf9e))
 - readme and failurenotifications ([b5eb207](https://github.com/salesforcecli/plugin-orchestrator/commit/b5eb207bf9ffdf64329068df8c31d0c41cfa713b))
