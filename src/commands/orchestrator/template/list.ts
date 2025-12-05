@@ -41,6 +41,11 @@ export default class ListTemplate extends SfCommand<TemplateData[]> {
       summary: messages.getMessage('flags.api-version.summary'),
       description: messages.getMessage('flags.api-version.description'),
     }),
+    all: Flags.boolean({
+      summary: messages.getMessage('flags.all.summary'),
+      description: messages.getMessage('flags.all.description'),
+      default: false,
+    }),
   };
 
   public async run(): Promise<TemplateData[]> {
@@ -56,12 +61,18 @@ export default class ListTemplate extends SfCommand<TemplateData[]> {
       const rawTemplates = await appFrameworkTemplate.list();
       this.spinner.stop();
 
-      const templates = TemplateListUtil.processTemplates(rawTemplates);
+      let templates = TemplateListUtil.processTemplates(rawTemplates);
+
+      // Filter out standard templates by default unless --all flag is used
+      if (!flags.all) {
+        templates = templates.filter((template) => !template.name?.startsWith('sfdc_internal__'));
+      }
 
       if (templates.length > 0) {
         TemplateDisplayUtil.displayTemplateList(this, templates);
       } else {
-        this.log(messages.getMessage('noResultsFound'));
+        const messageKey = flags.all ? 'noResultsFound' : 'noCustomTemplatesFound';
+        this.log(messages.getMessage(messageKey));
       }
 
       return templates;

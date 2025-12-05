@@ -19,7 +19,7 @@ import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages, Connection } from '@salesforce/core';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
-const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'orchestrator.template.eval');
+const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'orchestrator.rules.eval');
 
 type TransformationPayload = {
   document: {
@@ -85,23 +85,23 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       summary: messages.getMessage('flags.api-version.summary'),
       description: messages.getMessage('flags.api-version.description'),
     }),
-    'document-file': Flags.file({
-      char: 'd',
-      summary: messages.getMessage('flags.document-file.summary'),
-      description: messages.getMessage('flags.document-file.description'),
+    'template-info': Flags.file({
+      char: 't',
+      summary: messages.getMessage('flags.template-info.summary'),
+      description: messages.getMessage('flags.template-info.description'),
       required: true,
     }),
-    'values-file': Flags.file({
+    variables: Flags.file({
       char: 'v',
-      summary: messages.getMessage('flags.values-file.summary'),
-      description: messages.getMessage('flags.values-file.description'),
-      dependsOn: ['document-file'],
+      summary: messages.getMessage('flags.variables.summary'),
+      description: messages.getMessage('flags.variables.description'),
+      required: true,
     }),
-    'definition-file': Flags.file({
+    rules: Flags.file({
       char: 'r',
-      summary: messages.getMessage('flags.definition-file.summary'),
-      description: messages.getMessage('flags.definition-file.description'),
-      dependsOn: ['document-file'],
+      summary: messages.getMessage('flags.rules.summary'),
+      description: messages.getMessage('flags.rules.description'),
+      required: true,
     }),
   };
 
@@ -159,51 +159,41 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     }
   }
 
-  private async getTemplatePayload(flags: {
-    'document-file': string;
-    'values-file'?: string;
-    'definition-file'?: string;
-  }): Promise<{
+  private async getTemplatePayload(flags: { 'template-info': string; variables: string; rules: string }): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    return this.getDirectFilePayload(flags['document-file'], flags['values-file'], flags['definition-file']);
+    return this.getDirectFilePayload(flags['template-info'], flags['variables'], flags['rules']);
   }
 
   private async getDirectFilePayload(
-    documentFile: string,
-    valuesFile?: string,
-    definitionFile?: string
+    templateInfoFile: string,
+    variablesFile: string,
+    rulesFile: string
   ): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    this.log(`Loading document: ${documentFile}`);
+    this.log(`Loading template info: ${templateInfoFile}`);
 
-    // Read and parse the document file
-    const documentContent = await fs.readFile(documentFile, 'utf8');
-    const document = JSON.parse(documentContent) as unknown;
+    // Read and parse the template-info file
+    const templateInfoContent = await fs.readFile(templateInfoFile, 'utf8');
+    const document = JSON.parse(templateInfoContent) as unknown;
 
-    // Read values file if provided, otherwise use empty object
-    let values = { Variables: { hello: 'world' } };
-    if (valuesFile) {
-      this.log(`Loading values: ${valuesFile}`);
-      const valuesContent = await fs.readFile(valuesFile, 'utf8');
-      values = JSON.parse(valuesContent) as typeof values;
-    }
+    // Read variables file
+    this.log(`Loading variables: ${variablesFile}`);
+    const variablesContent = await fs.readFile(variablesFile, 'utf8');
+    const values = JSON.parse(variablesContent) as { Variables: Record<string, unknown> };
 
-    // Read definition file if provided, otherwise use empty rules
-    let definition = { rules: [] };
-    if (definitionFile) {
-      this.log(`Loading definition: ${definitionFile}`);
-      const definitionContent = await fs.readFile(definitionFile, 'utf8');
-      definition = JSON.parse(definitionContent) as typeof definition;
-    }
+    // Read rules file
+    this.log(`Loading rules: ${rulesFile}`);
+    const rulesContent = await fs.readFile(rulesFile, 'utf8');
+    const definition = JSON.parse(rulesContent) as { rules: unknown[] };
 
     return {
       template: {
         name: 'Direct Files',
-        path: documentFile,
+        path: templateInfoFile,
         source: 'local' as const,
       },
       payload: {

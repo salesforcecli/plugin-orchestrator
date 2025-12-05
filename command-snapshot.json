@@ -73,6 +73,14 @@
   },
   {
     "alias": [],
+    "command": "orchestrator:rules:eval",
+    "flagAliases": [],
+    "flagChars": ["o", "r", "t", "v"],
+    "flags": ["api-version", "flags-dir", "json", "rules", "target-org", "template-info", "variables"],
+    "plugin": "@salesforce/plugin-orchestrator"
+  },
+  {
+    "alias": [],
     "command": "orchestrator:template:create",
     "flagAliases": [],
     "flagChars": ["d", "l", "n", "o", "s", "t"],
@@ -97,18 +105,10 @@
   },
   {
     "alias": [],
-    "command": "orchestrator:template:eval",
-    "flagAliases": [],
-    "flagChars": ["d", "o", "r", "v"],
-    "flags": ["api-version", "definition-file", "document-file", "flags-dir", "json", "target-org", "values-file"],
-    "plugin": "@salesforce/plugin-orchestrator"
-  },
-  {
-    "alias": [],
     "command": "orchestrator:template:list",
     "flagAliases": [],
     "flagChars": ["o"],
-    "flags": ["api-version", "flags-dir", "json", "target-org"],
+    "flags": ["all", "api-version", "flags-dir", "json", "target-org"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {
