@@ -85,10 +85,10 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       summary: messages.getMessage('flags.api-version.summary'),
       description: messages.getMessage('flags.api-version.description'),
     }),
-    'template-info': Flags.file({
-      char: 't',
-      summary: messages.getMessage('flags.template-info.summary'),
-      description: messages.getMessage('flags.template-info.description'),
+    document: Flags.file({
+      char: 'd',
+      summary: messages.getMessage('flags.document.summary'),
+      description: messages.getMessage('flags.document.description'),
       required: true,
     }),
     variables: Flags.file({
@@ -159,26 +159,26 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     }
   }
 
-  private async getTemplatePayload(flags: { 'template-info': string; variables: string; rules: string }): Promise<{
+  private async getTemplatePayload(flags: { document: string; variables: string; rules: string }): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    return this.getDirectFilePayload(flags['template-info'], flags['variables'], flags['rules']);
+    return this.getDirectFilePayload(flags.document, flags.variables, flags.rules);
   }
 
   private async getDirectFilePayload(
-    templateInfoFile: string,
+    documentFile: string,
     variablesFile: string,
     rulesFile: string
   ): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    this.log(`Loading template info: ${templateInfoFile}`);
+    this.log(`Loading document: ${documentFile}`);
 
-    // Read and parse the template-info file
-    const templateInfoContent = await fs.readFile(templateInfoFile, 'utf8');
-    const document = JSON.parse(templateInfoContent) as unknown;
+    // Read and parse the document file
+    const documentContent = await fs.readFile(documentFile, 'utf8');
+    const document = JSON.parse(documentContent) as unknown;
 
     // Read variables file
     this.log(`Loading variables: ${variablesFile}`);
@@ -193,7 +193,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     return {
       template: {
         name: 'Direct Files',
-        path: templateInfoFile,
+        path: documentFile,
         source: 'local' as const,
       },
       payload: {
