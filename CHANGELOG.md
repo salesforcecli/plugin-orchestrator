@@ -1,3 +1,15 @@
+## [1.0.21](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.20...1.0.21) (2025-12-07)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.23.7 to 8.24.0 ([47cd9ea](https://github.com/salesforcecli/plugin-orchestrator/commit/47cd9ea0b6bbefe1e61b692a6d8d3663f95dfb73))
+
+## [1.0.20](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.0...1.0.20) (2025-12-05)
+
+### Bug Fixes
+
+- rules eval and template filtering ([#118](https://github.com/salesforcecli/plugin-orchestrator/issues/118)) ([22ae46c](https://github.com/salesforcecli/plugin-orchestrator/commit/22ae46c861653544746f7ba6c0f73a3529180414))
+
 # [1.1.0](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.1.0) (2025-12-05)
 
 ### Bug Fixes
