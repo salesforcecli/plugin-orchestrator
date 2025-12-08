@@ -36,7 +36,7 @@ Path to Analytics variables.json file.
 
 # flags.variables.description
 
-Path to the variables.json file containing variable definitions used in transformations.
+Path to the variables.json file containing variable definitions used in transformations. The file should contain a flat JSON object with key-value pairs. The CLI will automatically wrap these in the required Variables structure.
 
 # flags.rules.summary
 

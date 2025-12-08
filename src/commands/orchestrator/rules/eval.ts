@@ -183,7 +183,9 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     // Read variables file
     this.log(`Loading variables: ${variablesFile}`);
     const variablesContent = await fs.readFile(variablesFile, 'utf8');
-    const values = JSON.parse(variablesContent) as { Variables: Record<string, unknown> };
+    const variablesData = JSON.parse(variablesContent) as Record<string, unknown>;
+
+    const values = { Variables: variablesData };
 
     // Read rules file
     this.log(`Loading rules: ${rulesFile}`);
