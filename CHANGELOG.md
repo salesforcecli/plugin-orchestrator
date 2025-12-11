@@ -1,3 +1,9 @@
+## [1.0.24](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.23...1.0.24) (2025-12-11)
+
+### Bug Fixes
+
+- rename --variables to --values and remove Variables wrapper ([#124](https://github.com/salesforcecli/plugin-orchestrator/issues/124)) ([975e1c5](https://github.com/salesforcecli/plugin-orchestrator/commit/975e1c57cdcd8bf4a5f7ddd91959ca379a10a0cc))
+
 ## [1.0.23](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.22...1.0.23) (2025-12-09)
 
 ### Bug Fixes
