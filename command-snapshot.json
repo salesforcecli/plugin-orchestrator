@@ -76,7 +76,7 @@
     "command": "orchestrator:rules:eval",
     "flagAliases": [],
     "flagChars": ["d", "o", "r", "v"],
-    "flags": ["api-version", "document", "flags-dir", "json", "rules", "target-org", "variables"],
+    "flags": ["api-version", "document", "flags-dir", "json", "rules", "target-org", "values"],
     "plugin": "@salesforce/plugin-orchestrator"
   },
   {

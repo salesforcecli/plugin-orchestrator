@@ -36,11 +36,7 @@ type TransformationPayload = {
       namespace: string;
     };
   };
-  values: {
-    Variables: {
-      hello: string;
-    };
-  };
+  values: Record<string, unknown>;
   definition: {
     rules: Array<{
       name: string;
@@ -91,10 +87,10 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       description: messages.getMessage('flags.document.description'),
       required: true,
     }),
-    variables: Flags.file({
+    values: Flags.file({
       char: 'v',
-      summary: messages.getMessage('flags.variables.summary'),
-      description: messages.getMessage('flags.variables.description'),
+      summary: messages.getMessage('flags.values.summary'),
+      description: messages.getMessage('flags.values.description'),
       required: true,
     }),
     rules: Flags.file({
@@ -159,16 +155,16 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     }
   }
 
-  private async getTemplatePayload(flags: { document: string; variables: string; rules: string }): Promise<{
+  private async getTemplatePayload(flags: { document: string; values: string; rules: string }): Promise<{
     template: TemplateInfo;
     payload: TransformationPayload;
   }> {
-    return this.getDirectFilePayload(flags.document, flags.variables, flags.rules);
+    return this.getDirectFilePayload(flags.document, flags.values, flags.rules);
   }
 
   private async getDirectFilePayload(
     documentFile: string,
-    variablesFile: string,
+    valuesFile: string,
     rulesFile: string
   ): Promise<{
     template: TemplateInfo;
@@ -180,12 +176,10 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
     const documentContent = await fs.readFile(documentFile, 'utf8');
     const document = JSON.parse(documentContent) as unknown;
 
-    // Read variables file
-    this.log(`Loading variables: ${variablesFile}`);
-    const variablesContent = await fs.readFile(variablesFile, 'utf8');
-    const variablesData = JSON.parse(variablesContent) as Record<string, unknown>;
-
-    const values = { Variables: variablesData };
+    // Read values file
+    this.log(`Loading values: ${valuesFile}`);
+    const valuesContent = await fs.readFile(valuesFile, 'utf8');
+    const values = JSON.parse(valuesContent) as Record<string, unknown>;
 
     // Read rules file
     this.log(`Loading rules: ${rulesFile}`);
@@ -200,7 +194,7 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
       },
       payload: {
         document: document as TransformationPayload['document'],
-        values: values as TransformationPayload['values'],
+        values,
         definition: definition as TransformationPayload['definition'],
       },
     };

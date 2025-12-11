@@ -30,13 +30,13 @@ Path to JSON document file to transform.
 
 Path to the JSON document file (dashboard, lens, etc.) that will be transformed by the rules.
 
-# flags.variables.summary
+# flags.values.summary
 
-Path to Analytics variables.json file.
+Path to values JSON file.
 
-# flags.variables.description
+# flags.values.description
 
-Path to the variables.json file containing variable definitions used in transformations. The file should contain a flat JSON object with key-value pairs. The CLI will automatically wrap these in the required Variables structure.
+Path to the JSON file containing values used in transformations. Can contain any JSON structure that matches your transformation rules.
 
 # flags.rules.summary
 
@@ -49,7 +49,7 @@ Path to the rules.json file containing transformation rules and macro definition
 # examples
 
 - Test JSON transformation with Analytics files:
-  <%= config.bin %> <%= command.id %> --document ./dashboard.json --variables ./variables.json --rules ./rules.json --target-org myorg
+  <%= config.bin %> <%= command.id %> --document ./dashboard.json --values ./values.json --rules ./rules.json --target-org myorg
 
 - Test with specific API version:
-  <%= config.bin %> <%= command.id %> --document ./dashboard.json --variables ./variables.json --rules ./rules.json --target-org myorg --api-version 60.0
+  <%= config.bin %> <%= command.id %> --document ./dashboard.json --values ./values.json --rules ./rules.json --target-org myorg --api-version 60.0
