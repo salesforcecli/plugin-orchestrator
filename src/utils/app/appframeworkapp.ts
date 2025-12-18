@@ -137,21 +137,19 @@ export default class AppFrameworkApp {
    * @param templateId - ID of the template to decouple from
    * @returns The ID of the decoupled app
    */
-  public async decoupleApp(appId: string, templateId: string): Promise<string> {
-    if (!appId) {
-      throw new Error('App ID must be provided');
+  /**
+   * Decouple an app from its template
+   * Removes references to the template from the source app
+   *
+   * @param appIdOrName - ID or name of the app to decouple
+   * @returns App ID of the decoupled app
+   */
+  public async decoupleApp(appIdOrName: string): Promise<string> {
+    if (!appIdOrName) {
+      throw new Error('App ID or name must be provided');
     }
 
-    if (!templateId) {
-      throw new Error('Template ID must be provided for decoupling');
-    }
-
-    const url = `/apps/${appId}`;
-
-    const body = {
-      templateSourceId: templateId,
-      templateOptions: { appAction: 'DecoupleApp' },
-    };
+    const url = `/apps/${appIdOrName}/decouple`;
 
     // Define response types
     type AppResponse = {
@@ -160,9 +158,8 @@ export default class AppFrameworkApp {
     };
 
     const response = await request<AppResponse>(this.connection, {
-      method: 'PUT',
+      method: 'POST',
       url,
-      body,
     });
 
     if (response && typeof response === 'object') {
@@ -173,7 +170,7 @@ export default class AppFrameworkApp {
       }
     }
 
-    return appId; // Return the original app ID if no specific ID was found in the response
+    return appIdOrName; // Return the original app ID if no specific ID was found in the response
   }
 
   /**
