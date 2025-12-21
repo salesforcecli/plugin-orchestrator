@@ -570,20 +570,12 @@
     "@smithy/types" "^4.11.0"
     tslib "^2.6.2"
 
-"@aws-sdk/types@3.956.0":
+"@aws-sdk/types@3.956.0", "@aws-sdk/types@^3.222.0":
   version "3.956.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/types/-/types-3.956.0.tgz#3979dec51cf9b98483b72b84e535bf1f563bcca1"
   integrity sha512-DMRU/p9wAlAJxEjegnLwduCA8YP2pcT/sIJ+17KSF38c5cC6CbBhykwbZLECTo+zYzoFrOqeLbqE6paH8Gx3ug==
   dependencies:
     "@smithy/types" "^4.11.0"
-    tslib "^2.6.2"
-
-"@aws-sdk/types@^3.222.0":
-  version "3.936.0"
-  resolved "https://registry.yarnpkg.com/@aws-sdk/types/-/types-3.936.0.tgz#ecd3a4bec1a1bd4df834ab21fe52a76e332dc27a"
-  integrity sha512-uz0/VlMd2pP5MepdrHizd+T+OKfyK4r3OA9JI+L/lPKg0YFQosdJNCKisr6o70E3dh8iMpFYxF1UN/4uZsyARg==
-  dependencies:
-    "@smithy/types" "^4.9.0"
     tslib "^2.6.2"
 
 "@aws-sdk/util-arn-parser@3.953.0":
@@ -1593,7 +1585,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.3.2.tgz#10047e2b8d289c93f157ab4243a1b1de57f2d6a2"
   integrity sha512-mxhsWV1rzHfhGMVSFQRLOHZTGfB1R2FtqbuIb3hrgDFsW1NLjEDS2U+eZWBJiCYod1JeGpJxnETNq587lem1Gg==
 
-"@salesforce/dev-scripts@^11.0.2":
+"@salesforce/dev-scripts@^11.0.4":
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-11.0.4.tgz#9e9fa6d425308b638508e701956dfd4c97eb403c"
   integrity sha512-8RebBJpcgoO0AVmrb3pFwSUD8vCqdWbUmv3JwoDy2lWofAT0vYM3NywCCdKj26XnSASkRgKvsY6AQpkxLs+vVg==
@@ -2144,13 +2136,6 @@
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@smithy/types/-/types-4.11.0.tgz#c02f6184dcb47c4f0b387a32a7eca47956cc09f1"
   integrity sha512-mlrmL0DRDVe3mNrjTcVcZEgkFmufITfUAPBEA+AHYiIeYyJebso/He1qLbP3PssRe22KUzLRpQSdBPbXdgZ2VA==
-  dependencies:
-    tslib "^2.6.2"
-
-"@smithy/types@^4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@smithy/types/-/types-4.9.0.tgz#c6636ddfa142e1ddcb6e4cf5f3e1a628d420486f"
-  integrity sha512-MvUbdnXDTwykR8cB1WZvNNwqoWVaTRA0RLlLmf/cIFNMM2cKWz01X4Ly6SMC4Kks30r8tT3Cty0jmeWfiuyHTA==
   dependencies:
     tslib "^2.6.2"
 
