@@ -33,11 +33,20 @@ export async function request<T>(connection: Connection, options: RequestOptions
 
   const apiPath = `/services/data/v${connection.getApiVersion()}/app-framework${url}`;
 
-  const response = await connection.request<T>({
-    method,
-    url: apiPath,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  try {
+    const response = await connection.request<T>({
+      method,
+      url: apiPath,
+      body: body ? JSON.stringify(body) : undefined,
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    // Re-throw with more context about the API call
+    const errorMessage = `API request failed: ${method} ${apiPath}`;
+    if (error instanceof Error) {
+      error.message = `${errorMessage} - ${error.message}`;
+    }
+    throw error;
+  }
 }
