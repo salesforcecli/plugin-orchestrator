@@ -35,7 +35,7 @@ export default class DecoupleApp extends SfCommand<string> {
     'api-version': Flags.orgApiVersion({
       summary: messages.getMessage('flags.api-version.summary'),
       description: messages.getMessage('flags.api-version.description'),
-      default: '65.0',
+      default: '66.0',
     }),
     'app-id': Flags.string({
       char: 'i',
