@@ -1,5 +1,5 @@
 /*
- * Copyright 2025, Salesforce, Inc.
+ * Copyright 2026, Salesforce, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,26 +132,17 @@ export default class AppFrameworkApp {
 
   /**
    * Decouple an app from its template
+   * Removes references to the template from the source app
    *
-   * @param appId - ID of the app to decouple
-   * @param templateId - ID of the template to decouple from
-   * @returns The ID of the decoupled app
+   * @param appIdOrName - ID or name of the app to decouple
+   * @returns App ID of the decoupled app
    */
-  public async decoupleApp(appId: string, templateId: string): Promise<string> {
-    if (!appId) {
-      throw new Error('App ID must be provided');
+  public async decoupleApp(appIdOrName: string): Promise<string> {
+    if (!appIdOrName) {
+      throw new Error('App ID or name must be provided');
     }
 
-    if (!templateId) {
-      throw new Error('Template ID must be provided for decoupling');
-    }
-
-    const url = `/apps/${appId}`;
-
-    const body = {
-      templateSourceId: templateId,
-      templateOptions: { appAction: 'DecoupleApp' },
-    };
+    const url = `/apps/${appIdOrName}/decouple`;
 
     // Define response types
     type AppResponse = {
@@ -160,9 +151,9 @@ export default class AppFrameworkApp {
     };
 
     const response = await request<AppResponse>(this.connection, {
-      method: 'PUT',
+      method: 'POST',
       url,
-      body,
+      body: {}, // Send empty body for POST request
     });
 
     if (response && typeof response === 'object') {
@@ -173,7 +164,7 @@ export default class AppFrameworkApp {
       }
     }
 
-    return appId; // Return the original app ID if no specific ID was found in the response
+    return appIdOrName; // Return the original app ID if no specific ID was found in the response
   }
 
   /**

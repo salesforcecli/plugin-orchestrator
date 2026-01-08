@@ -15,16 +15,12 @@
  */
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 import { Messages, SfError, Connection } from '@salesforce/core';
-
 import AppFrameworkApp from '../../../utils/app/appframeworkapp.js';
-import { AppData } from '../../../utils/app/appTypes.js';
-import { AppListUtil } from '../../../utils/app/appListUtils.js';
-import { AppDisplayUtil } from '../../../utils/app/appDisplayUtil.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
-const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'appframework.list.app');
+const messages = Messages.loadMessages('@salesforce/plugin-orchestrator', 'appframework.decouple.app');
 
-export default class ListApp extends SfCommand<AppData[]> {
+export default class DecoupleApp extends SfCommand<string> {
   public static readonly summary = messages.getMessage('summary');
   public static readonly description = messages.getMessage('description');
   public static readonly examples = messages.getMessages('examples');
@@ -39,51 +35,64 @@ export default class ListApp extends SfCommand<AppData[]> {
     'api-version': Flags.orgApiVersion({
       summary: messages.getMessage('flags.api-version.summary'),
       description: messages.getMessage('flags.api-version.description'),
+      default: '66.0',
+    }),
+    'app-id': Flags.string({
+      char: 'i',
+      summary: messages.getMessage('flags.app-id.summary'),
+      description: messages.getMessage('flags.app-id.description'),
+      required: true,
     }),
   };
 
-  public async run(): Promise<AppData[]> {
-    const { flags } = await this.parse(ListApp);
+  public async run(): Promise<string> {
+    const { flags } = await this.parse(DecoupleApp);
 
     try {
-      this.spinner.start(messages.getMessage('fetchingApps'));
+      this.spinner.start(messages.getMessage('decouplingApp'));
 
       type OrgType = { getConnection(apiVersion?: string): Connection };
 
       const connection = (flags['target-org'] as OrgType).getConnection(flags['api-version']);
       const appFrameworkApp = new AppFrameworkApp(connection);
-      const rawApps = await appFrameworkApp.list();
+
+      // Use the app ID provided by the user
+      const appId = flags['app-id'];
+
+      // Call the decouple method
+      const result = await appFrameworkApp.decoupleApp(appId);
+
       this.spinner.stop();
 
-      const apps = AppListUtil.processApps(rawApps);
+      this.log(messages.getMessage('decoupleSuccess', [appId]));
 
-      if (apps.length > 0) {
-        AppDisplayUtil.displayAppList(this, apps);
-      } else {
-        this.log(messages.getMessage('noAppsFound'));
-      }
-
-      return apps;
+      return result;
     } catch (error) {
       this.spinner.stop();
       const errorMsg = (error as Error).message;
 
-      if (errorMsg.includes('certificate') || errorMsg.includes('altnames')) {
+      if (errorMsg.includes('NOT_FOUND') || errorMsg.includes('404')) {
         throw new SfError(
-          messages.getMessage('error.CertificateError'),
-          'AppListError',
-          messages.getMessages('error.CertificateError.Actions')
+          messages.getMessage('error.AppNotFound', [flags['app-id']]),
+          'AppNotFound',
+          messages.getMessages('error.AppNotFound.Actions')
         );
-      } else if (errorMsg.includes('Unauthorized') || errorMsg.includes('401')) {
+      } else if (errorMsg.includes('cannot be decoupled') || errorMsg.includes('INVALIDREQUEST')) {
         throw new SfError(
-          messages.getMessage('error.AuthenticationError'),
-          'AppListError',
-          messages.getMessages('error.AuthenticationError.Actions')
+          messages.getMessage('error.CannotDecouple', [flags['app-id']]),
+          'CannotDecouple',
+          messages.getMessages('error.CannotDecouple.Actions')
+        );
+      } else if (errorMsg.includes('INVALID_OPERATION') || errorMsg.includes('400')) {
+        throw new SfError(
+          messages.getMessage('error.InvalidOperation'),
+          'InvalidOperation',
+          messages.getMessages('error.InvalidOperation.Actions')
         );
       } else {
         throw new SfError(
           messages.getMessage('error.GenericError', [errorMsg]),
-          'AppListError',
+          'DecoupleError',
           messages.getMessages('error.GenericError.Actions')
         );
       }

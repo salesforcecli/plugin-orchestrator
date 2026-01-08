@@ -21,6 +21,14 @@
   },
   {
     "alias": [],
+    "command": "orchestrator:app:decouple",
+    "flagAliases": [],
+    "flagChars": ["i", "o"],
+    "flags": ["api-version", "app-id", "flags-dir", "json", "target-org"],
+    "plugin": "@salesforce/plugin-orchestrator"
+  },
+  {
+    "alias": [],
     "command": "orchestrator:app:delete",
     "flagAliases": [],
     "flagChars": ["i", "n", "o", "p"],
