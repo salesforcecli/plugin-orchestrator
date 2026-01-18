@@ -1,3 +1,11 @@
+## [1.0.27](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.26...1.0.27) (2026-01-18)
+
+### Bug Fixes
+
+- **deps:** bump @inquirer/select from 5.0.3 to 5.0.4 ([6d70e1b](https://github.com/salesforcecli/plugin-orchestrator/commit/6d70e1b46a431dc71729a88807e0cfa6f8a3de5e))
+
+## [1.0.26](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.25...1.0.26) (2026-01-09)
+
 ## [1.0.25](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.24...1.0.25) (2025-12-21)
 
 ### Bug Fixes
@@ -24,13 +32,7 @@
 
 - **deps:** bump @salesforce/core from 8.23.7 to 8.24.0 ([47cd9ea](https://github.com/salesforcecli/plugin-orchestrator/commit/47cd9ea0b6bbefe1e61b692a6d8d3663f95dfb73))
 
-## [1.0.20](https://github.com/salesforcecli/plugin-orchestrator/compare/1.1.0...1.0.20) (2025-12-05)
-
-### Bug Fixes
-
-- rules eval and template filtering ([#118](https://github.com/salesforcecli/plugin-orchestrator/issues/118)) ([22ae46c](https://github.com/salesforcecli/plugin-orchestrator/commit/22ae46c861653544746f7ba6c0f73a3529180414))
-
-# [1.1.0](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.1.0) (2025-12-05)
+## [1.0.20](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.18...1.0.20) (2025-12-05)
 
 ### Bug Fixes
 
@@ -46,6 +48,7 @@
 - **deps:** bump jws from 3.2.2 to 3.2.3 ([ab36c2d](https://github.com/salesforcecli/plugin-orchestrator/commit/ab36c2d3bd84b52c8f977a9b4a572b133b4145d9))
 - resolve CI TypeScript Buffer interface conflicts ([#117](https://github.com/salesforcecli/plugin-orchestrator/issues/117)) ([3e028d6](https://github.com/salesforcecli/plugin-orchestrator/commit/3e028d6894d127da3cc53f6cf81eacc41659dc9f))
 - resolve TypeScript Buffer type conflicts in CI ([#116](https://github.com/salesforcecli/plugin-orchestrator/issues/116)) ([31cbd60](https://github.com/salesforcecli/plugin-orchestrator/commit/31cbd60cd05719138c67dee17ee41e61d65cd4b7))
+- rules eval and template filtering ([#118](https://github.com/salesforcecli/plugin-orchestrator/issues/118)) ([22ae46c](https://github.com/salesforcecli/plugin-orchestrator/commit/22ae46c861653544746f7ba6c0f73a3529180414))
 
 ### Features
 
