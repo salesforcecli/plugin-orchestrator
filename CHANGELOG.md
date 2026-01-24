@@ -1,3 +1,9 @@
+## [1.0.29](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.28...1.0.29) (2026-01-24)
+
+### Bug Fixes
+
+- **deps:** bump lodash from 4.17.21 to 4.17.23 ([192f410](https://github.com/salesforcecli/plugin-orchestrator/commit/192f4106dd4dd14911c9450c748d34813cf01eca))
+
 ## [1.0.28](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.27...1.0.28) (2026-01-18)
 
 ### Bug Fixes
