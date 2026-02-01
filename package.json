@@ -11,7 +11,7 @@
     "@salesforce/kit": "^3.2.1",
     "@salesforce/sf-plugins-core": "^12",
     "ansis": "^3.17.0",
-    "eslint": "^8.56.0"
+    "eslint": "^9.26.0"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.3.8",
