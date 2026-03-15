@@ -1,3 +1,9 @@
+## [1.0.35](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.34...1.0.35) (2026-03-15)
+
+### Bug Fixes
+
+- **deps:** bump flatted from 3.3.3 to 3.4.1 ([0e99562](https://github.com/salesforcecli/plugin-orchestrator/commit/0e99562ea2fcb631dfb91f47416f8dfe12d406a0))
+
 ## [1.0.34](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.33...1.0.34) (2026-03-08)
 
 ### Bug Fixes
