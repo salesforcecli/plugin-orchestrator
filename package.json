@@ -11,21 +11,22 @@
     "@salesforce/kit": "^3.2.1",
     "@salesforce/sf-plugins-core": "^12",
     "ansis": "^3.17.0",
-    "eslint": "^8.56.0"
+    "eslint": "^8.57.1"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.3.10",
     "@salesforce/cli-plugins-testkit": "^5.3.41",
     "@salesforce/dev-scripts": "^11.0.2",
     "@salesforce/plugin-command-reference": "^3.1.81",
-    "eslint-config-salesforce-license": "^1.0.1",
-    "eslint-plugin-sf-plugin": "^1.20.31",
+    "@types/minimatch": "5",
+    "eslint-config-salesforce-license": "^1.0.2",
+    "eslint-plugin-sf-plugin": "^1.20.33",
     "oclif": "^4.22.87",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "files": [
     "/lib",
@@ -98,6 +99,7 @@
     "prepack": "sf-prepack",
     "prepare": "sf-install",
     "test": "wireit",
+    "test:dev": "yarn test:only && yarn lint && yarn build",
     "test:nuts": "nyc mocha \"**/*.nut.ts\" --slow 4500 --timeout 600000 --parallel",
     "test:only": "wireit",
     "version": "oclif readme"
@@ -221,9 +223,6 @@
     }
   },
   "resolutions": {
-    "@types/node": "^20.0.0"
-  },
-  "overrides": {
     "@types/node": "^20.0.0"
   },
   "exports": "./lib/index.js",
