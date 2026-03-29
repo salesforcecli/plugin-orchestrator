@@ -1,3 +1,9 @@
+## [1.0.40](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.39...1.0.40) (2026-03-29)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/kit from 3.2.4 to 3.2.6 ([91d5e76](https://github.com/salesforcecli/plugin-orchestrator/commit/91d5e763cb01dd9c67ca0c25e9e148c0b4b655e9))
+
 ## [1.0.39](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.38...1.0.39) (2026-03-27)
 
 ### Bug Fixes
