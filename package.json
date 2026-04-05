@@ -17,7 +17,7 @@
     "@oclif/plugin-command-snapshot": "^5.3.13",
     "@salesforce/cli-plugins-testkit": "^5.3.52",
     "@salesforce/dev-scripts": "^11.0.2",
-    "@salesforce/plugin-command-reference": "^3.1.84",
+    "@salesforce/plugin-command-reference": "^3.1.86",
     "@types/minimatch": "5",
     "eslint-config-salesforce-license": "^1.0.2",
     "eslint-plugin-sf-plugin": "^1.20.33",
