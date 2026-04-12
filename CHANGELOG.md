@@ -1,3 +1,9 @@
+## [1.0.42](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.41...1.0.42) (2026-04-12)
+
+### Bug Fixes
+
+- **deps:** bump @inquirer/select from 5.1.2 to 5.1.3 ([6b211d3](https://github.com/salesforcecli/plugin-orchestrator/commit/6b211d35c331c582b573e7dedd52d50af0ec5909))
+
 ## [1.0.41](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.40...1.0.41) (2026-04-05)
 
 ### Bug Fixes
