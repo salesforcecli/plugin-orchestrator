@@ -1,3 +1,9 @@
+## [1.0.46](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.45...1.0.46) (2026-05-03)
+
+### Bug Fixes
+
+- **deps:** bump @oclif/core from 4.10.6 to 4.11.0 ([080190d](https://github.com/salesforcecli/plugin-orchestrator/commit/080190dec38f2cea2589ee9f7bafd6450ff8e572))
+
 ## [1.0.45](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.44...1.0.45) (2026-04-26)
 
 ### Bug Fixes
