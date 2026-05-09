@@ -1,3 +1,9 @@
+## [1.0.48](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.47...1.0.48) (2026-05-09)
+
+### Bug Fixes
+
+- **deps:** bump fast-xml-builder from 1.1.3 to 1.2.0 ([19de23e](https://github.com/salesforcecli/plugin-orchestrator/commit/19de23e3888c082b89adfaa409c99bf0d8161aa4))
+
 ## [1.0.47](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.46...1.0.47) (2026-05-09)
 
 ### Bug Fixes
