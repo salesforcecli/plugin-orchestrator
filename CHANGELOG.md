@@ -1,3 +1,9 @@
+## [1.0.56](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.55...1.0.56) (2026-06-17)
+
+### Bug Fixes
+
+- **deps:** bump @babel/core from 7.28.5 to 7.29.7 ([6138343](https://github.com/salesforcecli/plugin-orchestrator/commit/61383433513e49dcb0bdd29d901f31bcd6ce4366))
+
 ## [1.0.55](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.54...1.0.55) (2026-06-17)
 
 ### Bug Fixes
