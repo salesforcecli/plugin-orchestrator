@@ -1,21 +1,21 @@
 {
   "name": "@salesforce/plugin-orchestrator",
   "description": "Plugin for working with SalesForce analytic apps, templates, assets and services.",
-  "version": "1.0.60",
+  "version": "1.0.62",
   "author": "Salesforce",
   "bugs": "https://github.com/forcedotcom/cli/issues",
   "dependencies": {
     "@inquirer/select": "^5.2.1",
     "@oclif/core": "^4",
-    "@salesforce/core": "^8.31.2",
+    "@salesforce/core": "^8.31.5",
     "@salesforce/kit": "^3.2.6",
     "@salesforce/sf-plugins-core": "^12",
     "ansis": "^3.17.0",
     "eslint": "^8.57.1"
   },
   "devDependencies": {
-    "@oclif/plugin-command-snapshot": "^5.3.26",
     "@salesforce/cli-plugins-testkit": "^5.3.62",
+    "@oclif/plugin-command-snapshot": "^5.3.30",
     "@salesforce/dev-scripts": "^11.0.2",
     "@salesforce/plugin-command-reference": "^3.1.115",
     "@types/minimatch": "5",
