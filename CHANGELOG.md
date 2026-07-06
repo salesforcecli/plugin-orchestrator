@@ -1,3 +1,15 @@
+## [1.0.62](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.61...1.0.62) (2026-07-05)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 8.31.4 to 8.31.5 ([bda5af7](https://github.com/salesforcecli/plugin-orchestrator/commit/bda5af7614f55b7d95460efcbf762451da2f7915))
+
+## [1.0.61](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.60...1.0.61) (2026-07-05)
+
+### Bug Fixes
+
+- **deps:** bump @oclif/core from 4.11.11 to 4.11.14 ([6abd1e2](https://github.com/salesforcecli/plugin-orchestrator/commit/6abd1e2647f6b2d1e4652f55c15093361f43d0a7))
+
 ## [1.0.60](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.59...1.0.60) (2026-06-28)
 
 ### Bug Fixes
