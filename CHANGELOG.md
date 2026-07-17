@@ -1,3 +1,9 @@
+## [1.0.64](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.63...1.0.64) (2026-07-17)
+
+### Bug Fixes
+
+- **deps:** bump websocket-driver from 0.7.4 to 0.7.5 ([507bb84](https://github.com/salesforcecli/plugin-orchestrator/commit/507bb84ec8e27f3179350425d80cb824b1c6d450))
+
 ## [1.0.63](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.62...1.0.63) (2026-07-12)
 
 ### Bug Fixes
