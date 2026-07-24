@@ -1,3 +1,9 @@
+## [1.0.65](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.64...1.0.65) (2026-07-24)
+
+### Bug Fixes
+
+- **deps:** bump linkify-it from 5.0.1 to 5.0.2 ([289107a](https://github.com/salesforcecli/plugin-orchestrator/commit/289107a866a67db6f1c2c31b89901d75d734d5fd))
+
 ## [1.0.64](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.63...1.0.64) (2026-07-17)
 
 ### Bug Fixes
