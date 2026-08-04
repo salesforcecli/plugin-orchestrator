@@ -1,3 +1,9 @@
+## [1.0.70](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.69...1.0.70) (2026-08-04)
+
+### Bug Fixes
+
+- **deps:** bump undici from 8.5.0 to 8.10.0 ([7f39a93](https://github.com/salesforcecli/plugin-orchestrator/commit/7f39a932f14989531639599fec2ac2f11f42a5fc))
+
 ## [1.0.69](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.68...1.0.69) (2026-08-02)
 
 ### Bug Fixes
