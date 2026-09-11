@@ -1,3 +1,11 @@
+## [1.0.73](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.72...1.0.73) (2026-09-11)
+
+### Bug Fixes
+
+- **deps:** bump @inquirer/select from 5.2.1 to 5.2.2 ([#269](https://github.com/salesforcecli/plugin-orchestrator/issues/269)) ([5806db6](https://github.com/salesforcecli/plugin-orchestrator/commit/5806db6a05fd3917b0175211f97ab754c956c0b6))
+- **deps:** bump browserslist from 4.28.1 to 4.28.9 ([#274](https://github.com/salesforcecli/plugin-orchestrator/issues/274)) ([a7a230d](https://github.com/salesforcecli/plugin-orchestrator/commit/a7a230dc7e1e1a3c70ef4729bb19a23f8b53958d))
+- **deps:** bump fast-uri from 3.1.5 to 3.1.7 ([#273](https://github.com/salesforcecli/plugin-orchestrator/issues/273)) ([5c1aa62](https://github.com/salesforcecli/plugin-orchestrator/commit/5c1aa62a0da78fa240be7d0c233c2130f462afe3))
+
 ## [1.0.72](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.71...1.0.72) (2026-08-09)
 
 ### Bug Fixes
