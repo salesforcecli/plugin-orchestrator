@@ -8,3 +8,10 @@ jobs:
   automerge:
     uses: salesforcecli/github-workflows/.github/workflows/automerge.yml@main
     secrets: inherit
+    with:
+      # This is a yarn repo: cache off yarn.lock, not the default package-lock.json,
+      # or setup-node fails with "Some specified paths were not resolved".
+      package-manager: yarn
+      cache-dependency-path: yarn.lock
+      # Branch ruleset only permits squash/rebase merges; the default 'merge' is rejected.
+      mergeMethod: squash
