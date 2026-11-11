@@ -1,3 +1,9 @@
+## [1.0.84](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.83...1.0.84) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump fast-copy from 3.0.2 to 3.1.0 ([#285](https://github.com/salesforcecli/plugin-orchestrator/issues/285)) ([64d05f4](https://github.com/salesforcecli/plugin-orchestrator/commit/64d05f4c081c01912f97adb3f57456dd254b3f21))
+
 ## [1.0.83](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.82...1.0.83) (2026-11-11)
 
 ### Bug Fixes
