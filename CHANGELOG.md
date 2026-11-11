@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.85...1.1.0) (2026-11-11)
+
+### Features
+
+- enable PFT telemetry for orchestrator ([#294](https://github.com/salesforcecli/plugin-orchestrator/issues/294)) ([08dfc2b](https://github.com/salesforcecli/plugin-orchestrator/commit/08dfc2b7f9c9f30804f88f9ed2a6ddd84b0a8887))
+
 ## [1.0.85](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.84...1.0.85) (2026-11-11)
 
 ### Bug Fixes
