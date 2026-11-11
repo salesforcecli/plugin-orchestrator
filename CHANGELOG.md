@@ -1,3 +1,9 @@
+## [1.0.76](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.75...1.0.76) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump zod from 4.1.13 to 4.6.7 ([#290](https://github.com/salesforcecli/plugin-orchestrator/issues/290)) ([3548f68](https://github.com/salesforcecli/plugin-orchestrator/commit/3548f6870830853402d22eb3e7c2cf0888922db4))
+
 ## [1.0.75](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.74...1.0.75) (2026-09-14)
 
 ### Bug Fixes
