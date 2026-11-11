@@ -1,3 +1,9 @@
+## [1.0.83](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.82...1.0.83) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump picomatch from 2.3.1 to 2.3.2 ([#293](https://github.com/salesforcecli/plugin-orchestrator/issues/293)) ([abf363a](https://github.com/salesforcecli/plugin-orchestrator/commit/abf363a7261118610ae2e29433a98683a7f1984c))
+
 ## [1.0.82](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.81...1.0.82) (2026-11-11)
 
 ### Bug Fixes
