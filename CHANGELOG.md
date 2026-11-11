@@ -1,3 +1,9 @@
+## [1.0.80](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.79...1.0.80) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump markdown-it from 14.2.0 to 14.3.3 ([#287](https://github.com/salesforcecli/plugin-orchestrator/issues/287)) ([4ef3dfe](https://github.com/salesforcecli/plugin-orchestrator/commit/4ef3dfe7a73c48f7f89c31c10b5168d901e90b74))
+
 ## [1.0.79](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.78...1.0.79) (2026-11-11)
 
 ### Bug Fixes
