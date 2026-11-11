@@ -1,3 +1,9 @@
+## [1.0.81](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.80...1.0.81) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump js-yaml from 3.14.2 to 3.15.2 ([#292](https://github.com/salesforcecli/plugin-orchestrator/issues/292)) ([027aaf1](https://github.com/salesforcecli/plugin-orchestrator/commit/027aaf11a51736efb1a6d22ecbbdd255b0bc0afc))
+
 ## [1.0.80](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.79...1.0.80) (2026-11-11)
 
 ### Bug Fixes
