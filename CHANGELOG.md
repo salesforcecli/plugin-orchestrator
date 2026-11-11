@@ -1,3 +1,9 @@
+## [1.0.78](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.77...1.0.78) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump fast-uri from 3.1.7 to 3.1.9 ([#289](https://github.com/salesforcecli/plugin-orchestrator/issues/289)) ([73d3f3b](https://github.com/salesforcecli/plugin-orchestrator/commit/73d3f3b159f30a500c9c415222a0daf18e899605))
+
 ## [1.0.77](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.76...1.0.77) (2026-11-11)
 
 ### Bug Fixes
