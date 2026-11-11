@@ -1,3 +1,9 @@
+## [1.0.77](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.76...1.0.77) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump brace-expansion from 1.1.12 to 1.1.22 ([#291](https://github.com/salesforcecli/plugin-orchestrator/issues/291)) ([7709603](https://github.com/salesforcecli/plugin-orchestrator/commit/77096031c17e407ba3f57a06d0d7f0fb2a9e1ca4))
+
 ## [1.0.76](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.75...1.0.76) (2026-11-11)
 
 ### Bug Fixes
