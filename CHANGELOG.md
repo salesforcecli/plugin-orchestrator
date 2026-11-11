@@ -1,3 +1,9 @@
+## [1.0.82](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.81...1.0.82) (2026-11-11)
+
+### Bug Fixes
+
+- **deps:** bump handlebars from 4.7.9 to 4.7.10 ([#286](https://github.com/salesforcecli/plugin-orchestrator/issues/286)) ([3c8d5fc](https://github.com/salesforcecli/plugin-orchestrator/commit/3c8d5fc765063a318a2d519e60d67783a47d5e51))
+
 ## [1.0.81](https://github.com/salesforcecli/plugin-orchestrator/compare/1.0.80...1.0.81) (2026-11-11)
 
 ### Bug Fixes
