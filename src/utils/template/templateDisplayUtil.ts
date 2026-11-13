@@ -161,7 +161,11 @@ export class TemplateDisplayUtil {
    * @param title - Section title
    * @param details - Key-value pairs to display
    */
-  private static displaySection(command: SfCommand<unknown>, title: string, details: Record<string, unknown>): void {
+  private static displaySection(
+    command: SfCommand<unknown>,
+    title: string,
+    details: Record<string, string | number | boolean | null | undefined>
+  ): void {
     command.log(ansis.bold(`=== ${title}`));
 
     for (const [key, value] of Object.entries(details)) {

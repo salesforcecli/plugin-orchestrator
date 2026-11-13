@@ -57,7 +57,7 @@ export const getStyledObject = (objectToStyle: TemplateData): TemplateData =>
       key,
       typeof value === 'string' ? getStyledValue(key, value) : value,
     ])
-  ) as TemplateData;
+  );
 
 /**
  * Group templates by type for better organization

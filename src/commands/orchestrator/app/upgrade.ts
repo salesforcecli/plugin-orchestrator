@@ -195,7 +195,7 @@ export default class OrchestratorAppUpgrade extends SfCommand<OrchestratorAppUpg
       'AppUpgradeError',
       messages.getMessages('error.UpgradeError.Actions'),
       undefined,
-      error as Error
+      error
     );
   }
 
