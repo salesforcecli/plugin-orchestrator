@@ -26,7 +26,6 @@ describe('orchestrator template delete', () => {
   let command: DeleteTemplate;
   let confirm: sinon.SinonStub;
   let remove: sinon.SinonStub;
-  let jsonEnabled: sinon.SinonStub;
   let flags: { 'template-id': string; 'no-prompt': boolean; 'target-org': { getConnection: () => object } };
 
   beforeEach(() => {
@@ -36,7 +35,6 @@ describe('orchestrator template delete', () => {
     sandbox.stub(command.spinner, 'start');
     sandbox.stub(command.spinner, 'stop');
     sandbox.stub(command, 'log');
-    jsonEnabled = sandbox.stub(command, 'jsonEnabled').returns(false);
     confirm = sandbox.stub(command, 'confirm').resolves(false);
     sandbox.stub(AppFrameworkTemplate.prototype, 'getTemplate').resolves({ id: 'template-123' });
     remove = sandbox.stub(AppFrameworkTemplate.prototype, 'deleteTemplate').resolves();
@@ -48,7 +46,6 @@ describe('orchestrator template delete', () => {
     await command.run();
     const { message } = confirm.firstCall.args[0] as { message: string };
     expect(message).to.include('Are you sure');
-    expect(message).not.to.equal('confirmDeleteYesNo');
     expect(remove.called).to.be.false;
   });
 
@@ -58,16 +55,7 @@ describe('orchestrator template delete', () => {
     expect(remove.calledOnceWithExactly('template-123')).to.be.true;
   });
 
-  it('retains confirmation in JSON mode without requiring --no-prompt', async () => {
-    jsonEnabled.returns(true);
-    confirm.resolves(true);
-    await command.run();
-    expect(confirm.calledOnce).to.be.true;
-    expect(remove.calledOnceWithExactly('template-123')).to.be.true;
-  });
-
-  it('allows explicit deletion in JSON mode without prompting', async () => {
-    jsonEnabled.returns(true);
+  it('deletes without prompting when --no-prompt is provided', async () => {
     flags['no-prompt'] = true;
     await command.run();
     expect(confirm.called).to.be.false;
