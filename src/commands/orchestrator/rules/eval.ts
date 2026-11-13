@@ -104,55 +104,46 @@ export default class TemplateEval extends SfCommand<TemplatePreviewResult> {
   public async run(): Promise<TemplatePreviewResult> {
     const { flags } = await this.parse(TemplateEval);
 
-    try {
-      type OrgType = { getConnection(apiVersion?: string): Connection };
-      const connection = (flags['target-org'] as OrgType).getConnection(flags['api-version']);
+    type OrgType = { getConnection(apiVersion?: string): Connection };
+    const connection = (flags['target-org'] as OrgType).getConnection(flags['api-version']);
 
-      // Determine template source and payload
-      const templateResult = await this.getTemplatePayload(flags);
+    // Determine template source and payload
+    const templateResult = await this.getTemplatePayload(flags);
 
-      this.log(`Testing transformation: ${templateResult.template.name}`);
-      this.log(`Source: ${templateResult.template.source}`);
+    this.log(`Testing transformation: ${templateResult.template.name}`);
+    this.log(`Source: ${templateResult.template.source}`);
 
-      if (templateResult.template.source === 'local') {
-        this.log(`Path: ${templateResult.template.path}`);
-      }
-
-      const startTime = Date.now();
-
-      // Make request to jsonxform/transformation endpoint
-      const apiPath = `/services/data/v${connection.getApiVersion()}/jsonxform/transformation`;
-
-      const result = await connection.request({
-        method: 'POST',
-        url: apiPath,
-        body: JSON.stringify(templateResult.payload),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const executionTime = `${Date.now() - startTime}ms`;
-
-      this.log('Transformation completed successfully!');
-      this.log('Results:');
-      this.log(JSON.stringify(result, null, 2));
-
-      return {
-        status: 'success',
-        template: templateResult.template,
-        input: templateResult.payload,
-        output: result,
-        executionTime,
-      };
-    } catch (error) {
-      this.log(`Transformation failed: ${(error as Error).message}`);
-
-      return {
-        status: 'error',
-        error: (error as Error).message,
-      };
+    if (templateResult.template.source === 'local') {
+      this.log(`Path: ${templateResult.template.path}`);
     }
+
+    const startTime = Date.now();
+
+    // Make request to jsonxform/transformation endpoint
+    const apiPath = `/services/data/v${connection.getApiVersion()}/jsonxform/transformation`;
+
+    const result = await connection.request({
+      method: 'POST',
+      url: apiPath,
+      body: JSON.stringify(templateResult.payload),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const executionTime = `${Date.now() - startTime}ms`;
+
+    this.log('Transformation completed successfully!');
+    this.log('Results:');
+    this.log(JSON.stringify(result, null, 2));
+
+    return {
+      status: 'success',
+      template: templateResult.template,
+      input: templateResult.payload,
+      output: result,
+      executionTime,
+    };
   }
 
   private async getTemplatePayload(flags: { document: string; values: string; rules: string }): Promise<{

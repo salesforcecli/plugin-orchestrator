@@ -99,7 +99,7 @@ export default class DeleteTemplate extends SfCommand<void> {
       let shouldDelete = flags['no-prompt'];
       if (!shouldDelete) {
         shouldDelete = await this.confirm({
-          message: 'confirmDeleteYesNo',
+          message: messages.getMessage('confirmDeleteYesNo'),
         });
       }
 
