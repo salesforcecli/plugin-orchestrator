@@ -1,5 +1,4 @@
 {
-  "devDepOverrides": ["eslint-config-salesforce-license"],
   "test": {
     "testsPath": "test/**/*.test.ts"
   }

@@ -18,7 +18,7 @@ import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 import { Messages, SfError, Connection } from '@salesforce/core';
 
 import AppFrameworkTemplate from '../../../utils/template/appframeworktemplate.js';
-import { TemplateData } from '../../../utils/template/templateTypes.js';
+import { TemplateData, RawTemplate } from '../../../utils/template/templateTypes.js';
 import { TemplateDisplayUtil } from '../../../utils/template/templateDisplayUtil.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
@@ -54,6 +54,36 @@ export default class DisplayTemplate extends SfCommand<TemplateData> {
     }),
   };
 
+  private static formatTemplate(rawTemplate: RawTemplate): TemplateData {
+    return {
+      id: rawTemplate.id,
+      name: rawTemplate.name,
+      label: rawTemplate.label,
+      description: rawTemplate.description,
+      templateType: rawTemplate.templateType,
+      templateSubtype: rawTemplate.templateSubtype,
+      templateId: rawTemplate.templateId,
+      folderId: rawTemplate.folderId,
+      namespace: rawTemplate.namespace,
+      templateVersion: rawTemplate.releaseInfo?.templateVersion,
+      assetVersion: rawTemplate.assetVersion,
+      maxAppCount: rawTemplate.maxAppCount,
+      variableDefinition: rawTemplate.variableDefinition,
+      layoutDefinition: rawTemplate.layoutDefinition,
+      rules: rawTemplate.rules,
+      created: rawTemplate.createdDate ? new Date(rawTemplate.createdDate).toLocaleString() : 'n/a',
+      modified: rawTemplate.lastModifiedDate ? new Date(rawTemplate.lastModifiedDate).toLocaleString() : 'n/a',
+      industries: rawTemplate.tags?.industries?.join(', ') ?? 'n/a',
+      audience: rawTemplate.tags?.targetAudience?.join(', ') ?? 'n/a',
+      icons: rawTemplate.icons,
+      chainDefinitions: rawTemplate.chainDefinitions,
+      applicationSourceId: rawTemplate.applicationSourceId,
+      url: rawTemplate.url,
+      configurationUrl: rawTemplate.configurationUrl,
+      readinessUrl: rawTemplate.readinessUrl,
+    };
+  }
+
   public async run(): Promise<TemplateData> {
     const { flags } = await this.parse(DisplayTemplate);
 
@@ -79,33 +109,7 @@ export default class DisplayTemplate extends SfCommand<TemplateData> {
         throw new SfError(`Template ${String(identifier)} not found, 'TemplateNotFound'`);
       }
 
-      const template = {
-        id: rawTemplate.id,
-        name: rawTemplate.name,
-        label: rawTemplate.label,
-        description: rawTemplate.description,
-        templateType: rawTemplate.templateType,
-        templateSubtype: rawTemplate.templateSubtype,
-        templateId: rawTemplate.templateId,
-        folderId: rawTemplate.folderId,
-        namespace: rawTemplate.namespace,
-        templateVersion: rawTemplate.releaseInfo?.templateVersion,
-        assetVersion: rawTemplate.assetVersion,
-        maxAppCount: rawTemplate.maxAppCount,
-        variableDefinition: rawTemplate.variableDefinition,
-        layoutDefinition: rawTemplate.layoutDefinition,
-        rules: rawTemplate.rules,
-        created: rawTemplate.createdDate ? new Date(rawTemplate.createdDate).toLocaleString() : 'n/a',
-        modified: rawTemplate.lastModifiedDate ? new Date(rawTemplate.lastModifiedDate).toLocaleString() : 'n/a',
-        industries: rawTemplate.tags?.industries?.join(', ') ?? 'n/a',
-        audience: rawTemplate.tags?.targetAudience?.join(', ') ?? 'n/a',
-        icons: rawTemplate.icons,
-        chainDefinitions: rawTemplate.chainDefinitions,
-        applicationSourceId: rawTemplate.applicationSourceId,
-        url: rawTemplate.url,
-        configurationUrl: rawTemplate.configurationUrl,
-        readinessUrl: rawTemplate.readinessUrl,
-      };
+      const template = DisplayTemplate.formatTemplate(rawTemplate);
 
       this.spinner.stop();
 
