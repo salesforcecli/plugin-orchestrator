@@ -26,7 +26,6 @@ describe('orchestrator app delete', () => {
   let command: DeleteApp;
   let confirm: sinon.SinonStub;
   let remove: sinon.SinonStub;
-  let fetch: sinon.SinonStub;
   let jsonEnabled: sinon.SinonStub;
   let flags: { 'app-id': string; 'no-prompt': boolean; 'target-org': { getConnection: () => object } };
 
@@ -39,7 +38,7 @@ describe('orchestrator app delete', () => {
     sandbox.stub(command, 'log');
     jsonEnabled = sandbox.stub(command, 'jsonEnabled').returns(false);
     confirm = sandbox.stub(command, 'confirm').resolves(false);
-    fetch = sandbox.stub(AppFrameworkApp.prototype, 'getApp').resolves({ id: 'app-123', name: 'Sales' });
+    sandbox.stub(AppFrameworkApp.prototype, 'getApp').resolves({ id: 'app-123', name: 'Sales' });
     remove = sandbox.stub(AppFrameworkApp.prototype, 'deleteApp').resolves();
   });
 
@@ -58,12 +57,12 @@ describe('orchestrator app delete', () => {
     expect(remove.calledOnceWithExactly('app-123')).to.be.true;
   });
 
-  it('rejects JSON mode without explicit confirmation before accessing the org', async () => {
+  it('retains confirmation in JSON mode without requiring --no-prompt', async () => {
     jsonEnabled.returns(true);
-    await rejects(command.run(), /--no-prompt/);
-    expect(confirm.called).to.be.false;
-    expect(fetch.called).to.be.false;
-    expect(remove.called).to.be.false;
+    confirm.resolves(true);
+    await command.run();
+    expect(confirm.calledOnce).to.be.true;
+    expect(remove.calledOnceWithExactly('app-123')).to.be.true;
   });
 
   it('allows explicit deletion in JSON mode without prompting', async () => {

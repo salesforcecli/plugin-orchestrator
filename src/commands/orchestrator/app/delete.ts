@@ -68,10 +68,6 @@ export default class DeleteApp extends SfCommand<void> {
       );
     }
 
-    if (this.jsonEnabled() && !flags['no-prompt']) {
-      throw new SfError('Specify --no-prompt to confirm deletion when using --json.', 'AppDeleteError');
-    }
-
     try {
       const connection = flags['target-org'].getConnection(flags['api-version']);
       const appFrameworkApp = new AppFrameworkApp(connection);
