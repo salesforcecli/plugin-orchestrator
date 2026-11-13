@@ -1,0 +1,8 @@
+false_positive:
+  - id: '.github/workflows/onRelease.yml:e098d10e8a898b9736f114a24b867cf1e6babb0cee3ea67ab41b5c9d71185cb5'
+    justification: >-
+      Per guidance form platform cli team, this finding is triaged as
+      a false positive for the Salesforce CLI team's shared workflows repository.
+      Referencing salesforcecli/github-workflows at main follows the team's
+      supported publishing pattern. https://salesforce-internal.slack.com/archives/C06V045BZD0/p1794591453352719
+not_exploitable: []
