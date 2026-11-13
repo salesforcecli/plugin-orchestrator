@@ -14,44 +14,70 @@
  * limitations under the License.
  */
 
+import { rejects } from 'node:assert/strict';
+import { Config } from '@oclif/core';
 import { expect } from 'chai';
+import sinon from 'sinon';
+import DeleteTemplate from '../../../../src/commands/orchestrator/template/delete.js';
+import AppFrameworkTemplate from '../../../../src/utils/template/appframeworktemplate.js';
 
-describe('appframework delete template', () => {
-  const testTemplateId = '0XtB000000001aXYAQ';
+describe('orchestrator template delete', () => {
+  const sandbox = sinon.createSandbox();
+  let command: DeleteTemplate;
+  let confirm: sinon.SinonStub;
+  let remove: sinon.SinonStub;
+  let fetch: sinon.SinonStub;
+  let jsonEnabled: sinon.SinonStub;
+  let flags: { 'template-id': string; 'no-prompt': boolean; 'target-org': { getConnection: () => object } };
 
-  it('should verify URL construction for delete request', () => {
-    // This test verifies the URL construction in the deleteTemplate method
-    const url = `/templates/${testTemplateId}`;
-
-    expect(url).to.equal(`/templates/${testTemplateId}`);
+  beforeEach(() => {
+    flags = { 'template-id': 'template-123', 'no-prompt': false, 'target-org': { getConnection: () => ({}) } };
+    command = new DeleteTemplate([], {} as Config);
+    sandbox.stub(command, 'parse' as keyof DeleteTemplate).resolves({ flags });
+    sandbox.stub(command.spinner, 'start');
+    sandbox.stub(command.spinner, 'stop');
+    sandbox.stub(command, 'log');
+    jsonEnabled = sandbox.stub(command, 'jsonEnabled').returns(false);
+    confirm = sandbox.stub(command, 'confirm').resolves(false);
+    fetch = sandbox.stub(AppFrameworkTemplate.prototype, 'getTemplate').resolves({ id: 'template-123' });
+    remove = sandbox.stub(AppFrameworkTemplate.prototype, 'deleteTemplate').resolves();
   });
 
-  it('should format confirmation messages correctly', () => {
-    const templateName = 'My Test Template';
-    const templateId = testTemplateId;
+  afterEach(() => sandbox.restore());
 
-    const confirmMessage = `Are you sure you want to delete template '${templateName}' (ID: ${templateId})?`;
-
-    expect(confirmMessage).to.include(templateName);
-    expect(confirmMessage).to.include(templateId);
+  it('shows the confirmation text and leaves the resource intact when cancelled', async () => {
+    await command.run();
+    const { message } = confirm.firstCall.args[0] as { message: string };
+    expect(message).to.include('Are you sure');
+    expect(message).not.to.equal('confirmDeleteYesNo');
+    expect(remove.called).to.be.false;
   });
 
-  it('should handle template identification by ID or name', () => {
-    const testCases = [
-      { templateId: testTemplateId, templateName: undefined, expected: testTemplateId },
-      { templateId: undefined, templateName: 'TestTemplate', expected: 'TestTemplate' },
-    ];
-
-    testCases.forEach(({ templateId, templateName, expected }) => {
-      const identifier = templateId ?? templateName;
-      expect(identifier).to.equal(expected);
-    });
+  it('deletes the resolved resource after confirmation', async () => {
+    confirm.resolves(true);
+    await command.run();
+    expect(remove.calledOnceWithExactly('template-123')).to.be.true;
   });
 
-  it('should generate appropriate success messages', () => {
-    const successMessage = `Successfully deleted template with ID: ${testTemplateId}`;
+  it('rejects JSON mode without explicit confirmation before accessing the org', async () => {
+    jsonEnabled.returns(true);
+    await rejects(command.run(), /--no-prompt/);
+    expect(confirm.called).to.be.false;
+    expect(fetch.called).to.be.false;
+    expect(remove.called).to.be.false;
+  });
 
-    expect(successMessage).to.include('Successfully deleted');
-    expect(successMessage).to.include(testTemplateId);
+  it('allows explicit deletion in JSON mode without prompting', async () => {
+    jsonEnabled.returns(true);
+    flags['no-prompt'] = true;
+    await command.run();
+    expect(confirm.called).to.be.false;
+    expect(remove.calledOnceWithExactly('template-123')).to.be.true;
+  });
+
+  it('preserves API deletion failures', async () => {
+    flags['no-prompt'] = true;
+    remove.rejects(new Error('Delete permission denied'));
+    await rejects(command.run(), /Delete permission denied/);
   });
 });

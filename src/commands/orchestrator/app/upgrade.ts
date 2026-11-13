@@ -215,7 +215,11 @@ export default class OrchestratorAppUpgrade extends SfCommand<OrchestratorAppUpg
       const updateOptions = OrchestratorAppUpgrade.buildUpdateOptions(flags, templateValues);
 
       const upgradedAppId = await this.executeUpgrade(appFrameworkApp, appId, updateOptions);
-      await this.displayUpgradedApp(appFrameworkApp, upgradedAppId);
+      try {
+        await this.displayUpgradedApp(appFrameworkApp, upgradedAppId);
+      } catch (error) {
+        this.debug(`Error fetching app details: ${(error as Error).message}`);
+      }
 
       return { appId: upgradedAppId };
     } catch (error) {

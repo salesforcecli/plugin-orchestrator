@@ -75,6 +75,10 @@ export default class DeleteTemplate extends SfCommand<void> {
       );
     }
 
+    if (this.jsonEnabled() && !flags['no-prompt']) {
+      throw new SfError('Specify --no-prompt to confirm deletion when using --json.', 'TemplateDeletionError');
+    }
+
     try {
       type OrgType = { getConnection(apiVersion?: string): Connection };
       const connection = (flags['target-org'] as OrgType).getConnection(flags['api-version']);
@@ -99,7 +103,7 @@ export default class DeleteTemplate extends SfCommand<void> {
       let shouldDelete = flags['no-prompt'];
       if (!shouldDelete) {
         shouldDelete = await this.confirm({
-          message: 'confirmDeleteYesNo',
+          message: messages.getMessage('confirmDeleteYesNo'),
         });
       }
 

@@ -124,13 +124,16 @@ export default class UpdateApp extends SfCommand<string> {
 
       this.log(messages.getMessage('updateSuccess', [updatedAppId]));
 
-      // Fetch the updated app and display its details
-      const updatedApp = await appFrameworkApp.getApp(updatedAppId);
-      if (updatedApp) {
-        const processedApps = AppListUtil.processApps([updatedApp]);
-        if (processedApps.length > 0) {
-          AppDisplayUtil.displayAppDetails(this, processedApps[0]);
+      try {
+        const updatedApp = await appFrameworkApp.getApp(updatedAppId);
+        if (updatedApp) {
+          const processedApps = AppListUtil.processApps([updatedApp]);
+          if (processedApps.length > 0) {
+            AppDisplayUtil.displayAppDetails(this, processedApps[0]);
+          }
         }
+      } catch (error) {
+        this.debug(`Error fetching app details: ${(error as Error).message}`);
       }
 
       return updatedAppId;

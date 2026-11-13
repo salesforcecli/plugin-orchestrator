@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { rejects } from 'node:assert/strict';
+import { Config } from '@oclif/core';
 import { TestContext } from '@salesforce/core/testSetup';
 import { expect } from 'chai';
 import { stubSfCommandUx } from '@salesforce/sf-plugins-core';
+import AppFrameworkApp from '../../../../src/utils/app/appframeworkapp.js';
 import OrchestratorAppUpgrade from '../../../../src/commands/orchestrator/app/upgrade.js';
 
 describe('orchestrator app upgrade', () => {
@@ -114,5 +117,40 @@ describe('orchestrator app upgrade', () => {
     expect(options.logLevel).to.equal('debug');
     expect(options.chainName).to.equal('test-chain');
     expect(options.templateValues).to.deep.equal({ test: 'value' });
+  });
+  it('returns the upgraded app ID even if the follow-up display fetch fails', async () => {
+    const command = new OrchestratorAppUpgrade([], {} as Config);
+    $.SANDBOX.stub(command, 'parse' as keyof OrchestratorAppUpgrade).resolves({
+      flags: {
+        'app-id': 'app-123',
+        'template-id': 'template-123',
+        'target-org': { getConnection: () => ({}) },
+      },
+    });
+    $.SANDBOX.stub(command, 'debug' as keyof OrchestratorAppUpgrade);
+    const getApp = $.SANDBOX.stub(AppFrameworkApp.prototype, 'getApp');
+    getApp.onFirstCall().resolves({ id: 'app-123', name: 'Sales', templateSourceId: 'template-123' });
+    getApp.onSecondCall().rejects(new Error('Read permission denied'));
+    const update = $.SANDBOX.stub(AppFrameworkApp.prototype, 'updateApp').resolves('app-123');
+    expect(await command.run()).to.deep.equal({ appId: 'app-123' });
+    expect(update.calledOnce).to.be.true;
+  });
+
+  it('preserves upgrade mutation failures', async () => {
+    const command = new OrchestratorAppUpgrade([], {} as Config);
+    $.SANDBOX.stub(command, 'parse' as keyof OrchestratorAppUpgrade).resolves({
+      flags: {
+        'app-id': 'app-123',
+        'template-id': 'template-123',
+        'target-org': { getConnection: () => ({}) },
+      },
+    });
+    $.SANDBOX.stub(AppFrameworkApp.prototype, 'getApp').resolves({
+      id: 'app-123',
+      name: 'Sales',
+      templateSourceId: 'template-123',
+    });
+    $.SANDBOX.stub(AppFrameworkApp.prototype, 'updateApp').rejects(new Error('Upgrade permission denied'));
+    await rejects(command.run(), /Upgrade permission denied/);
   });
 });
