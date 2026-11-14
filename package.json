@@ -8,7 +8,7 @@
   "o11yUploadEndpoint": "https://794testsite.my.site.com/byolwr/webruntime/log/metrics",
   "productFeatureId": "aJCEE0000001nWX4AY",
   "dependencies": {
-    "@inquirer/select": "^5.2.6",
+    "@inquirer/select": "^5.3.0",
     "@oclif/core": "^4",
     "@salesforce/core": "^8.31.5",
     "@salesforce/kit": "^3.2.6",
