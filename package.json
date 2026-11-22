@@ -18,7 +18,7 @@
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.4.0",
     "@salesforce/cli-plugins-testkit": "^5.3.68",
-    "@salesforce/dev-scripts": "^15.0.0",
+    "@salesforce/dev-scripts": "^15.0.1",
     "@salesforce/plugin-command-reference": "^3.1.160",
     "@types/chai": "^4.3.17",
     "@types/minimatch": "5",
@@ -26,7 +26,7 @@
     "@types/node": "^20",
     "@types/sinon": "^10.0.20",
     "eslint": "^10.15.0",
-    "eslint-config-salesforce-typescript": "^6.0.0",
+    "eslint-config-salesforce-typescript": "^6.0.2",
     "eslint-plugin-sf-plugin": "^3.0.1",
     "oclif": "^4.24.0",
     "ts-node": "^10.9.2",
